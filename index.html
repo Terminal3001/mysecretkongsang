@@ -1,0 +1,2344 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title> 废墟入口 · 我的秘密空桑 </title>
+    <style>
+        /* ===== 全局重置 & 增强核废墟风格噪点纹理 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #03070c;
+            font-family: '宋体', 'SimSun', 'Times New Roman', serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 20px 12px;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 240, 200, 0.2) 1px, transparent 1px),
+                radial-gradient(circle at 45% 65%, rgba(200, 220, 255, 0.22) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 75% 25%, rgba(180, 210, 255, 0.25) 1px, transparent 1px),
+                radial-gradient(circle at 90% 80%, rgba(220, 200, 255, 0.18) 2px, transparent 2px),
+                radial-gradient(circle at 10% 15%, rgba(255, 220, 180, 0.15) 1px, transparent 1px),
+                radial-gradient(circle at 30% 50%, rgba(140, 200, 255, 0.3) 2px, transparent 2px),
+                radial-gradient(circle at 70% 40%, rgba(180, 140, 255, 0.28) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 55% 80%, rgba(100, 220, 255, 0.25) 2px, transparent 2px),
+                radial-gradient(circle at 85% 15%, rgba(255, 160, 200, 0.2) 1px, transparent 1px),
+                repeating-linear-gradient(0deg, 
+                    rgba(80, 140, 220, 0.3) 0px,
+                    rgba(40, 100, 200, 0.5) 1px,
+                    rgba(20, 60, 140, 0.4) 2px,
+                    transparent 2px,
+                    transparent 6px),
+                repeating-linear-gradient(180deg, 
+                    rgba(60, 120, 230, 0.2) 0px,
+                    transparent 3px,
+                    rgba(30, 80, 180, 0.25) 5px,
+                    transparent 8px),
+                repeating-linear-gradient(45deg, 
+                    rgba(140, 180, 255, 0.2) 0px,
+                    rgba(100, 140, 240, 0.15) 3px,
+                    transparent 3px,
+                    transparent 10px,
+                    rgba(160, 120, 255, 0.18) 15px,
+                    transparent 20px),
+                repeating-linear-gradient(-45deg, 
+                    rgba(80, 160, 255, 0.12) 0px,
+                    transparent 5px,
+                    rgba(200, 160, 255, 0.15) 12px,
+                    transparent 18px,
+                    rgba(120, 200, 255, 0.1) 25px),
+                repeating-radial-gradient(circle at 30% 40%, rgba(100, 150, 240, 0.25) 1px, transparent 1px),
+                repeating-radial-gradient(circle at 70% 60%, rgba(200, 180, 255, 0.2) 1px, transparent 1px),
+                radial-gradient(ellipse at 15% 25%, rgba(140, 200, 255, 0.4) 0%, transparent 60%),
+                radial-gradient(ellipse at 85% 70%, rgba(180, 140, 255, 0.45) 0%, transparent 70%),
+                radial-gradient(ellipse at 40% 80%, rgba(220, 180, 255, 0.3) 0%, transparent 65%),
+                radial-gradient(ellipse at 60% 20%, rgba(100, 220, 255, 0.35) 0%, transparent 55%),
+                radial-gradient(circle at 20% 30%, rgba(255, 200, 180, 0.25) 0%, transparent 40%),
+                radial-gradient(circle at 80% 50%, rgba(180, 220, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(210, 180, 255, 0.2) 0%, transparent 45%),
+                linear-gradient(135deg, #041020 0%, #132845 40%, #1a2f4a 70%, #0d1f35 100%);
+            
+            background-size: 
+                40px 40px, 50px 50px, 45px 45px, 55px 55px,
+                35px 35px, 40px 40px, 30px 30px, 25px 25px,
+                8px 8px, 12px 12px,
+                25px 25px, 30px 30px,
+                4px 4px, 5px 5px,
+                100% 100%, 100% 100%, 100% 100%, 100% 100%,
+                100% 100%, 100% 100%, 100% 100%,
+                100% 100%;
+            
+            background-blend-mode: 
+                overlay, overlay, overlay, overlay,
+                screen, screen, screen, screen,
+                multiply, soft-light,
+                screen, overlay,
+                soft-light, soft-light,
+                screen, screen, screen, screen,
+                screen, overlay, lighten,
+                normal;
+                
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 40%, 
+                    rgba(180, 220, 255, 0.25) 0%, 
+                    rgba(100, 140, 220, 0.2) 30%,
+                    rgba(40, 60, 140, 0.15) 60%,
+                    transparent 90%),
+                radial-gradient(circle at 80% 70%, 
+                    rgba(220, 180, 255, 0.2) 0%, 
+                    rgba(140, 100, 220, 0.18) 40%,
+                    transparent 80%),
+                radial-gradient(circle at 0% 0%, rgba(10, 20, 50, 0.25) 0%, transparent 70%),
+                radial-gradient(circle at 100% 0%, rgba(20, 10, 60, 0.25) 0%, transparent 70%),
+                radial-gradient(circle at 0% 100%, rgba(30, 10, 70, 0.2) 0%, transparent 70%),
+                radial-gradient(circle at 100% 100%, rgba(10, 30, 80, 0.2) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            mix-blend-mode: overlay;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(0deg, 
+                    rgba(255, 255, 255, 0.03) 0px,
+                    transparent 1px,
+                    rgba(100, 150, 255, 0.02) 2px,
+                    transparent 3px,
+                    rgba(200, 220, 255, 0.02) 4px,
+                    transparent 5px),
+                repeating-linear-gradient(90deg, 
+                    rgba(180, 200, 255, 0.02) 0px,
+                    transparent 2px,
+                    rgba(140, 180, 255, 0.02) 4px,
+                    transparent 6px);
+            pointer-events: none;
+            z-index: 0;
+            animation: enhancedStaticNoise 0.15s infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes enhancedStaticNoise {
+            0% { transform: translate(0, 0); opacity: 0.6; }
+            15% { transform: translate(-1px, 2px); opacity: 0.5; }
+            30% { transform: translate(2px, -1px); opacity: 0.7; }
+            45% { transform: translate(-2px, -1px); opacity: 0.5; }
+            60% { transform: translate(1px, 2px); opacity: 0.6; }
+            75% { transform: translate(-1px, -2px); opacity: 0.5; }
+            90% { transform: translate(2px, 1px); opacity: 0.7; }
+            100% { transform: translate(0, 0); opacity: 0.6; }
+        }
+
+        .dream-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 40% 50%, rgba(140, 200, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 30%, rgba(200, 160, 255, 0.1) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+            mix-blend-mode: screen;
+            animation: glowPulse 8s infinite ease-in-out;
+        }
+
+        @keyframes glowPulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+            100% { opacity: 0.3; }
+        }
+
+        .site-wrapper {
+            max-width: 1100px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 0 2px #1a3a6a, 0 0 0 5px #0a1a2a, 0 10px 30px rgba(0, 30, 60, 0.5);
+            background: rgba(5, 12, 20, 0.95);
+            border: 1px solid #2a4f8a;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(2px);
+        }
+
+        .top-nav {
+            background-color: rgba(5, 15, 25, 0.95);
+            border-bottom: 2px solid #2a5faf;
+            padding: 8px 18px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: inset 0 -2px 0 #0a2a4a, 0 0 20px rgba(0, 100, 255, 0.2);
+            font-family: '宋体', 'SimSun', serif;
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav-left-container {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-back-button {
+            color: #8fc0ff;
+            font-size: 0.85rem;
+            font-family: '宋体', 'SimSun', serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            padding: 4px 12px;
+            background: rgba(5, 20, 35, 0.8);
+            border: 1px solid #3a6fcf;
+            box-shadow: 0 0 15px #1a4aaf, inset 0 0 8px #0a2a5a;
+            text-shadow: 0 0 8px #2a8fff;
+            transition: 0.2s;
+            border-radius: 2px;
+            white-space: nowrap;
+            backdrop-filter: blur(2px);
+        }
+
+        .nav-back-button:hover {
+            color: #d0f0ff;
+            background: rgba(10, 30, 55, 0.9);
+            border-color: #5aafff;
+            box-shadow: 0 0 25px #2a8fff;
+        }
+
+        .nav-left {
+            color: #9fc9ff;
+            text-shadow: 0 0 8px #1a7fdf;
+            font-weight: bold;
+            font-size: 0.9rem;
+            background: rgba(5, 20, 35, 0.8);
+            padding: 6px 14px;
+            border-radius: 30px;
+            border: 1px solid #3a6fcf;
+            box-shadow: inset 0 0 12px #0a2a6a, 0 0 15px #1a4aaf;
+            white-space: nowrap;
+            font-family: '宋体', 'SimSun', serif;
+            backdrop-filter: blur(2px);
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 28px;
+            color: #8fb5ff;
+            text-shadow: 0 0 5px #1a6fdf;
+            font-size: 0.85rem;
+        }
+
+        .nav-right span {
+            cursor: default;
+            transition: 0.2s;
+            padding: 4px 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-right span:hover {
+            color: #c0e4ff;
+            border-bottom: 2px solid #4a9fff;
+            text-shadow: 0 0 12px #2a8fff;
+        }
+
+        .main-content {
+            padding: 20px 20px 30px 20px;
+            background: rgba(2, 10, 18, 0.8);
+            backdrop-filter: blur(2px);
+            position: relative;
+            z-index: 2;
+        }
+
+        .forum-thread {
+            background: rgba(5, 12, 22, 0.95);
+            border: 2px solid #1a3f7f;
+            box-shadow: inset 0 0 25px #030a15, 0 8px 20px rgba(0, 0, 0, 0.8);
+            padding: 20px 18px;
+            color: #b0d4ff;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(rgba(40, 80, 160, 0.2) 1px, transparent 1px),
+                repeating-linear-gradient(45deg, 
+                    rgba(0, 30, 60, 0.1) 0px,
+                    transparent 10px);
+            background-size: 24px 24px, 20px 20px;
+            font-family: '宋体', 'SimSun', serif;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(1px);
+        }
+
+        .forum-thread::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(0deg, 
+                    rgba(60, 120, 220, 0.08) 0px,
+                    rgba(60, 120, 220, 0.12) 2px,
+                    transparent 2px,
+                    transparent 6px),
+                repeating-linear-gradient(90deg,
+                    rgba(30, 60, 120, 0.05) 0px,
+                    transparent 4px);
+            pointer-events: none;
+            z-index: 1;
+            mix-blend-mode: overlay;
+        }
+
+        .op-post-minimal {
+            border-left: 6px solid #1a4aaf;
+            padding-left: 20px;
+            margin-bottom: 25px;
+            background: linear-gradient(90deg, rgba(10, 25, 45, 0.8), transparent);
+            position: relative;
+            z-index: 2;
+            box-shadow: inset 0 0 20px rgba(0, 60, 120, 0.2);
+        }
+
+        .post-meta {
+            color: #7fafff;
+            font-size: 0.75rem;
+            margin-bottom: 12px;
+            display: flex;
+            gap: 25px;
+            border-bottom: 1px dotted #1a3f8f;
+            padding-bottom: 5px;
+            text-shadow: 0 0 3px #1a6fdf;
+        }
+
+        .post-content {
+            color: #b0d8ff;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+            text-shadow: 0 0 2px #0a4a9f;
+        }
+
+        .replies {
+            margin-top: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .reply-item {
+            border: 1px solid #1a3f7f;
+            background: rgba(5, 15, 28, 0.9);
+            padding: 12px 15px;
+            margin-bottom: 12px;
+            box-shadow: inset 2px 2px 8px #020812, inset -2px -2px 8px #0a1f3f, 0 4px 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(2px);
+        }
+
+        .reply-avatar {
+            min-width: 70px;
+            color: #6f9fff;
+            font-weight: bold;
+            font-size: 0.85rem;
+            border-right: 2px solid #1a3f7f;
+            padding-right: 12px;
+            white-space: nowrap;
+            font-family: '宋体', 'SimSun', serif;
+            text-shadow: 0 0 5px #1a6fdf;
+        }
+
+        .reply-body {
+            flex: 1;
+        }
+
+        .reply-body .reply-time {
+            color: #6f9fff;
+            font-size: 0.7rem;
+            margin-bottom: 4px;
+            opacity: 0.8;
+        }
+
+        .reply-body .reply-text {
+            color: #9fc0ff;
+            font-size: 0.85rem;
+            text-shadow: 0 0 2px #0a3a8f;
+        }
+
+        .mail-tip {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin: 15px 0 10px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .mail-tip.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mail-icon {
+            background: rgba(5, 20, 40, 0.9);
+            border: 3px double #2a6fcf;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #afd8ff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            box-shadow: 0 0 30px #1a4abf, inset 0 0 15px #0a2a7f;
+            display: inline-block;
+            animation: flicker 2.2s infinite;
+            font-weight: bold;
+            cursor: pointer;
+            background-image: 
+                radial-gradient(rgba(60, 120, 220, 0.2) 1px, transparent 1px),
+                repeating-linear-gradient(45deg, rgba(30, 60, 120, 0.1) 0px, transparent 5px);
+            background-size: 20px 20px, 10px 10px;
+            font-family: '宋体', 'SimSun', serif;
+            position: relative;
+            z-index: 3;
+            backdrop-filter: blur(2px);
+        }
+
+        @keyframes flicker {
+            0% { opacity: 1; text-shadow: 0 0 8px #1a7fdf; box-shadow: 0 0 30px #1a4abf; }
+            25% { opacity: 0.8; text-shadow: 0 0 15px #3a9fff; box-shadow: 0 0 40px #2a6fdf; }
+            50% { opacity: 0.6; text-shadow: 0 0 20px #5abfff; box-shadow: 0 0 50px #3a8fff; }
+            75% { opacity: 0.8; text-shadow: 0 0 15px #3a9fff; box-shadow: 0 0 40px #2a6fdf; }
+            100% { opacity: 1; text-shadow: 0 0 8px #1a7fdf; box-shadow: 0 0 30px #1a4abf; }
+        }
+
+        /* 游戏须知界面 - 完全保持原样 */
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(5, 20, 40, 0.9);
+            backdrop-filter: blur(3px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .notice-window {
+            background: #0b2a3b;
+            border: 4px solid #6da5c9;
+            padding: 30px 35px;
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+            color: #e0f0ff;
+            font-family: '宋体', 'SimSun', 'Times New Roman', serif;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            box-shadow: 0 0 50px #2266aa, inset 0 0 30px #144d7a;
+            background-image: radial-gradient(rgba(100, 180, 255, 0.2) 1px, transparent 1px);
+            background-size: 20px 20px;
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .notice-title {
+            font-size: 1.5rem;
+            color: #c8ecff;
+            text-align: center;
+            margin-bottom: 25px;
+            text-shadow: 0 0 5px #0af;
+            letter-spacing: 4px;
+            border-bottom: 2px dashed #3f8ec0;
+            padding-bottom: 10px;
+            font-family: '宋体', 'SimSun', 'Times New Roman', serif;
+        }
+
+        .notice-content {
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .notice-content p {
+            margin: 0.8em 0;
+            text-indent: 0 !important;
+            padding-left: 0;
+            font-family: '宋体', 'SimSun', 'Times New Roman', serif;
+            font-size: 0.9rem;
+        }
+
+        .notice-content a {
+            color: #88ddff;
+            text-decoration: underline;
+        }
+
+        .clickable-link {
+            color: #aae0ff;
+            text-decoration: underline dotted #3f9eff;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+
+        .final-link {
+            margin-top: 25px;
+            text-align: right;
+            font-size: 1rem;
+        }
+        .final-link a {
+            color: #44bbff;
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .final-link a:hover {
+            color: #99ddff;
+            text-shadow: 0 0 8px #3af;
+        }
+
+        .close-notice {
+            position: absolute;
+            top: 12px; right: 20px;
+            color: #6eb3d4;
+            font-size: 1.8rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .close-notice:hover {
+            color: #b3e4ff;
+        }
+
+        .scene { display: none; }
+        .scene.active { display: block; }
+
+        /* ===== 模拟恐怖风格阅读页 ===== */
+        .horror-reader {
+            background: #0a0f1a;
+            min-height: 70vh;
+            position: relative;
+            border: 2px solid #2a3f6a;
+            box-shadow: 0 0 50px rgba(0, 20, 40, 0.8), inset 0 0 30px #03070f;
+            padding: 25px 30px;
+            font-family: '宋体', 'SimSun', 'Times New Roman', serif;
+            backdrop-filter: blur(3px);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .horror-reader::before {
+            content: "";
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            background: 
+                repeating-radial-gradient(circle at 30% 40%, rgba(0, 0, 0, 0.3) 1px, transparent 2px),
+                repeating-linear-gradient(45deg, rgba(255, 0, 0, 0.02) 0px, transparent 10px),
+                repeating-linear-gradient(135deg, rgba(0, 0, 255, 0.02) 0px, transparent 15px);
+            animation: horrorNoise 0.2s infinite;
+            pointer-events: none;
+            z-index: 1;
+            mix-blend-mode: multiply;
+        }
+
+        .horror-reader::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                transparent 30%,
+                rgba(40, 20, 60, 0.1) 50%,
+                transparent 70%);
+            filter: blur(8px);
+            animation: weightlessShift 12s infinite alternate;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        @keyframes horrorNoise {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+            20% { transform: translate(-2%, -1%) scale(1.02); opacity: 0.6; }
+            40% { transform: translate(1%, 2%) scale(0.98); opacity: 0.4; }
+            60% { transform: translate(-1%, 1%) scale(1.01); opacity: 0.5; }
+            80% { transform: translate(2%, -2%) scale(0.99); opacity: 0.6; }
+            100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+        }
+
+        @keyframes weightlessShift {
+            0% { transform: translateY(0) rotate(0deg); filter: blur(8px); opacity: 0.3; }
+            25% { transform: translateY(-5px) rotate(0.5deg); filter: blur(10px); opacity: 0.4; }
+            50% { transform: translateY(8px) rotate(-0.5deg); filter: blur(12px); opacity: 0.2; }
+            75% { transform: translateY(-3px) rotate(0.3deg); filter: blur(9px); opacity: 0.4; }
+            100% { transform: translateY(0) rotate(0deg); filter: blur(8px); opacity: 0.3; }
+        }
+
+        .glitch-text {
+            position: relative;
+            z-index: 5;
+            color: #c8d8ff;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            text-shadow: 
+                2px 2px 0 rgba(255, 0, 0, 0.2),
+                -2px -2px 0 rgba(0, 0, 255, 0.2),
+                0 0 10px rgba(100, 150, 255, 0.3);
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-family: '宋体', 'SimSun', 'Times New Roman', serif;
+        }
+
+        /* 模糊标题样式 - 为所有记录片段标题添加模糊效果 */
+        .blur-title {
+            filter: blur(2px);
+            color: #afafcf;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            transition: filter 0.3s ease;
+        }
+
+        .blur-title:hover {
+            filter: blur(1px);
+        }
+
+        .falling-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(180deg, 
+                transparent 0px,
+                transparent 30px,
+                rgba(60, 100, 200, 0.03) 31px,
+                transparent 32px);
+            animation: falling 8s linear infinite;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        @keyframes falling {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(60px); }
+        }
+
+        .page-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            padding: 12px 0;
+            border-top: 2px dashed #3f5f8f;
+            font-family: '宋体', 'SimSun', 'Times New Roman', serif;
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-prev, .nav-next {
+            color: #8fbfef;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            padding: 6px 18px;
+            background: rgba(10, 20, 35, 0.7);
+            border: 2px solid #3f6faf;
+            box-shadow: 0 0 20px #1a3f8f, inset 0 0 10px #0a1f4f;
+            transition: 0.2s;
+            backdrop-filter: blur(4px);
+            text-decoration: none;
+            font-family: '宋体', 'SimSun', serif;
+        }
+
+        .nav-prev:hover, .nav-next:hover {
+            background: rgba(20, 35, 55, 0.9);
+            border-color: #6f9fff;
+            box-shadow: 0 0 30px #2a6fcf;
+            color: #d0f0ff;
+        }
+
+        .nav-prev.disabled, .nav-next.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+            border-color: #2f4f7f;
+        }
+
+        .page-indicator {
+            color: #7fafdf;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-shadow: 0 0 8px #1a5faf;
+        }
+
+        .horror-content {
+            flex: 1;
+            max-height: 65vh;
+            overflow-y: auto;
+            padding-right: 15px;
+            scrollbar-width: thin;
+            scrollbar-color: #3f6faf #0a1a2a;
+            position: relative;
+            z-index: 5;
+        }
+
+        .horror-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .horror-content::-webkit-scrollbar-track {
+            background: #0a1a2a;
+            border: 1px solid #1f3f6f;
+        }
+        .horror-content::-webkit-scrollbar-thumb {
+            background: #3f6faf;
+            border-radius: 0;
+        }
+
+        /* ===== 黑底白字撑满全屏页面 ===== */
+        .black-screen {
+            background: #000000;
+            min-height: 70vh;
+            position: relative;
+            border: none;
+            box-shadow: none;
+            padding: 25px 30px;
+            font-family: '宋体', 'SimSun', 'Times New Roman', serif;
+            display: flex;
+            flex-direction: column;
+            color: #ffffff;
+        }
+
+        .black-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            color: #ffffff;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            max-width: 800px;
+            margin: 0 auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .black-content p {
+            margin: 0.6em 0;
+        }
+
+        .black-content .question-mark {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; text-shadow: 0 0 5px #ffffff; }
+            50% { opacity: 1; text-shadow: 0 0 20px #ffffff; }
+            100% { opacity: 0.5; text-shadow: 0 0 5px #ffffff; }
+        }
+
+        /* ===== 虚线边框深红色按钮（正常文字大小） ===== */
+        .choice-container {
+            background: rgba(5, 5, 10, 0.95);
+            border: 2px solid #2a1f1f;
+            padding: 50px 20px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(100, 0, 0, 0.2), inset 0 0 30px #1a0a0a;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(4px);
+        }
+
+        .choice-buttons-horror {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .choice-btn-blood {
+            background: rgba(20, 5, 5, 0.8);
+            border: 2px dashed #8b0000;
+            color: #ff6f6f;
+            font-size: 1.2rem;
+            font-weight: normal;
+            padding: 10px 30px;
+            cursor: pointer;
+            font-family: '宋体', 'SimSun', 'Times New Roman', serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            min-width: 100px;
+            text-shadow: 0 0 10px #ff0000;
+            backdrop-filter: blur(2px);
+            transition: 0.3s;
+            box-shadow: 0 0 25px #8b0000, inset 0 0 10px #3f0000;
+            animation: bloodGlow 2s infinite alternate;
+            background-color: rgba(30, 5, 5, 0.7);
+        }
+
+        .choice-btn-blood:hover {
+            background: rgba(50, 10, 10, 0.9);
+            border-color: #ff4d4d;
+            color: #ffafaf;
+            box-shadow: 0 0 45px #ff0000, inset 0 0 20px #8f0000;
+            transform: scale(1.02);
+        }
+
+        @keyframes bloodGlow {
+            0% { box-shadow: 0 0 20px #6a0000, inset 0 0 8px #2f0000; }
+            100% { box-shadow: 0 0 40px #b30000, inset 0 0 18px #6f0000; }
+        }
+
+        .choice-back {
+            margin-top: 25px;
+            text-align: center;
+        }
+        
+        .choice-back span {
+            color: #7f9fbf;
+            border: 1px solid #3f5f8f;
+            padding: 6px 25px;
+            cursor: pointer;
+            background: rgba(10, 15, 25, 0.8);
+            backdrop-filter: blur(2px);
+            box-shadow: 0 0 15px rgba(30, 60, 120, 0.2);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            transition: 0.2s;
+            text-transform: uppercase;
+            font-family: '宋体', 'SimSun', serif;
+        }
+        
+        .choice-back span:hover {
+            background: rgba(20, 30, 45, 0.9);
+            box-shadow: 0 0 25px #2a6fbf;
+            color: #c0e0ff;
+        }
+
+        /* ===== 结局页 - 完全使用glitch-text样式，无竖线 ===== */
+        .ending-reader {
+            background: #0a0f1a;
+            min-height: 60vh;
+            position: relative;
+            border: 2px solid #2a3f6a;
+            box-shadow: 0 0 50px rgba(0, 20, 40, 0.8), inset 0 0 30px #03070f;
+            padding: 30px 35px;
+            font-family: '宋体', 'SimSun', 'Times New Roman', serif;
+            backdrop-filter: blur(3px);
+            overflow: hidden;
+        }
+
+        .ending-reader::before {
+            content: "";
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            background: 
+                repeating-radial-gradient(circle at 30% 40%, rgba(0, 0, 0, 0.3) 1px, transparent 2px),
+                repeating-linear-gradient(45deg, rgba(255, 0, 0, 0.02) 0px, transparent 10px),
+                repeating-linear-gradient(135deg, rgba(0, 0, 255, 0.02) 0px, transparent 15px);
+            animation: horrorNoise 0.2s infinite;
+            pointer-events: none;
+            z-index: 1;
+            mix-blend-mode: multiply;
+        }
+
+        .ending-reader::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                transparent 30%,
+                rgba(40, 20, 60, 0.1) 50%,
+                transparent 70%);
+            filter: blur(8px);
+            animation: weightlessShift 12s infinite alternate;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .ending-content-text {
+            position: relative;
+            z-index: 5;
+            color: #c8d8ff;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            text-shadow: 
+                2px 2px 0 rgba(255, 0, 0, 0.2),
+                -2px -2px 0 rgba(0, 0, 255, 0.2),
+                0 0 15px rgba(100, 150, 255, 0.3);
+            white-space: pre-wrap;
+            word-break: break-word;
+            max-width: 800px;
+            margin: 0 auto;
+            font-family: '宋体', 'SimSun', 'Times New Roman', serif;
+        }
+
+        .ending-content-text p {
+            margin: 1em 0;
+            padding: 0;
+            background: transparent;
+            border-left: none;
+            backdrop-filter: none;
+        }
+
+        .ending-content-text .chapter-title {
+            font-size: 1.2rem;
+            color: #afafcf;
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: none;
+            padding: 0;
+            background: none;
+            border-left: none;
+        }
+
+        .back-links {
+            margin-top: 40px;
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .back-links span { 
+            color: #7fb5ff; 
+            border: 1px solid #1a4aaf; 
+            padding: 6px 20px; 
+            cursor: pointer; 
+            background: rgba(5, 15, 30, 0.9); 
+            backdrop-filter: blur(2px);
+            box-shadow: 0 0 15px rgba(30, 80, 200, 0.3);
+            font-size: 0.9rem;
+            transition: 0.2s;
+            font-family: '宋体', 'SimSun', serif;
+        }
+        .back-links span:hover {
+            background: rgba(10, 25, 45, 0.95);
+            box-shadow: 0 0 25px #2a7fff;
+        }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+<div class="site-wrapper">
+    <!-- 导航栏 - 仅在论坛首页显示 -->
+    <div class="top-nav" id="mainNav">
+        <div class="nav-left-container">
+            <div id="globalBackButton" class="nav-back-button" onclick="goBack()">↩ 返回</div>
+            <div class="nav-left">📁 废弃网站存档入口</div>
+        </div>
+        <div class="nav-right">
+            <span>首页</span>
+            <span>热搜</span>
+            <span>分类</span>
+            <span>废墟</span>
+            <span>遗迹</span>
+        </div>
+    </div>
+
+    <!-- ========== 界面1: 论坛首页 ========= -->
+    <div id="scene1" class="scene active main-content">
+        <div class="forum-thread">
+            <div class="op-post-minimal">
+                <div class="post-meta">
+                    <span>终端3000</span>
+                    <span>2035-11-02 23:14</span>
+                </div>
+                <div class="post-content">
+                    刚才从一台报废的联想拯救者y9000p里拖出个可疑的存档：kong sang 遗留终端。<br>
+                    有人想要试试看吗？
+                </div>
+            </div>
+
+            <div class="replies">
+                <div class="reply-item">
+                    <div class="reply-avatar">BBS_2F</div>
+                    <div class="reply-body">
+                        <div class="reply-time">2035-11-02 23:47</div>
+                        <div class="reply-text">我也在那个镜像里翻出过一段奇怪的hex，解码后是“https://www.mysecretkongsang.net/”但打不开，是我的问题吗？</div>
+                    </div>
+                </div>
+                <div class="reply-item">
+                    <div class="reply-avatar">TAPE_01</div>
+                    <div class="reply-body">
+                        <div class="reply-time">2035-11-03 00:03</div>
+                        <div class="reply-text">需要特殊入口，看右上角信箱里有</div>
+                    </div>
+                </div>
+                <div class="reply-item">
+                    <div class="reply-avatar">CRT_99</div>
+                    <div class="reply-body">
+                        <div class="reply-time">2035-11-03 00:19</div>
+                        <div class="reply-text">有点意思，点一下信箱会弹出一段游戏须知，有废知道这个玩意的前身是啥类型的游戏吗0.0</div>
+                    </div>
+                </div>
+                <div class="reply-item">
+                    <div class="reply-avatar">DISC_52</div>
+                    <div class="reply-body">
+                        <div class="reply-time">2035-11-03 08:42</div>
+                        <div class="reply-text">现在往废里搬无意义水贴的人真是越来越多了。。。完全不懂这个东西有什么好研究的，闲就去花点心思在代码cs上冲榜顺便把我家门口垃圾带下去丢了。</div>
+                    </div>
+                </div>
+                <div class="reply-item">
+                    <div class="reply-avatar">MODEM_33</div>
+                    <div class="reply-body">
+                        <div class="reply-time">2035-11-03 09:17</div>
+                        <div class="reply-text">但是话又说回来，这个游戏当年不是很火吗，怎么大家都没什么提到这方面的==</div>
+                    </div>
+                </div>
+                <div class="reply-item">
+                    <div class="reply-avatar">RADAR_77</div>
+                    <div class="reply-body">
+                        <div class="reply-time">2035-11-03 10:05</div>
+                        <div class="reply-text">楼上废，你高估这里的二次废含量了啊喂，非要说的话尘x禁x在十年前也倒闭了来着，在隔壁小某书也没几个还会记得了吧。</div>
+                    </div>
+                </div>
+                <div class="reply-item">
+                    <div class="reply-avatar">PUNCH_88</div>
+                    <div class="reply-body">
+                        <div class="reply-time">2035-11-03 11:30</div>
+                        <div class="reply-text">不是，感情你们都能点进最后的那个链接啊？为什么我根本点不动？</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mail-tip" id="mailTip">
+                <div class="mail-icon" id="mailEnvelope">✉ 信箱 · 1封未读 ✉</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 浮层弹窗（游戏须知）- 完全保持原样 ===== -->
+    <div class="overlay" id="noticeOverlay">
+        <div class="notice-window">
+            <span class="close-notice" id="closeNoticeBtn">&times;</span>
+            <div class="notice-title">游戏须知</div>
+            <div class="notice-content">
+                <p>尊敬的玩家：</p>
+                <p>欢迎进入《我的秘密空桑》。在开始正式游玩前，请阅读以下须知，以确保您获得流畅而完整的游戏体验。注意，此作为ARG类型游戏，您不扮演任何游戏角色，您只需扮演自己。</p>
+                <p>1.存档与进度</p>
+                <p>本游戏采用自动存档与手动存档结合机制，重要决策或探索前建议手动存档。</p>
+                <p>存档文件请勿随意修改或删除，以免造成进度丢失。</p>
+                <p>2.操作与适配</p>
+                <p>默认支持键盘/鼠标及主流手柄操作，您可以在设置中自定义键位。</p>
+                <p>本游戏配备智能脑机接口，使用虚拟现实舱体可切换为全景操作模式，带来更为沉浸式的完整体验。</p>
+                <p>游戏内已为不同性能设备提供画质选项，若遇到卡顿请调整图形设置。</p>
+                <p>注意：游戏不会强制您接触某特殊分支选项，如遇到选择相关问题（1/3，5/2，2/1），请三思而行。</p>
+                <p>3.机制说明</p>
+                <p>没错，游戏从现在就已经开始，当您阅读至这段文字的这一刻就已经加入了游戏，而更多秘密也在等待您的探索中……</p>
+                <p>部分剧情可能涉及深邃主题，请根据个人偏好选择体验。</p>
+                <p>并非所有关卡谜题都能通过游戏内置搜索得到解答，如遇到问题，请适当使用互联网工具查询。您可能会用到的网站入口如下：<br>
+                <span class="clickable-link" data-href="https://weibo.com/">https://weibo.com/</span><br>
+                <span class="clickable-link" data-href="https://www.qqxiuzi.cn/zh/luanma/">https://www.qqxiuzi.cn/zh/luanma/</span><br>
+                <span class="clickable-link" data-href="https://www.qianwen.com/">https://www.qianwen.com/</span></p>
+                <p>注意：您的选择将影响角色命运与结局，每一次决策都可能开启新的故事线。</p>
+                <p>4.背景介绍</p>
+                <p>你受邀前往一个隐藏在茫茫数据海洋内的神秘网站，并接下了关于探索一个7年前便已关服的游戏：《食物语陪伴版》的委托。《食物语陪伴版》的前身，是广州天梯有限公司2019年9月制作发行的一款中华美食拟人手游《食物语》，于2023年4月7日停止更新，并于2024年4月17日推出《食物语陪伴版》。《食物语》制作组在发行《食物语陪伴版》时承诺该游戏永不关服，但好景不长，由于一年后该公司所属的百奥游戏集团彻底破产倒闭，《食物语陪伴版》也在2025年12月31日彻底切断了与互联网信号的连接。</p>
+                <p>据委托人直言，他在机缘巧合之下意外获取了《食物语陪伴版》关服前最后的数据备份，但当他将备份数据上传到云端、载入这款操作较为老旧的游戏时，却意外发现了许多超出常理的奇怪剧情……他为您提供了能够于云端登录《食物语陪伴版》2025年12月31日的备份入口，请点击以下网页链接进入：</p>
+                <div class="final-link" id="enterReadingLink">
+                    <a id="finalLink">https://www.mysecretkongsang.net/</a>
+                </div>
+                <p>祝您游戏愉快。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 模拟恐怖风格阅读页 1-9（带模糊标题） ========= -->
+    <div id="scene2" class="scene main-content">
+        <div class="horror-reader">
+            <div class="falling-lines"></div>
+            <div class="horror-content">
+                <div class="glitch-text">
+                    <div class="blur-title">🏠 记录片段 01</div>
+                    <p>▓▒░ 【图鉴·掠影】 ░▒▓</p>
+                    <p>鎴戝·NO3·鐜嬪皬娉:</p>
+                    <p>鎴戝湪鑽掑矝涓婅繋鎺ラ粠鏄庛€傚お闃冲垵鍗囨椂锛屽拷鐒舵湁鍗佷竾鏀噾鍠囧彮榻愰福銆傞槼鍏夌┛杩囬€忔槑鐨勭┖姘旓紝鍦ㄦ殫钃濊壊鐨勫ぉ绌洪杩囥€傚湪榛戞殫灏氭湭閫€鍘荤殑娴烽潰涓婄噧鐑х潃鍗佷竾鏀湣鐑涖€傛垜鍚。<p>
+                    <p>日复一日，年复一年，相似的场景总是出现在熟悉的梦里。</p>
+                    <p>▓▒░ 【图鉴·团队】 ░▒▓</p>
+                    <p>€鍒囨劅瑙夐兘浼管家：又被称作背后的三个閮芥洿浼熷ぇ鐨勬剰涔夈€傛兂鏄庣櫧浜嗕粠浜虹殑瑙掑害鐪嬫潵杩欑鎰忎箟鏄笉瀛樺湪鐨勪互鍚庯紝鎴戦潰鍓嶅氨鍑虹幇浜嗕竴鐗囧瘋瀵炵殑</p>
+                    <p>▓▒░ 【聊天】 ░▒▓</p>
+                    <p>鍖栫煶锛屽彧鏈夎繖涓€鐗囧潥纭€屽厜婊戠殑鐭冲銆傛垜鐢ㄦ垜鐨勮瘲鎶婂畠鍒绘弧锛屽張鎶婂瓧杩瑰姞娣憋紝涓轰簡浣垮畠鍦ㄨ繖浜鸿抗缃曞埌鐨勫湴鏂规案涔呭瓨鍦ㄣ€ 
+西湖醋鱼：你这嘴一张，肯定就有人要倒霉
+东坡肉：怎么能ｈ锛屾壘鍒颁簡浜哄閫佹垜鍒掔幓鐠冪殑閭ｇ墖纭川鍚堥噾銆備簬鏄垜鐢ㄦ湁鍔涚殑绗旇抗鎶婃垜鐨勮瘲鍒诲湪鐭冲涓婏紝杩欐槸鎴戠殑鑳滃埄绾康纰戙€傚湪杩欏闆堕浂鐨勭煶宀涗笂鍒</p>
+                    <p>▓▒░ 空桑总动员 ░▒▓（157）
+
+鍦ㄦ垜灏忕殑鏃跺€欙紝甯告湁涓€绉嶅啺鍑夌殑鎭愭€栦娇鎴戜粠鐫℃ⅵ涓儕閱掞紝鎴戜箙涔呭湴鍑濊鐫€榛戝銆傛垜涓嶆槑鐧芥垜涓轰粈涔堜細姝汇€傚埌鎴戞鏃讹紝涓€鍒囨劅瑙夐兘浼氬仠姝紝鎴戜細娑堝け鍦ㄤ竴鐗囨贩娌屼箣涓€傛垜瀹虫€曟鏃犳劅瑙夛紝瀹佹効鏈変竴绉嶆劅瑙変細姘镐箙瀛樺湪銆傚摢鎬曞畠鏄柤銆 
+
+-
+
+蜜汁紝鑰屾垜鑷繁鍜屼竴鍒囦汉涓€鏍烽兘鏄湁闄愮殑銆傛垜闈炲父闈炲父涓嶅枩娆㈣繖涓姣旓紝鑰佹兂鎶婂畠鍚﹀畾鎺夈€備簬鏄垜寮€濮嬪幓鎬濈储鍒板簳鏈夋病鏈変竴绉嶆瘮浜哄拰浜虹被閮芥洿浼熷ぇ鐨勬剰涔夈€傛兂鏄庣櫧浜嗕粠浜虹殑瑙掑害鐪嬫潵杩欑鎰忎箟鏄笉瀛樺湪鐨勪互鍚庯紝鎴戦潰鍓嶅氨鍑虹幇浜嗕
+虾饺：难道难道໒꒰๑•͈ x •͈๑꒱১
+吉利濊鐫€榛戝銆傛垜涓嶆槑鐧芥垜涓轰粈涔堜細姝汇€傚埌鎴戞鏃讹紝涓€鍒囨劅瑙夐兘浼氬仠姝紝鎴戜細娑堝け鍦ㄤ竴鐗囨贩娌屼箣涓
+鎴戞懜鐫€姘存箍杩囩殑琛ｈ锛屾壘鍒颁簡浜哄閫佹垜鍒掔幓鐠冪殑閭ｇ墖纭川鍚堥噾銆備簬鏄垜鐢ㄦ湁鍔涚殑绗旇抗鎶婃垜鐨勮瘲鍒诲湪鐭冲ご涓婏紝杩欐槸鎴戠殑鑳滃埄绾康纭戙€傚湪杩欏闆堕浂鐨勭煶宀涗笂鍙湁杩欎竴鐗囧潥纭殑
+鸡茸金丝笋：你们两个到底在说什么怪话啊！
+鸡茸金丝笋：算了，我去完成昨天没完成的设计，先匿了！
+
+
+……
+
+
+所以有谁能来告诉你，作为一个普普通通的ARG游戏，为什么它会内载一个足足有60多个G的回合制手游，且配套了每个选项都能有点击反馈与剧情细分，ui花里胡哨如同光污染、红点像牛皮糖一样黏在屏幕上怎么点都点不掉的完整游戏界面？网页解谜游戏根本不是这样的！你应该给我一个搜索框，让我通过搜索找到各种各样的网页，可能会提供一些根本点不动的迷惑选项装样子显得页面很充实，最多给我把与剧情相关的主要文字加粗作为提示，然后我经过一番紧张刺激的文字破案后达成结局——为什么一个正常的ARG网页解谜游戏需要进入游戏舱连接VR接口？知不知道游戏舱启动一小时足以烧掉十台大冰箱连续不断工作一周的电量啊！！你不接受！！
+唯一的优势大概就是这款名为《食物语陪伴版》的游戏你七年前真的玩过，要是再早一些的话可以追溯到十年前：你曾短暂地接触过它的前身《食物语》，但没玩多久，就被它堪称脑残的策划岗位和铆足了劲儿捞钱的架势气得游戏卸载——再见面就是陪伴版了，当年累充三千的御品膳具如今商城点击即送，凄凄惨惨戚戚，相顾无言，惟有泪千行。以及作为一款女性向手游，这款游戏里设计的一百五十多个食魂居然没有一位能够勾起你留下来的兴趣，实属失败至极。
+
+游戏制作组更像是为了炫耀自己拿到了某款十年前的大火游戏数据这盘醋，包了一碟名为ARG解谜游戏实则展示游戏数据的饺子——但这碟醋实际上也不咋样，部分过场cg略显敷衍，聊天界面有大量锟斤拷和文本丢失，部分文案前言不搭后语，还会时而飞过几行似乎是文本丢失的乱码。差评，退钱！
+你有些郁闷地在心里吐槽着，放下先前浏览的手机·图鉴与群聊界面，环顾了一番正在落雪的庭院。2032年的VR虚拟交互已经做得几近逼真，虽说为了兼顾玩家所需的时尚感与沉浸式气候变换体验，游戏舱会削弱一部分环境带来的温度与接触差异，以免部分游戏玩家在穿着神圣、过图冰天雪地时惨遭冻伤。
+
+
+此时空桑的季节恰为暖冬，一树晶莹的雪花在整个下午阳光的照耀下也未能融化几分，沉甸甸地将梅树的枝头压弯，如同缀了满树结了霜的柿果，被夕阳时分的光线一镀，在背后的红墙下投着暖洋洋、剔透而金灿的倒影。簌簌的积雪偶尔飘下几片，落在立在树下的你的手背上——并不寒冷，反而带着如清晨露气般的微凉。游戏如同开放大世界探索般毫无进展，你在一小时内反复浏览了几个固定展示的界面，可谓是一无所获：没有触发任何后续剧情与不同分支，只找出了几个动画播放时的bug。
+《食物语陪伴版》的时间定格在了2025年12月31日，而现在的官方时间是2032年2月1日：因此游戏内npc的生活轨迹也早已被按下了暂停，定格在了关服的那一天。所幸时间还有些剩余，你根据既有的游戏经验思索了一番，又艰难地回忆起了一部分此游戏最初的剧情：似乎要进入主线剧情的回忆部分才能触发npc对话与交互，而《食物语》的开头剧情便是空桑少主从梦境内幽幽转醒，被浑身散发扑鼻香气的大美人咚在床上……
+
+善哉善哉，你的手只用了一秒钟便点进了剧情回顾界面，眼前只黑了一秒，便发觉自己已然如同回忆里的剧情一般躺在了床上。晨起的鸟雀啁鸣之声断断续续、隐约入耳，还未睁眼便觉有带着暖意的香气轻柔地洒在脸侧，你一脸了然地眨了眨困倦的眼皮，果然，佛跳墙美丽而熟悉的脸庞在视线内逐渐清晰。对方嗓音温柔地唤你起床，而你在这番糖衣炮弹的攻势下半推半就地享受了一番，方才起身更衣、洗漱、走下楼梯来到大堂。带着沉浸式体验galgame后心满意足的笑容，你在转角处迎面碰上踱步的北京烤鸭，少年帝王见到你后喜上眉梢，刚要开口，便听见整个空桑上方传来惊天动地的一声咆哮——
+脚下的地板龟裂迸溅、瓦砾横飞，一旁的佛跳墙失色道：这是……饕餮？！
+而此时你的笑容立刻僵在了脸上，不等你反应过来任何对策，手指已经飞快地调出了操控界面：该死的食物语祸国殃民，你光记得自己醒来后被美人服侍和青梅竹马搭话，全然忘记了第一卷的后续内容是饕餮出世——而你的游戏舱在购买时贪图便宜，没有安装危险剧情过滤与感官屏蔽系统：总而言之是虽然你的身体安全，但在一款十年前的老游戏内被摔成脑震荡的概率从来不是0，然而——
+
+上方的拱顶被撕开一条巨大的裂缝，饕餮带着震怒的吼声一时间地动山摇，它巨大的爪牙粗暴地从破洞内捅进来乱抓乱砸一气，闪着冰冷锋利的利甲已然近在眼前：而你面对着游戏界面右下角、十分钟前还完好亮着的“退出游戏”，此时却已然变成一片灰色的不可交互页面，差点没一下子背过气去。</p>
+                     <p style="color:#8fafff;">Chapter1.
+
+
+“编号3001玩家请注意，你已触发主线任务1·循环。
+
+任务描述：所谓的永动循环是一个完美的谎言，当我走到莫比乌斯环的尽头时，看到的却是站在起点的另一个我。”</p>
+
+                    <p>所以最开始只是想玩一个轻松愉快的网页解密游戏，现在到底为什么会有性命危险——你们这个游戏保真合法吗？防火防盗防诈骗，我发誓要是这次能平安地从这个该死的游戏界面退出，下次再也不乱点击陌生的网页链接了好吗，好的！
+
+饕餮的爪牙瞬间将脚下的地面撕裂，你眼前一花，只来得及在昏迷前抱着无穷无尽的悔恨暗暗腹诽，但下一秒便感觉预料之中的疼痛并未到来：身体在一片柔软中不断下坠，昏昧黑沉的黑暗一点点将视线侵袭，直至消泯——待到意识短暂回笼时，鼻尖已然再次萦上了一阵若隐若现的清香。
+你茫然地睁开眼，佛跳墙绝美的容颜再度出现在了眼前，他低低地唤了声你的名字，将你的额发拢至耳后：“你醒了。”
+但或许是你大张着嘴、满脸呆滞而不可置信的痴态过于明显，这位美人的脸上难得带了几分疑惑与不确定的情绪，他不由得偏了偏头：“嗯？是我脸上有什么东西吗？”
+
+天杀的制作组和那个劳什子委托人，《食物语陪伴版》根本不是这样的！哪怕你的记忆似乎这两年隐约愈发地不好了起来，也照旧记得这根本不是一款无限流游戏！你们的程序员到底往它的代码里加了什么！！
+你来不及和他解释，只得手忙脚乱地推开佛跳墙，蹬上拖鞋便草草地往门外冲去：并利用空余时间触碰了一下界面右上角的“跳过”：它和“退出游戏”一样闪烁着嘲讽的灰色，作为《食物语》的新手关，想来这段初始剧情也是不得不过。于是当楼梯口徘徊的北京烤鸭抬头向上望去时，当他看见你身影的那一刻，也和闷头冲下来的你本人同样惊异地睁大了双眼：“爱卿，你、你——”
+“这段剧情和上一次好像有些不同，怎么还结巴了？”你说着便将目光投向了门扉拐角处的壁钟，上次眼前一黑前的匆匆一瞥，依稀记得是早晨八点三十五分：而现在是八点零六，若是时间计算没有问题的话，距离饕餮袭来还有不到半个小时。此时面前的北京烤鸭终于缓过神来，你瞧他面色怪异，似是双眼都不知道该朝哪放：“朕无事，只是爱卿你，今日为何这般就下来——”
+
+
+一件轻薄的外套落在肩头，我在春日早晨有些料峭的寒风中打了个喷嚏，方才后知后觉自己此时只穿了件单薄的睡衣。佛跳墙担忧的声音从后方响起：“美人，发生什么事了吗？你今日似乎格外反常。”
+“也没什么，就——”你尴尬地咳了两声，“我冲出来的时候，怎么没人提醒我要整理仪容仪表、至少把衣服扣子扣好？以及……”
+
+顾不上管二人是否会相信整件事情的来龙去脉，你以最快的语速将饕餮袭来后的一切后续交代了一遍，旋即便顾不上去看他人反应，飞快地冲至楼下：与你前一个起晚的轮回不同，此时的庭院内立着一位面相奸诈、老奸巨猾的访客，他看你从楼梯上下来，愣了一秒，旋即扯开一个有些狰狞的笑意：“空桑少主，久仰。今日前来，是为通知，宴仙坛——”
+你大脑飞速转动，饕餮带来的毁灭似乎是必然结局，为了贯彻空桑少主撕毁《食物语》、重新寻回食魂记忆的主线，这段剧情似乎不可避免，除非……
+除非你对食物语的主线剧情压根不感兴趣，也并不想按照既定路线，把它第八章后便又臭又长 剧情再重温一遍——那种捏着鼻子一边翻白眼一边看的感觉你也不想再体会第二次了，现在你只想退出这个该死的云端游戏窗口！
+
+于是众食魂接下来所见的一切，便是你冲上前，如同久别逢亲般一把抓住了易牙的双手：“太好了！正好我也想尝尝你做的菜，顺便讨论一下厨艺方面的问题——我这就跟你走！”
+
+……
+
+你第三次从床上睁开眼的时候，表情带着十成十的生无可恋。床头闹钟的时间显示此刻是七点半，窗外隐约有雀鸟啁啾，似是由于你这次醒得格外早，佛跳墙此时还没有来拜访。当你冲口而出那句话后甚至没来得及看清反派的表情，便感觉后脑结结实实地挨了一下，像被人抡圆了胳膊甩上一棍子似的，双眼发黑，喉间也一片腥甜——旋即再睁开眼时，便已到了第三次轮回的伊始处。
+显然这个该死的游戏不可能让你钻这种程度的漏洞，而且强制性走主线任务：你明智地不打算去找其他空子，否则可能会拿到一个作死最多次数的成就称号。但是……你慢慢地眯起眼睛，很难相信食物语的主线有何等魅力，足以让游戏主创不惜一切代价也要让玩家走完全部剧情——难道真的要被饕餮蹂躏搓扁一次？针对曾经在百田游戏集团危难时没有往游戏里氪金的玩家打击报复？还是说……
+有什么细节是明明在我眼前，但被遗漏掉的、视而不见的违和之处？你思忖着翻身下床，尽量快速地完成了从洗漱到穿衣的一系列动作，拉开卧室门时往楼下大厅一望，发觉自己再度刷新了启动时间：拐角处的钟表显示的是七点四十五。
+
+后花园通往住所的石阶往日光洁整齐，但恰逢近日下雪，瞧起来颇有些像一道被新雪覆盖、曲曲折折的小路。一路上你没有遇到佛跳墙，似是由于还未到对方准点来喊你起床的时间，反倒在道路尽头遇见了北京烤鸭。他正迈开步子，低头跨过一级石阶，骤然抬头望见你时似是被吓了一跳：“今日怎的起得这般早？”
+你打了个哈哈敷衍了过去，想起前几次轮回都过于匆忙，屡屡遇见他在楼下徘徊，却并未上前询问过——说不定有线索呢：“北敬，大早上来找我有什么事吗？”
+“爱卿忘了？今日该是朕一日馆长当值的日子。”他笑了笑，叫了一声你的名字，“在正式开始巡视之前，我依稀记得要在值班表上填好朕的姓名——但是最后这张表该张贴在何处，爱卿有印象吗？”
+这种细枝末节的游戏设定到底是谁会记得啊！我只得试探性地问他：“要不……你直接交给我？反正和我直接汇报也是一样的。”
+“话是这么说，但总觉得如果不将值班表填写完整并提交的话会有很恐怖的后果……”北敬沉思了稍许，忽然抬头望向你，“朕想起来了！”
+你精神一振：“想起来了什么？”
+北京烤鸭冲你眼睛弯弯地一笑，旋即低下头又陷入了沉思。你起初以为是他在卖关子，但等了少顷，他忽然又抬起头来：“朕想起来了！”
+你呆立在原地：“所以你想起来了什么？倒是说啊！”
+面前年轻的皇帝又将头低了下去。你忍不住一步上前，双手扶住他的肩膀轻轻摇晃了下：“你不要吓我，鸭鸭！你还记得你说过什么吗？”
+展现在你面前的又是一个笑容：“朕想起来了！”
+“所以到底想起来了什么？！”
+“朕想起来了！”
+“是因为不能说？到底是谁？被屏蔽了？！”虽然这表现更像是卡bug了啊！“难道就是这个人放出的饕餮？不对不对，我记得饕餮明明是易牙假扮的苦味使秘密豢养在空桑地下的，现在它还在沉睡，除非此时有人去作案……”
+“朕想起来了！”
+“所以你想起来的人到底是谁？！”
+“朕想起来了！”
+
+……
+
+就在你几近崩溃，就在差点强制掐对方人中关机的时候，佛跳墙带着疑惑的声音如同救星般在后方响起：“少主，你们俩在干什么？今日起得可早？”
+你脑海中掠过无数恐怖acgn作品的经典设定，譬如npc角色其实是被异化的恐怖世界内催眠的怪物，如果让他们意识到自己已经死亡便会陷入疯狂大开杀戒，此时一级的主角多半就死到临头了——然而预料中的情景并没有发生，就在听见佛跳墙声音的同一刻，北京烤鸭疑惑地“嗯”了一声。他抬起头，冲后方的人道了声无事，旋即将目光再度落在你身上，视线的焦点似乎放空了一瞬：“……难道是没睡醒……朕方才同你说什么了吗？”
+“没有没有，”你将头摇得像拨浪鼓，“你非常清醒，非常！”
+本来就在类无限流的恐怖循环里，这种俄罗斯套娃一样的数据延迟循环套循环最好再也不要发生了！
+
+说到这里，我最近似乎也觉得睡得不是很好——后方走来的人用长袖掩住嘴，稍稍打了个哈欠。你回头望向美人的面容，忍不住开始回忆，若是以前《食物语》仍在世之时有沉浸式游戏舱带来的3d体验，面前的人物形象建模会是你如今眼前所见的这般模样吗？如果非要说的话，眼前的食魂相较你心目中佛跳墙的形象确实相差无几，但根据你对他过往履历的了解，对方周身的光芒似乎有些过于——灰暗了。
+毕竟当这个人在从前的你记忆中出现的第一面，几乎能用夺目来形容：而此时他的眉宇间萦绕着几分挥之不去的倦意，而面前的北京烤鸭也同样如此……如果用你熟悉的状态来形容的话，大概就是加班到晚上八点赶完最后一版方案交给甲方、却被告知对方不喜欢和自己姓名同样的元素所以让你推翻重来时的有气无力感。你这么在心底暗暗地吐槽道，安抚性地拍拍二人的肩：“正巧，我过会有些急事要处理，可能不在空桑——你们可以先回去歇息，一日馆长也不着急。”
+
+毕竟四十分钟后空桑就要被饕餮毁灭了，着急也没用。你将二人打发走后呼出索引导览，谢天谢地这个破游戏除了文本bug和退出键失灵之外，其他功能还算正常：比如这个“湪鑽”想来就是地图的意思。你靠着微薄的记忆又是在餐厅的周围一阵乱转，总算按图索骥找到了那个传说中的地下暗道，而饕餮便被豢养在地基之下，现在过去毁掉通道的话兴许还来得及——
+——吧？
+
+……
+
+而当你历经千辛万苦、最终站在了那个下沉式的牢狱入口时，面对着空空如也到甚至锁链都蒙上了一层薄灰的锁妖台，差点忍不住情绪失控、破口咆哮出来：“我饕餮呢？我这么大一个饕餮呢？！现在明明才八点二十几分，甚至离易牙到来还——”
+——温馨提示，你脑子里所剩不多的理智答道，根据对周围环境的观察，这个地下锁妖台已经废弃差不多二十年往上了：别说饕餮，周围甚至连一根鸟毛都没见到。以及根据你从前对百田有限公司的尿性了解，我建议你对于它疯癫一般没头没尾的文案水平不要抱有过高的参考价值与期待。
+——什么意思？
+——在你过“食物语”楔子剧情第一章时，“饕餮被藏在空桑地下锁妖台”这个设定很有可能还没被写出来。
+
+何意味？你失去了所有力气与手段，意思是在八点三十五分左右的时候，易牙会凭空变出一只上古神兽，将整个餐馆摧枯拉朽地——好吧，或许根本不需要去纠结食物语如同脑残一般的剧情逻辑，否则只会被它牵着鼻子走。
+你强行打起精神，赶在饕餮到来前的最后几分钟连滚带爬地逃出了地下通道，遥遥地朝远处的居所处望了一眼，却仿佛看见空桑的某个角落处蒙上了一层似有似无的黑雾：如果“湪鑽”是地图，再对照房屋图标来看，那处有些阴森诡异的地方很有可能是宿舍——你的住处在可以瞭望全景的那处高阁上，这个“宿舍”有极大的可能是食魂宿舍。不过……
+脚下的地面由于吼声带来了一阵一阵的震颤，在饕餮的巨爪撕裂大地之前，盘旋在你脑海中由于对食魂异常、剧情缺陷和游戏冲突的谜团隐约串成了一条线，但当你试图伸手去抓住些许蛛丝马迹时，那些思绪便又如错觉般的晨雾四散开了。怀抱着这些隐约的疑虑，你眼前再度一黑——
+
+在自己的榻边醒来，床头的时钟显示此刻为六点半。
+
+
+心跳的速度仍沉浸在先前在地下通道间奔跑带来的余波中，你任凭自己放空了片刻，向下陷入柔软的床铺间，长长地叹了口气。早晨的阳光带着暖意轻柔地倾泻在眼皮上，窗外的鸟雀一如往常地声声啁啾着，时而抖动翅膀，窗台边沿便传来细微积雪落下的声音。你打了个哈欠，从床头坐起身来，将目光投向窗外，眨了眨眼：
+咦……
+嗯？
+
+……
+
+不对！不对！！不对！！！
+你在瞬间感觉到双臂裸露在外的皮肤一阵刺麻，鸡皮疙瘩沿着后颈一路蔓延至胸口，血管同样像被灌入了雪水般一瞬间差点结冰：这不可能！四次循环下来，不算你压根没有观察到任何环境的第一次，后续的三次循环时间一次比一次提前，就连佛跳墙都没有再出现——但冬日早晨六点半的空桑怎么会有挂上枝头的阳光？！窗外的鸟雀为何在记忆中永远是唱三声叫一声、抖动翅膀，旋即扇落积雪？世上没有两片完全一模一样的叶子、每一秒的时间空隙都是这个宇宙独一无二的存在，所以这种情况永远都不可能发生！
+
+那么现在这种情况是……
+仿佛有一只冰凉的手轻抚上了你的心脏，恐惧一点点将其收紧：是时间！时间有问题！这个游戏、这个游戏的时间——
+它一直在骗你！</p>
+                </div>
+            </div>
+            <div class="page-nav">
+                <span class="nav-prev disabled">← PREVIOUS</span>
+                <span class="page-indicator">01 / 09</span>
+                <span class="nav-next" onclick="goToPage(3)">NEXT →</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="scene3" class="scene main-content">
+        <div class="horror-reader">
+            <div class="falling-lines"></div>
+            <div class="horror-content">
+                <div class="glitch-text">
+                    <div class="blur-title">记录片段 02</div>
+                    <p style="color:#8fafff;">Chapter 2.
+
+
+
+“编号3001玩家请注意，你已触发主线任务2·日记。
+
+任务描述：日记？笔记？手记？它存在的形式并不重要，重要的是当我落笔在纸页上写下文字时，并不会觉察到它是预言抑或只是一个故事。”</p>
+
+                    <p>但要是这么说的话，难道我每一次轮回醒来的时间都是固定的？还是这个地方根本没有什么“时间”的概念？又或者这一切其实都是能够被人为所操控的？你从床上一跃而下，在焦急中也顾不上自己领口的扣子有没有系好，一鼓作气拉开房门，直奔食魂宿舍：那便是你昨日看见有黑雾萦绕之处，你嗅觉向来较常人更为灵敏一些，此时更是在踏着积雪奔往目的地的沿途嗅到了一些不同寻常的气息，那似乎……
+是硝烟的气味？来不及多想，你凭借第六感踏入目光所及的第一栋建筑大门，正打算往上走去，恰好迎面撞上了正向下走来的佛跳墙。对方看见你气喘吁吁、衣衫不整的模样，神色略有些惊异地打量了片刻，微笑着冲你施了一礼：“少主来此所为何事？”
+“我来这里是想找——”你的话说到一半便卡在了喉头，神色复杂地看了面前的人一眼：自你登录游戏后太过于诡异的情况接二连三，以至于你竟然事到如今才迟迟地意识到，面前的人按照设定该始终唤你为美人才对。
+照你看来这个游戏应该改名叫“我的诡异空桑”会更为合理一点，毕竟这里的空气有毒，还有自带让食魂ooc的不明物质。难道传统acgn内npc发狂无差别屠杀的结局依然是经典桥段？来不及思考对方的态度变化是不是被人下毒的原因，你顿了顿，还是斟酌着将自己来的路上打好的腹稿和盘托出：“你在这里居住的时间比较久，所以我想问问，你有没有觉得这个宿舍里有什么地方——或者有哪个人，最近的状态有些奇怪？”
+
+面前的美人面上闪过一丝迷茫的神色：“我应食神大人邀请暂居此处，但来去频繁，对多数面孔并没有太大的印象……”神经病啊制作人到底有没有玩过这游戏！你在心里大叫，狗屎系统，佛跳墙在真正的食物语是最招蜂引蝶的那一批人，走到哪都粲然夺目，结果你搁这和我说他认识的人不多？骗鬼呢！我要鉴云！“……奇怪的人在下没关注多少，但自我有印象起，湣鐑便特意提醒过广大食魂不要进入一楼走廊靠右后方的某个房间，据传言，那处曾发生过不好的事……”
+不好的事？闹鬼？等等，这个“湣鐑”又是什么？我穿越到了一个提到其他人名字就会被屏蔽的游戏吗？难道这里其实是晋江？你有些哭笑不得地扶额，根据记忆里空桑少主背后的三个男人的设定、再加上楔子里鹄羹还在沉睡没有出场等等，试探性地问：“德州警官在吗？他还好吗？”
+“他很好，此时应该在晨间巡逻，少主要是想绕开他的监管进入房间一探究竟的话，现在是个好时机。”对面的人似是看出了些什么，笑意盎然地冲你又行了一礼，旋即便告辞离开——渣男！前两天还在爬我的床！主线第七章的时候陪我上刀山下火海我还为你揍过小混混，现在就翻脸不认人了是吧，关心都不知道关心一下！
+
+
+不过说到主线你忽然灵光一闪，想起空桑少主似乎有个存在感极弱的净化能力：下次要是再遇到佛跳墙的话，可以悄咪咪地对他用一下——眼下自然还是探查那个神秘房间更为紧要。你赶紧调转脚步冲下楼梯，急匆匆地拐入一楼的走廊。本以为在寻找上还需花费些许时间，但你骤抬眼望去，便发现那个出了问题的房间正如acgn恐怖游戏中被泼洒了鲜血的鬼门一样显眼——不对不对，能不能不要再代入通关恐怖游戏的思路了，对自己好点！
+你走到那唯一一扇、相比其余或多或少从门缝与窗棂间溢出黑雾的房间，显得过于干净而纯良无害的房屋门口，先象征性地敲了两下虚掩的门，旋即咬牙推开。映入眼帘的情景颇有些在你意料之外但情理之中的感觉，房间内空空荡荡、被漆成一片崭新的空白，如同刚刚装修完毕的样板房，从未有任何食魂在此处居住过。
+
+屋内仅存的家具是一张四脚书桌，之所以说是四脚书桌，也是因为这张桌子除了有四个角之外任何抽屉与隔板都没有：光洁而一览无余，倒是省去了你四处查探的必要：说“书桌”也是因为桌面上摆着一本笔记本，否则说是餐桌倒更合理些——然而这间房屋的装潢（纯白地狱也能称得上装潢吗？）与宿舍其余区域古色古香的软装风格实在是过于格格不入，非要说的话，更像是曾住了一个医院的病号。笔记本的扉页上写着“空桑管理日志”几个字，你向后翻开，察觉到书写者的字迹工整锋利，然而写的内容却无聊透顶：</p>
+
+<p style="color:#8fafff;">11月21日，一次。
+11月22日，一次。
+11月23日，一次，失败。
+11月24日，一次。
+
+……
+
+11月30日，三次。记得扣除月供。
+12月1日，五次。
+12月2日，五次，三次失败。
+12月3日，五次均失败。</p>
+
+<p>记录日期最终停留在了12月31日，然而你翻来覆去没能找到年份，只得依据常理猜测为2025年——即食物语陪伴版关服那天。记事者的字体到后续愈发潦草，以至于最后一日已然简化到了12.31 11111111111的计数——你数了一下，后面的“1”有十一个，十一次。记录者在写些什么？在尝试什么？又是为何屡屡掺杂着几次失败的痕迹——你抱着探究的兴趣越过几大页空白，将记录本翻到了最后一面，却发现上面赫然写着更多类似于锟斤拷的大段字符：书写方式与先前那人不尽相同，或许是书写者性情大变，又或许是遭遇变乱、在匆匆下不得已潦草、狂乱而晦涩。
+
+
+那些带着几分恐怖谷意味的文字看得你有些头昏脑涨，直至雪白的墙壁在一声震颤下龟出几丝裂缝，方才在饕餮的悲声哀嚎中回过神来。脚下不甚结实的地面抖得地动山摇，你望向手中的记事本，在恍惚间一咬牙，将其往兜里一塞，旋即才飞快地跑出房门。广场上此时已然三三两两地聚集了一些食魂，他们的表情有疑惑、有恐惧，但望向你的时候无一例外，都带上了几分惊异的陌生。你在瞬间几乎感觉到自己像是游街示众的罪囚，在针刺般的目光下毫无遮挡地横穿大半个广场跑过，只能尽力在狼狈躲避被饕餮撕碎的屋瓦碎片时，加快速度朝自己的那个所谓房间的“出生点”奔去——
+
+“啪嚓”一声横空飞来一块碎石，重重地砸在了你的左小腿上，你不由得痛叫一声，狼狈地向前扑倒：不对，这不对劲，十分甚至有十二分地不对劲！这种程度的人物血条损毁不至于触发如此强烈的痛觉反应，除非开发出这款仿生游戏舱的公司不想干了：伴随着时间的流逝游戏世界里的一情一景似乎都在刻入骨髓，你惊恐地意识到如果不尽快结束循环的轮回，或许在未来的某一次循环中就不是重启，而是真正的……
+死亡。强烈求生欲驱使着你拖着一条伤腿咬牙爬起，一步一步、朝着眼前的住所大堂艰难地挪动，直到在彻底脱力地倒下去前，映入眼帘的照旧是那口拐角处的挂钟：早晨八点五十五分，距离九点整仅剩300秒。
+而下一次……能逃脱吗？
+
+……
+
+腿上的剧痛几乎使你在有意识的瞬间便再度疼得要晕过去，伤口并没有随着第五次循环的开始而消失，反倒由于埋在被单下再次被剐蹭挤压，溢出的血污将床单染湿了一大块。在黑暗中比痛觉先来的是有人轻柔地唤你名字的声音，你如同惊弓之鸟般骤然睁开双眼，映入眼帘的居然是佛跳墙温柔美丽的脸庞：若非受伤的腿在提醒你一切非虚，你几乎产生了某种错觉，仿佛前几次轮回的经历都是一场梦：“福寿全，你……大早上找我有何事？”
+你说着便尝试着动了动，但手脚却被身上的人压得更紧了几分。你艰难地抽出一只手，捞过床头的闹钟看了一眼：五点整。时间流逝的速度在飞速加快，而窗外的景象也似是懒得和你虚与委蛇，变成了彻底的一片漆黑，昏暗无光的环境下，你甚至无法看清窗台上还有没有积雪。
+佛跳墙的呼吸此时却又轻柔地洒在你的耳畔，对方温柔地俯下身，带着香气面容近在咫尺：“叫少主起床自然是我的分内之事，不过……”
+“……”你心里有些不祥的预感，只得冲他挤出一个笑容，“不过什么？”
+“不过……”那双异瞳的美目忽然放空了些许，神色内流露出几分惘然，“近日空桑有重要之物失窃，日月使无心打理俗务，因而餐馆上下皆是漆黑一片。”他的目光向下游离过去，你直到此时才恍然发觉有什么坚硬之物硌在胸口，竟是那本记事本，它竟没有伴随轮回的重启一同消失！“——而您，又是谁呢？”
+
+对方话音未落，双眸骤然闭合，竟直直地淌下两行血泪！你被骤生的变故吓得尖叫一声，几乎是胡乱而毫无章法地催动灵力：分明是净化之法，却恰好挡下了佛跳墙朝你心口袭来的一击。趁着对方神色一僵而短暂愣神的片刻，你紧紧地护住怀中的记事本，拖着伤腿以平生最快的速度冲下了楼！
+——这脑残游戏终于还是变成了恐怖acgn，演都不演了是吧！
+
+
+一层，两层，你从未如此痛恨自己的豪华居所在最高楼的楼顶，而作为一个尚无多少灵力的凡人，从楼顶一跃而下显然是不可能的——而糟糕的是与前几日都有明显不同，今日在最高楼往下的楼层内聚集了颇有些数量的食魂：高矮胖瘦、男女老幼，他们部分人的面容你如同昨日初见般记忆清晰，部分人却如湮没于记忆长河般早已模糊——若此时是一个普普通通的重返空桑的日子，你定有心情同他们好好叙叙旧。但此时的你在一瞥间，才发觉自己受伤的左腿竟深可见骨，却也只能迎着夹道而来的、恶意或凝视的目光，咬牙一层一层跌跌撞撞地朝下方走去：
+千头万绪虽然你还没厘清，但此时也只能放手一赌——拐过某个角落时食魂的数量忽然散去了大半，身后的脚步声逐级逼近，你趁着其余人暂时没能注意到你的空隙，艰难地将自己的半个身子藏进了房间夹层的某个储物间的缝隙内。痛觉带来一阵一阵抚过全身的颤栗，冷汗已然完全浸湿后背，你闭着眼，尽量掩藏住自己的气息，听着从后方逐渐清晰的脚步声，在心里默数着数字：一，二，三，四……
+二十七、二十八、二十九……三十。由远及近的脚步逐渐朝着远处再度模糊，追捕你的人似是一无所获，不快不慢地再度朝着下一层楼去了。你舒了口气，试探性地睁开双眼，被汗水与泪水蒙住的视线一片模糊，光线几乎不见五指的前方空无一人，四周一片静寂，似是所有诡异的生灵都已然消失——
+
+“你是在找我吗？”
+当温和而带着笑意的声音从左侧方传来时，你的心跳几乎停了一拍。而正如所预设的那样，在看见佛跳墙从黑暗中慢慢浮现、苍白而无任何血色与表情的脸出现时，你的手指便已经抓住了储物间靠下方那扇矮窗的窗棂：谢天谢地，你在找地方躲藏时还记得观察一下基本的环境，而此刻……
+
+掠过面颊的风声和对面麻木的面容于你的记忆里都只出现了一刻，仿佛被火焰燎灼翅膀的飞蛾一般于顷刻间灰飞烟灭：而接踵而至的，却是大半个身体接触到泥土地时钻心的痛感。你运气还算比较好，坠落的地点在三楼，窗外也是柔软的花园草坪而非坚硬的水泥地面：否则估计这会儿就没你的碎碎念什么事了。头脑由于剧烈的撞击而昏沉一片，连带着所视之物几乎都产生了重影，你觉得自己大抵是彻底摔坏了脑子，但此时也顾不上太多了，而是以最后一丝力气扶着墙站起身，踉跄着朝一楼大堂拐角处，那座矗立的钟表走去：
+脚步声由不缓不慢地逼近一下逾为急迫，追逐你的、披着佛跳墙外皮的生物仿若瞬间移动了一般，几乎片刻间便从三楼出现在了一楼朝下的最后一层楼梯口：你被那道阴冷的、如软体动物蔓延爬行上身躯的目光俯视着，但所幸经历了接二连三的刺激，你的脑海已经逼近一个昏迷后回光返照的状态，仅凭潜意识的动作出手：
+
+重重地、用尽了大半个身躯的力气，将那面挂钟光滑的玻璃罩面掀翻在了地上，旋即掏出怀里的记事本，一下一下，哪怕双眼已几近不能视物——也凭直觉将其砸了个粉碎。
+
+四处散落的锋利碎片划伤了手指，心头血的流失带了尖锐的疼痛，使得你忽然清醒了几分。所以这算不算是只要我先一步把自己摔成一个智障、你就无法从精神层面攻击我？你苦中作乐地想道，旋即也再也没力气去管抓你的人到底是佛跳墙还是什么劳什子阴兵鬼差，放任逐渐袭近的黑暗掩盖双目，浑身卸力、几近彻底倒下：
+
+……
+
+“……您真的，格外擅长给人添麻烦。”</p>    
+                </div>
+            </div>
+            <div class="page-nav">
+                <span class="nav-prev" onclick="goToPage(2)">← PREVIOUS</span>
+                <span class="page-indicator">02 / 09</span>
+                <span class="nav-next" onclick="goToPage(4)">NEXT →</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="scene4" class="scene main-content">
+        <div class="horror-reader">
+            <div class="falling-lines"></div>
+            <div class="horror-content">
+                <div class="glitch-text">
+                    <div class="blur-title">记录片段 03</div>
+                    <p style="color:#8fafff;">Chapter 3.
+
+
+
+“编号3001玩家请注意，你已触发主线任务3·过客。
+
+任务描述：与生命中至亲至敬人的初见，也可能以过客的形式诞生——而当我看到那张面孔时的第一眼，立即意识到那代表了什么。”</p>
+
+
+                    <p>比死亡的阴影先一步到来的，竟是一声叹息。你带着几分疑惑微微抬起头，还没来得及睁开双眼，便感受到有一只手拉过你的手臂，将你从地上拽起身来。几次眨眼后原本消弭的视力再度化为清晰，而你惊异地发现那种如同被千万柄锤子敲骨吸髓的、钝钝的痛觉不知何时已消失了，自己所身处的环境也已全然变样：
+在一片纯白而漫无边际的空间内闪烁着隐约的光点，四肢哪怕伸展到极限也无法触碰到所处地方的边缘，你一时间甚至感觉脚下所踩着的地面也是一片虚空，直到拉你起来的那人俯下身，你第一反应竟是自己险些产生了错觉，不然怎会看见一双深如鎏金般的眼睛。
+一个穿着浅金色正装，有着深蓝色头发、年轻英俊的陌生食魂。你皱着眉打量他的脸，虽然有些失礼，但与这位食魂骤然照面的第一刻，比起脑海中残留下的任何印象与联想，先响起的居然是心脏缓慢跳动的声音。
+
+“你是……”他是谁？陌生的面容与锋利的眉眼竟莫名催生出了某种近乎柔和的气息，这种矛盾杂糅的感受实在是过于特别，但是你们见过吗？空桑上下大大小小的食魂不说全部烂熟于心，但至少不会有这样一个人，在初见时甚至无法想起有关他一星半点的痕迹。你开口时才发现自己的声音干涩而皲裂，仿佛连续数月都未被雨水灌溉过的沙漠，忙咽了口水，才勉强使得自己说话听起来没那么沙哑，“……不，我肯定见过你。”
+似乎救了你的人叹了口气，只是抬手，替你轻轻拭去了面颊边残留的血迹：“我很荣幸能得到这样的评价——看样子您并未改变多少，值得欣慰。在解释这一切前，还请您把手给我检查一下。”
+
+你直愣愣地伸出手，任凭他轻柔地托住你双手的手腕左右翻动着检查了片刻，在确保没有任何细微的伤口残留后才放心似的捏了捏你的手指：“外表无明显伤口，关节位置正常，能自由屈伸——看样子在砸碎钟表的过程中您并没有出多大的力气，主要还是得依赖我记事本外壳的坚硬程度。”
+……他一直都是这么说话的吗？
+你有些哭笑不得，但没有和他计较这些，而是率先问出了自己所疑惑的、最关键的问题：“所以那个房间的主人也是你？”
+当然，他勾起唇角，我想您现在肯定有许多困惑，包括我为什么会在这里、您之前的遭遇又是为了什么。我的笔记本最后一页有些许内容，不知道您是否关注过？
+有，你不知为何甚至有些心虚，即便你的理智告诉你这是游戏的代码显示问题：但是……我看不懂。
+
+所幸对面的人并没有过多地责怪你，眉心靠近天灵盖的部位传来丝丝清凉的感觉，仿佛在夏夜搬来竹椅后在庭院内小憩，被微风偷偷地吹了口气。你眨了眨眼，看见他放下手，将笔记本递到了你眼前，翻至最后一页：</p>
+
+
+<p style="color:#cfafff;">2026年1月1日
+
+展信佳，只能以这样的面目和您对话真的十分抱歉。长话短说，如若您此刻能看懂这一段文字，想必已经同我最年轻的记忆见过面了吧？此刻的您或许对上述言论皆是一头雾水，但从头解释这一切必然是十分耗费心力的大工程，因而请允许您最康纰戙€傚偷个懒，就当是对您遗忘与我相关的过去的小小的惩罚。请将手交给面前的这位食魂，他会带您去到一段被这个空间湮没的历史。
+附：此时的我很
+难忆起这位记忆……或者说“碎片”的性情与个性，但若是没记错的话，他的脾性不算特别古怪。记事本会在您归来时更新。
+
+——您挚爱的锛屾壘鍒颁簡浜。</p>
+
+
+<p>你的手指捻着纸张的边缘，感觉脸颊几乎也要为最后这个称呼发起烫来——脑海中的思绪在“要命，我以前不会真欠下过什么情债”和“我到底该怎么退出游戏以及你谁”中拉扯，在阅读完毕后几乎下意识地翻到了后一页。然而正如（日记？信笺？）文中人所言，往后翻去只余笔记本的底面。你深吸口气，从头又再读了一遍尾页的内容，忽然意识到了一个问题，于是抬头看向身旁静立着的人：“你先前明明赋予了我能透过乱码看清文字的能力，为何这里、这里——这两处的文字依然是乱码？”
+我必须声明一点，他伸手将你思索时无意识在指尖绕了又绕的头发理顺，所谓“透过乱码看清文字的能力”并不存在，只是因为您通过重重险阻来到此地之后、自动撞破了一些原本会被屏蔽的设定而已。或者可以这么说，那双金瞳笑眯眯地看过来，打游戏时总会要通关前置教学之后，才能解锁更深入的进阶玩法——对吧？
+
+……说得好，要不是有你提醒，我都要忘记自己现在还在游戏中了。你总觉得这些术语从对面人的口中说出似乎有些过分违和，但还是无奈地舒了口气：“所以这就是万象阵？按照记事本中的说法，你是他所有的记忆碎片中最年轻的那一位？”
+“我就是他，只不过是曾经的他。至于在过去、在相逢的最初曾发生过些什么——请您随我来。”他拉过你的手臂，正如同将你从异变的空桑世界解救出时那般，眼前的白光在视线中逐渐扭曲到透明、模糊，直至再度与黑暗趋同。在安静如同空灵的山谷中你依然能听见他的声音，“关于我从何而来、又缘何诞生于此。”
+
+
+……
+
+
+冰城的白桦林地上覆着一层厚厚的积雪，白色躯壳下裸露的褐色树皮被风催得皴皱，在白茫茫的一片虚影中格外显眼，如同枪弹留下的瘢痕似的难以忽视、历久弥新。金色眼睛的食魂从树林间走出，他穿着与你身边人同款的浅金色正装，双肩上覆着一层薄雪，神态平静，但似乎带了些微弱的踌躇。在他身后跟着出来的、是十来位衣衫褴褛的人，有的身材高大、有的瘦弱矮小，男女老少或年轻或苍老，无一例外皆是发色浅淡、眉眼深邃。林地边缘地带是一条横亘于灰白平原之上的大道，荒瘠的土地被一分为二，向遥远的地方望去隐约有村落三两，炊烟袅袅。
+化形不过百年出头的食魂转过身，食魂诞生的时间节点各有不同，自尧舜禹至民国之末，在历史悠久的长河里，他也算得上是最年轻的那一代。“每日每六个钟头后的整点，自西边起会有一班通往沈城的列车。”他开口道，“东伪过去还要一会时间，那边的生意活儿也比留在冰城好做。抓紧时间了，诸位。”
+滞留在后方的几位俄国难民听了这话，表情有些愤慨。其中一位逃难来此的艺术家从队伍末尾高声喊道：“您将我们大伙从道台府迁出时，可不是这么保证的——你承诺我们离开府邸后能接到的活计不会少，工钱也足以过上自白色逃亡后再没经历过的好日子，但可没说这要求是令我们彻底离开冰城，再一次背井离乡！”
+“各位稍安勿躁，”食魂微微地笑了，即便立于落在一旁的你眼里，此时的他还未如之后的模样那般滴水不漏，可以连一丝一毫的情绪都不流露，“年关将近，我替诸位向老爷申请了双倍的工钱，足够你们在无任何收入来源的情况下维系整月的开销——以及，我不清楚东伪的日报流通速度，有没有将杀头的消息传到各位手里？”他扫了眼明显瑟缩下来的人群，稍缓和了口气，“沈城的状况尚不明朗，如若有力气继续前行，可自码头处泅渡过海：申城的法租界对你们而言，是目前最安全的地方。”
+
+他说完这一番话，缀在身后的俄国难民们便再没有私语传来，直至半顷之后，其中一位神色惊惶的夫人抬起头，用颤抖的声线问道：“那……先生，好心的年轻人，让我们离开之后，您可怎么办呢？老爷的态度大家都知道，但是现在形势这么个情况，哪怕你没有放走我们这帮府内下人，东伪人之后来了，您又该怎么办呢？”
+“我不会有任何事，更罔提性命危险——您可千万别这么想。”食魂讶异地睁大了双眼，他本是由灵力化形而成，哪怕被东伪人拉去吃几发子弹，顶多也是受一段时间重伤、在静养间等待灵力重新聚合变好，难以忍受的程度甚至不如鲜血涌出时弄脏衣服。这些不断被强化的记忆在你的脑海中吸烟刻肺，以至于一旦回想起相关内容，嗓子里都会下意识涌出残余的苦味。
+
+
+这些秘辛自然不能为外人所道，因而你只是静默地看着他微微侧开身子，将工钱分发给领取的难民后，目送着他们往山腰处的车站方向离去。深蓝色头发的年轻人站在雪覆的林地山坡上，呼啸的风将发丝吹乱、紧紧贴上面颊和额前的皮肤，在瑟缩的冷意之下，他站得却依然挺拔。他正打算将工钱分给队伍最末尾处戴兜帽的女性，却被对方一把抓住了手腕。年轻的声音从兜帽下传来，我想邀请你去一个地方。
+你是……年轻的食魂也皱起眉，但转瞬之间，那位看不清面容的女性便松开了手，转而从怀里掏出一个记事本，唰唰地写下些地址之后，交到了他的手上。而立在一旁的你，自然在她掏出记事本的瞬间便如遭雷击般意识到了什么：
+那正是“他”用于记录、又给你留下密信的那个黑色封皮的记事本！
+
+所以这个人是谁？是游戏设定里的你父母、他的前辈，还是某位与这段历史息息相关、决定掺手人间的世外高人？你的思绪一团乱麻，几乎没意识到年轻女性留下字条后便匆匆地离开了，而他的视线从对方的背影处慢慢转移，微笑着落在了你的脸上。年轻时期的记忆踩着碎雪与枯枝一路走来，停在约一尺的距离处，不远不近地望着你：“目睹这一切后，您看起来不太高兴。”
+有什么值得我高兴的吗？你苦笑起来，此时天色渐沉，空气中逐渐飘下些许晶莹的碎雪，有几片落在他的眉梢眼角，如同被打磨抛光的镞头，衬得那双如晨星般清洌的眼眸愈发锋利逼人。你将他额前落下的些许细雪掸开，竭力用轻松的语气道：“没什么，我只是在想……看见这一切的时候你的身影比我想象中更为熟悉，但又模糊到足够遥远。”以至于你在回忆起一些零碎的片段时竟会自发地编纂填充细节，“这些人最后得返故乡了吗？我又什么时候才能回家？那个人——”
+“那个人的身份自然重要，之后您会看到的——而在那时，他也会来送你回家。”年轻的记忆突然拉住你的手臂，片刻的天旋地转后，你只觉眼前便又是一片漆黑，“回到占位符后，记得重新浏览记事本的尾页。回见。”</p>
+                </div>
+            </div>
+            <div class="page-nav">
+                <span class="nav-prev" onclick="goToPage(3)">← PREVIOUS</span>
+                <span class="page-indicator">03 / 09</span>
+                <span class="nav-next" onclick="goToPage(5)">NEXT →</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="scene5" class="scene main-content">
+        <div class="horror-reader">
+            <div class="falling-lines"></div>
+            <div class="horror-content">
+                <div class="glitch-text">
+                    <p style="color:#8fafff;">Chapter 4.
+
+
+
+“编号3001玩家请注意，你已触发主线任务4·昨日。
+
+任务描述：前日是昨日的昨日，后天是明天的明天。时间如此排列有序但又鬼魅似地流走，所述的是哪一个‘昨日’，很遗憾我已经记不太清了。”</p>
+
+
+                    <p>占位符？你在漆黑中不断眨着双眼，怀揣着满心的疑虑慢慢在视线尽头看见了一个模糊的光点，不断扩张、放大、清晰，最终落在了一片白茫茫而无虚实之分的空间上：这种地面让你只觉踏入了虚空，因而在落下时没忍住踉跄了下，而身旁顿时便有另一双手伸过来，稳稳地扶了你一把。
+你抬起双眼，身边的年轻人缩回双手，对你微微欠身：他仍穿着那身淡金色的正装，区别是头发略长了几分，胸口处则系了几条深色的绶带。他的面容和民国时在冰城无甚变化，双眼内蕴含着笑意，气质却仿佛更为锋利了几分——但这些都不是最重要的。你望向他额角一点湿润的痕迹，那是雪花融化后黏附在发丝上的印记，愕然地伸出手又迟疑着落下，最终攥住了他的袖子：“你是……前面那一段记忆明明也是你！难道你始终是同一个人，一直都没有变过？”
+“正如同您失去了所有与我有关的记忆一样，他也同样如此。就在刚刚，年轻时的回忆重返了这具躯壳，所以我才说‘我’就是‘他’，他还不完整，但我们从未变过。”他笑眯眯地望着你，而此时已经有一个记事本递到了你的手上，“我很感谢您对我的关心，但在确认完毕这些事情之后，还请您先履行自己的义务。”
+如同严师一般熟悉的话语……你嘴角些许抽搐，将记事本快速地翻至最后一页，果不其然地在前一页的信笺下半部分又多出了几段文字：
+
+
+<p style="color:#cfafff;">2027年1月1日
+
+展信佳。
+看了这部分的记忆后，想必您心中已经有了一些隐约的困惑吧？当然，我相信以您的能力，定然能在蛛丝马迹之间自己得到一些猜测与解答。……别告诉我您没有思考过其中的关联性，这些答案并不复杂，也并不困难，如若您连在生死攸关的时刻思索这些关窍的能力都没有，我会再次考虑开设智力训练课程的事情。
+……我开玩笑的，这一切的前提都是我能再度与您见面之时。写下这段文字的时候，我也隐约想起了亟须补充的部分细节——剩下的内容，还是留到下一页再同您讲述吧。
+
+——您挚爱的锛屾壘鍒颁簡浜。</p>
+
+
+<p>……这个玩笑分明一点也不好笑！你咬着牙，在发觉信笺并没有任何后续内容后，重重地一下将笔记本的封皮合上。您大可不必与其置气，它只是一段描述性的文字。有另一只手伸过来按在你的手臂上，不知道名字的食魂声音不急不缓，在你头顶响起，如若我有能力的话，自然也会想替您分忧——可惜这似乎是一块残缺的拼图，而我们需要做的，就是将缺失的那些部分补上。
+“我没有生气，”你这么回答他，好吧，可能还是有一点：明明我们都在为解开这个谜题努力，但当读出这段文字的时候，你的眼前甚至出现了一张脸上挂着满肚子坏水的笑容——这不太公平吧！说到底的，这一切到底和你有什么关系？哪怕这个游戏似乎正在从一个恐怖acgn转向galgame，你也不想玩了，退钱！我要下线！
+
+……真的吗？心跳的速度并没有减缓，面前的人不乱不慌，只微笑着望着你的双眼，你却如同一下子泄气了似的，草草扫了一下始终灰白的退出游戏键后，不得不将所有的理由都归咎于其上。为了掩盖杂乱无章的脉搏，你转过头，冲他抛出了一个或许勉强算得上是“思考过后得到的猜测与解答”的问题：“从冰城离开时，我似乎听见你提到了‘占位符’相关的内容……那是不是可以理解为，在一个往往会被操作者所忽略的文档里，我们目前所身处的地方更像是卡了一个软件的bug？”
+“不错，您很聪明。”他即刻答道，“或者换句话说，我之所以能够站在这里与您对话，也是因为一个不可能存在的时间点——我迷失之中的时间已经过了很久，久到似乎比我从浑浑噩噩中化形为食魂所经历的百年还要更长。”
+“你在这里待了有多久？”你下意识地问道。
+“您听说过烂柯人的故事吗？”他突然拉过你的手臂，一步踏入前方，你顿时如同踩空的失重般同他一起飞快地向下坠落，“如果按照世事的时间概念，或许这段时间足够斧上的朽木成灰。言尽于此，我们该出发了。”
+
+
+……
+
+
+……有时候我也会觉得，以第三视角看着有自己面容的游戏主角做一些你早已逐渐淡忘的事情，这种感觉其实还挺奇异的。你望着正伏在花园内凉亭边呼呼大睡的自己，在心里默默地道。春分时的空桑早已褪去了料峭的风雪，逼近傍晚的夕阳细细碎碎地洒在少女的脸侧，又轻柔地落在曳地的裙裾边缘，自发丝至缎带都被温柔地镶上了一层金边——眼前画面像被风一轻吹就会揉皱的旧画纸，在时光的打磨下早已不真实到似乎甫一伸手去触摸，便会如缥缈的尘烟般松脆易碎。
+你望着似是比现在的你要年轻许多的面容，默默地、不合时宜地想起了这条裙子累充168块钱，这笔对尚年轻的你称得上是巨款的投入，也早已随着游戏的关服沉弭在了数据的长河中：热乎乎的钞票变成了冷冰冰的返还充值公告，一想到这件事你顿时记忆复苏，对百田恨得牙痒。廊下熟睡的少女似是梦见了什么美事，在睡梦中动了动嘴唇，露出了一个傻兮兮的笑容：难道当年你刷本太困时挂着机就这么睡过去时的表情就是这样？思及这一点你以手掩面，恨不得跑过去替她在头上蒙一条毯子。
+
+所幸画面的重点并不在此，不过半顷，在连廊的拐角处便传来了两道脚步声，一快一慢，一重一轻。年轻食魂金色的眼眸朝凉亭内扫过，又似是虚虚实实地在你所处的方位扫了一眼：一道记忆自然是不能看见回溯中的人影的，但无来由地，你还是会在与他双目相接时产生一阵没来由的、心虚一般的悸动。
+那道视线浅浅地在面前的景象上掠过，随即落在了身边高大而有些发福的男人身上。你自然认得他，作为设定里的游戏主角父亲兼剧情三人行燃冬爱好者，你在打主线关卡时几度看见他和他老婆的剧情时便烦得恨不得退出：那位塑造不如设定的前任食神大人，此时正严肃地同身边的年轻人商量着什么。两道声音不远不近地飘入你的耳朵，你由此听见主角那个便宜爹带着难以忽视的疑虑的声音：“锛屾鍒簡……先生？您的履历非常完美，从过往合作历史到作战经验都无可挑剔。但我仍困惑您为什么要选择来此工作？按照您的优秀程度，又何必来应聘空桑的……管家？”
+
+
+管家？你将这两个词在舌尖默默地滚了几遍，翻来覆去、咬文嚼字，似是能从这简短的两个发音中咂摸出些许带着深意的苦味。远处的交谈还在继续，前任食神（其实按照故事线发展，此时他约莫还没被革职）紧接着又道：“我常年与夫人在外远游，府内事务多是小女一人操持。我这个女儿懂事，但毕竟年幼，处事轻率……您若是同她有过一面之缘的话，此时来拜访，恐怕要失望了。”
+那深蓝色头发的年轻人闻言，朝熟睡中的少女远远投去视线，旋即意味不明地笑了一声。“阁下多虑了，我与令爱先前并未见过，现下也正是……各种意义上的初见。”他望过来，身姿从远方遥遥一看照旧挺拔，“今日一见，果真是与众不同。不过关于为何来此应聘管家这一职务，我倒是可以完整地回答您。”
+
+接下来的瞬间你的世界仿佛被按下了消音键，就连视线都扭曲而模糊：如同雨后被涟漪搅碎平静的湖面，一圈一圈逐渐变得透明。你只得勉力地睁大自己的双眼，却也只能依稀看见他似是从怀里掏出什么东西，正在前任食神面前不断地翻动着——第六感告诉你，这似乎是一个类似笔记或日记本的物件。但还没能等你观察出二人的态度有何变化，世界又于瞬间骤然清晰，谈话也以一句尾声徐徐地落入耳畔：“……我很放心。那之后就请您多指教了，空桑的新任管家。”
+“幸不辱命。”年轻的食魂冲眼前人微一欠身，旋即就像立时便适应了自己的新身份一般，朝着眼前的凉亭缓步走去。睡蒙了的少女被人轻轻地推醒，率先映入眼帘的便是一张英俊而挂着微笑的脸，就在这时你脑海中似乎有闪电噼啪一声闪过，某些尘封的回忆无法控制地涌现——就是冲击力似乎有点大。
+以至于你的第一反应是抬手捂住前额，刚好避开了眼前的这一幕：“少主，初次见面，我是专程来服侍您的锛屾鍒簡，空桑的新任管家。我的工作从此时便正式开展了，因而请您注意一下自己的形象，至少把口水擦擦干净——这只是最基础的整理仪容仪表。”
+
+……
+
+先前目睹的情形唤醒的记忆有些杂乱、琐碎，但其中蕴含的情感有些又过于鲜明：以至于当你被拉着手臂返回占位符时，依然久久都不能回神。身边的人似是看出了你的困惑与满心的纠结，便只是掸了掸袖扣处落上的灰，不经意地道：“看样子您这一次想起的记忆有些多，愿意同我讲述一些吗？”
+怎么不愿意！你的控诉几乎是冲口而出：“当然，但是——”
+又能说些什么呢？
+你猛然顿住，呼吸不由得上下起伏，心脏在感应到某种情绪时的瞬间停了一拍：哪怕你记忆中所经历的一切都只是游戏设定好的数据流程，但你在回忆这些细节时，居然超出意外地感受到了一种……悲伤。
+和其他一些你觉得自己可能疯了的情绪。面前的人倒是丝毫不觉有他，只是笑眯眯地递过来一本笔记本：“说得不错，相信您看完更新的内容后会有全新的体悟。”
+这就是你对我刚才所说内容的全部反应？你冲他怒目而视，手上却很听话地接了过来，翻开尾页，发觉这一次在先前写下的文字之后，多出了整整一页崭新的内容：</p>
+
+<p style="color:#cfafff;">2028年1月1日
+
+展信佳。写到这里的时候我突然迟疑了：或许比起这些寒暄式的对话，我应该同您讲更多的一些有关我本身的事情。但一个待您严格、枯燥、乏味的人，他又有什么值得讲述的呢？请允许我修正自己的言辞，以上内容包含了对您管家工作的诋毁，可能从侧面造成了对您的影响——因而我尽可能将事情说得更详细一点，在被允许的范围之内。
+一个来自北地的旅人，为何会决定出现在空桑与您相遇？在目睹上一节的记忆后，您或许已经有了些许猜想，而我也自然抱着同样的想法：我与您的相遇是必然会发生的，正如我注定要成为您的管家、导师、又或许可以是左膀右臂一般，我对自己同您相处时度过的那些时光（当然，有些明显是被浪费了的）心甘情愿，哪怕抛开前任食神曾开出的酬劳，时光倒流之后，我自然也会做同样的选择。
+但是，又是什么导致了我们分离？在空桑的万千食魂之中，我并非最重要、又或者是最特殊的那一个，如若我曾在您心中有一席之地，您的管家对此深感荣幸——当然，这小小的荣幸事到如今也被您忘记我的怨念扯平了。而如今的空桑是如何一番光景，显然您也已经有所体会：发现它变成这样的原因并解决，是把我彻底救出、或者说是脱离此处的必要条件。我已经在此徘徊了许久光阴，并不介意再多等您一会。
+但是要是您能够抓紧时间的话，自然就更好了。接下来的路或许会有些许危险，抓紧我记忆的手，同我本人一样，他会付出一切来保护您：虽然这种难度承诺，在下一段回溯的片段中似乎用不太上，仍盼您平安。
+
+——您挚爱的锛屾壘鍒颁簡浜。</p>
+                </div>
+            </div>
+            <div class="page-nav">
+                <span class="nav-prev" onclick="goToPage(4)">← PREVIOUS</span>
+                <span class="page-indicator">04 / 09</span>
+                <span class="nav-next" onclick="goToPage(6)">NEXT →</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="scene6" class="scene main-content">
+        <div class="horror-reader">
+            <div class="falling-lines"></div>
+            <div class="horror-content">
+                <div class="glitch-text">
+                    <div class="blur-title">记录片段 05</div>
+                    <p style="color:#8fafff;">Chapter 5.
+
+
+
+“编号3001玩家请注意，你已触发主线任务5·名字。
+
+任务描述：名字是诞生之初最短的诅咒。当询问他人的姓名时，我是否已经做好了要与此人纠缠余生因果的觉悟？开玩笑的，其实名字只是一个称呼而已。”</p>
+
+
+                    <p>这次的信笺占据了整整一页纸，你的心也前所未有地跳得如此快过：书写者的口吻已极其栩栩如生，正如同你脑海中的形象和记忆从模糊被一点点冲洗到立体，几近呼之欲出——哪怕在最终仍被模糊透明的高墙阻隔，依然令你不由攥紧了手下的纸张，将信笺的边角揉得皱皱巴巴，如同被蹂躏后团成团丢进水里的叶片，只能在乘人不备时伸张自己的脉络，几乎有些委屈的意味。
+你放下笔记本后不由得发了会呆，在心乱如麻中感受到手中的东西被抽走，身边的人似是犹豫了片刻，最后难得体贴地拍了拍你的肩。准备好了吗？他问道，你望向那双依然锋利而清冽的金色眼睛，总觉得那里面似乎有些什么发生了变化，信中也说了，这一次可能会有些危险，跟紧我。
+“我知道了，我也并不害怕。”你长叹一口气，抬起头直视着他，“我唯一的要求是，等会你带我走的时候，能不要突然拽我胳膊吗？下坠时的失重感比在回忆中看到的任何东西都要可怕十倍。”
+
+
+这是你的肺腑之言，毕竟你其实极为恐高。年轻的食魂停下手上的动作，安静地盯了你一会后，伸手去拉你的手指。你下意识地瑟缩了一下，但掌心的触感和想象中极为不同，牵住你的那只手温暖、修长而有力，无时无刻不在散发着干燥的热量。你那金色眼睛的管家此时却变得比先前沉默寡言了不少，他偏过头，在坠入黑暗前你似是看到他几不可见地笑了一下，但很快便湮没在无边际的虚无中——掌心触感的消失几乎使你产生了瞬间的恐慌，在虚空中你试着重新去抓那只手，却趔趄着扑了个空，跌倒在湿润的黑土地上。
+
+四处是一片曲折的山脉，你跌倒后伏在一片似是被战火犁平的田地之间，在双眼能看清外界的瞬间便抬头寻找他的身影；反应过来后却又失笑，仅仅只是因为信中提到要握紧他的手，便对虚拟世界的数据产生了惯性与依赖吗？这条通向结局的路必然还是得自己走的。就当是为了退出游戏，以及解开coj猫身上的谜题——或许此时你应该过个好感鉴定？不过按照你目前的运气值设定积累恐怕会直接roll出一个大失败，直接被他手起刀落：所幸年轻的食魂应该……不会这么对你，你也并不是在跑团。你这么胡思乱想地安慰着自己，边朝呈梯田状分布的山脚走去，边分心观察着周围的环境，却意外地在遥远的谷底发现了一道令你难以置信的身影：
+穿着遮掩面容的兜帽、身形清瘦的女性，她宽大的衣袍之间似是藏着什么东西——你的嗓子在瞬间便要发出呼喊的声音，但又被下意识地克制回去：这里是什么地方？你身处哪里？如果主动与除他之外的任何人发生联系的话，是否会导致一些时间流上的问题？……那道女性身影的存在甚至有些过分眼熟，作为能邀请他去某个地方的人，她给你的感觉甚至有点像一位带着神性的母亲。
+
+
+理智告诉你应该停留在原地，会有景色自适应着在你眼前发生变化，但仅犹豫了一瞬，你便追着她的脚步往山下跑去。——万一呢？你的直觉告诉你，跟上去或许有无法想象的收获，是希冀也有可能是诅咒——就这样你仿佛被恶魔设下的重重困障牵绊住了脚步一般，始终维系着只能远远看到一个小点的背影的距离，跟着她走到了山的尽头。
+沿途走过的风景空旷开阔，原本的树木河流、篱栏人家似是都被战火摧走了大半，在这样一望无际的土地上仅稍一回头便能发现有人在跟踪自己，但她始终没有，而是走得焦急又心事重重。你边远远地跟着，边调用着自己已不甚清晰的记忆，开始回忆九年前的《食物语陪伴版》中有没有过这样一个类似的角色：强大、神秘，身上带着不甚清晰的谜团。你们二人翻过山岭、蹚过河流、行过巨石与岩滩，当踩在松软的沙地上的你听着远处海岸线一阵一阵的波涛，意识到自己哪怕回头、也再找不到出生的地点时，眼前始终不远不近的人偏偏在此时骤然消失了。你屏住呼吸，似有预感了一般当场回身，躲在一块裸露的礁石背后，悄悄地往前方望去——
+“——嘘。”
+
+一双手忽然从背后伸出，无声无息地盖住了你的双眼，你被惊了一跳，所幸之前便有先见之明地死死捂住了嘴，方才没有在瞬间叫出声来。不断翕动的睫毛剐蹭着对方掌心的皮肤，温热的呼吸似有似无地洒在耳畔，有人从你背后俯身过来，熟悉的声音里带着些疲惫的意味：“您可真是让我一番好找……请先不要看。”
+所以他是怎么凭空出现的？你却率先抽了抽鼻子，轻轻皱起眉：得益于较常人更为灵敏的嗅觉，身后的人身上竟沾染上了某种寡淡的硝烟味，由于近在咫尺，你甚至能闻到丝丝铁锈一般的血腥气息——与先前在虚假的空桑宿舍那会闻见的黑烟极为相似。你没有动，只是将手覆在对方掩住你眼睛的手指之上，安抚性地轻拍两下，低声询问：“我以为剧情触发不在原地，才——出什么事了，你受伤了吗？”
+
+你的管家却没有回答你的话，甚至微微收紧了手指：与此同时，你听见身前由远及近，似是传来了轻轻的脚步声。不要说话，不要抬头，不要看。他低声吩咐你，另一只手覆在你的头顶，在将你视线往下按去的同时，使得你几乎整个人都缩在了礁岩之后：“过会无论发生什么，都绝不要出来，我来解决。”
+他说完这话后便要撤开离去，但就在这时你福至心灵，突然紧紧地抓住了他的一只手：在视线的一片黑暗中你将头低低埋在双膝之间，但由此他也没能走得太远，一道仿佛从遥远处传来的、模糊难辨的回音便已然在你二人头顶响起，率先抵达的是一声叹息：“在这里见到我，你好像很不高兴。”
+“……您多虑了。”年轻的食魂在你身边缓缓起身，他的声音平稳，听不出任何情绪，“在不同程序的信息流内跃迁是一件很危险的事情——哪怕是为了您自身的安全着想，我也建议您尽快返回自己的占位符去。”
+
+占位符？你每次睁开眼后落地的那一片白茫茫的空间？你一下睁开了双眼，即便入目是粗粝不平的褐色礁石后背，光线骤然涌入双目时仍使人有一瞬间的晕眩：直到他轻轻地回握了一下你的掌心，你才意识到自己不知何时已将对方那只手攥得死紧。一个庞大而恐怖的猜想在脑海内成形，你紧跟着便听见身前的那道声音轻笑一声：“你知道我不会听你的话。”
+“我知道。”
+“我只想找回他。”
+“这并非一件易事。”
+“你又好到哪里去了呢？”这一次的语气带上了细微的轻蔑与嘲讽，听见这句话时你浑身的肌肉骤然绷紧，但恐惧又或是愤怒的情绪还未彻底迸发，那道声音便接着道，“别那么紧张，我又没有恶意。但容我提醒一句，这一段记忆磨损异常严重，所在的世界线已经濒临崩溃，不适合作为回顾的场景。我先走了，再见。”
+你能感受到身边的人微微欠身，但一言不发，始终伫在原处：直到那脚步声逐渐走向比来时更远的远方、彻底听不见除海浪声外一丝一毫的响动，方才轻轻地、低低地舒了口气。你于是也放松下来，只觉由于缩在原地的时间过久，浑身无力到险些瘫软，正要起身抬头，他却仍旧将一只手按在你的发顶，声音甚至罕见地带上了几分紧张：“请您不要看我。”
+什么道理？难道他真的伤得很重——食魂会受伤没错，但一段记忆内的虚影也会受伤吗？你这么想着，却下意识道，可是我蹲得好累。
+
+
+头顶于是传来撕裂的声音，一截带着余温的布条落在了你的眼前。他将你脑后的头发挽起，细心地将那节布条严严实实地蒙住你的双眼后，将自己的手塞进了你的掌心。抓紧，他这么命令你，这里地势不平，如若不想让我看见您摔得踉踉跄跄、青一块紫一块的英姿，最好不要再轻易松开我的手。
+这是生气了？你自知理亏地安分下来，在他的引领下摸索着踏过一块又一块的碎石与枯枝。现下是一个阴沉的、闷热的午后，惨白的天光透过布料洒上眼皮，海风潮湿地拂过你的面颊，柔软的发梢从脸侧擦过，你抬起空着的那只手想要将扰人的头发拨至耳后，指尖传来的触感却不似源于自己：“……你留长发了？”
+“我会随记忆内容变化形态，至于为什么会是长发，或许在您逐渐磨损的记忆里，此时此刻的我便应当是这副模样。”他轻声地笑了，你却有些不满：可是我甚至无从得见你此时的面容，又何来记忆里你的模样一说？
+
+再等等，他耐心地道，等跨过这一片危险地带，您就能把布条摘下来了。由于您……或者说是其余人对这一片地区的记忆流失极为严重，这段回忆里的地形发生了一些空缺，这并非现在的您能够独立翻越的：虽然您日行千里如八脚猫流窜的速度令我自愧不如，但在此时这种特殊情况下，还是希望您能稍微依赖一下您的管家。
+……你决定放弃纠结他究竟是在夸你还是在阴阳你这件事，“或许我能理解为地形没加载完成，有严重的空气墙和断档bug，需要开启自动寻路。”
+“可以这么说。”
+“——那她是谁？她又在找谁？”
+“您无需知道。”
+
+
+“很遗憾，但看样子我不得不知道。”你摸索着向前迈了一步，便倏地感觉脚下的地面骤然平坦：他任凭你摘下了蒙住双眼的布条，湿润的风吹来咸腥的潮水，浪花将雪白的沫打在礁岩边缘，而你们二人已经立于远离海滩的、坚硬宽广的石路当中，将这一切景象在身后抛得格外地远。你长久地注视着面前身披战甲、高高束着发的人，直至那双金色的眸子内浮出了些许错觉般的、难以明喻的情绪，旋即又细微地游离开来，才不经意地转回头，“其实这一幕的场景我已经看完了，对吧？”
+“嗯。”
+“并没有规定我想起一段记忆后便要返回占位符中，比如现在——哪怕这一段经历在我的脑海中是一片空白，我也依然在这里。”宽广的道路逐渐向下倾斜，铺就路面的坚硬石块变得零碎而不完整，逐渐露出其下裸露的新嫩草皮。你忽然觉得有些累了，在覆盖着新草的斜坡上缓缓坐下，将头放在膝上，“先前主动带我回到原本地方的人，是你。那为什么这会你反而没有开启那条下坠的通道？”你转过头，开玩笑似的望向他，“难道是因为此处的风景格外好看，想多陪我一会？”
+而这会他的——碎片或者分身，显然也已经想起了某些零散而被掩埋的记忆。但你年轻的管家只是如同你记忆中千万次的那般，安静地望着你：他的那些未明之言像一把在寂静中燃烧的火，如深沉的夜里突然循光诞生的游魂，在北国空旷到几乎能听见寒冷落地的空气间噼啪地回响、焚尽，只余温存的沉默。他也只是长久地注视着你，旋即垂下视线，缓缓地开口：“或许也可以说，我只是想同你待得久一些。”
+
+他没有说敬语，这可能也是你长久以来从对方口中听到过的最僭越的话。你一时间感觉自己的心脏被一下攥住，在不能呼吸的瞬间迎来的不是惊讶或惶恐，而是磅礴涌出的困惑：“你为什么不相信我？是不相信我有能解开这一切的决心吗？抑或是不相信我会践行发掘这个游戏真相的渴望？”
+“你应该知道我是一个很专注的人，在看书和电影，甚至是游戏以及文艺作品的时候，只要开了头便会一心一意地直到通关——哪怕这是一部史诗级烂片，知道结局也是我应该为自己选择的权利，我有能力也有必要知道。”你深吸一口气，再度看向他的眼睛，“我想知道这个游戏的结局。”
+我想知道这里究竟发生过什么，我想知道被写作代码的程序世界为什么会变成如今的样子，我想知道……知道你的名字。
+
+
+或许是对你过去明明有机会认真思索、却千万次以漫不经心又或是顺口戏言般的态度玩笑过去的惩罚，那个仿佛呼之欲出的姓名在你嘴边滚了三次，最终还是茫然地归于平静之中。年轻的食魂叹了口气，向下凑近你，将一张叠了几下的信纸塞进你前胸的口袋内。你在瞬间闻到了他身上混杂了血腥和铁锈的气息间，还掺杂了一丝干干净净、带着阳光和浆洗干净过的衣物的香味。那一晃而过如同幻觉的气息在瞬间却如同洪水般汹涌，在无知无觉中你鼻子狠狠一酸，差点就这么掉下泪来。他却似乎是看出了你的狼狈，只默默地将解开的布条重新在你眼前缠上，旋即几乎可以说是温柔地捧住了你的脸。你能感觉到带着体温的指尖隔着一层布料从你眼角细细擦过，一触即收，像是阔别许久的问候。
+我怎么可能不相信您呢，他轻声道，我只是太害怕您遭遇危险了，如若真的会有这么一天发生，您的管家又将被置于何处呢？——但既然您这么请求了，我还是相信您。眼前朦胧透着微光的昏暗逐渐化为墨色一般的漆黑，你的身躯逐渐失重，在重峦叠嶂的回音间听见了最后的那句低语：……第四页记事在您准备好时打开。</p>
+                </div>
+            </div>
+            <div class="page-nav">
+                <span class="nav-prev" onclick="goToPage(5)">← PREVIOUS</span>
+                <span class="page-indicator">05 / 09</span>
+                <span class="nav-next" onclick="goToPage(7)">NEXT →</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="scene7" class="scene main-content">
+        <div class="horror-reader">
+            <div class="falling-lines"></div>
+            <div class="horror-content">
+                <div class="glitch-text">
+                    <div class="blur-title">记录片段 06</div>
+                    <p style="color:#8fafff;">Chapter 6.
+
+
+
+“编号3001玩家请注意，你已触发主线任务6·梦境。
+
+任务描述：——即便如此也要离开吗？”</p>
+
+
+                    <p>“早安。您醒了吗？”
+
+你在睡眼蒙眬间听见了熟悉的声音，身边的床榻也随即有了细微的塌陷，一时间几乎产生了某种恍惚——紧跟着便是回忆起先前的经历，差点控制不住尖叫出声：勤勤恳恳三周目一朝回到解放前，难道无限流设定还在追你？这次你一定要退钱！
+抱着这样的心态你视死如归地睁开了双眼，但出乎意料地并没有看见俯身的佛跳墙。视线内的人影被模糊地扩大后逐渐变得清晰，但你的思路却仿佛被蒙上了一层隔绝空气的油膜，遇水后粘连地变得黏稠而迟钝：深蓝色的发丝，淡金色的正装，微笑的金色眼睛——多么眼熟的一套穿着，但这种行为绝不可能——
+——出现在那个人的身上！！
+
+你一记头槌重重地顶在了对方前额之上，疼得自己眼冒金星，但好歹是清醒了不少：清晨来上这么一幕真是令人神清气爽，比SSS级恐怖片更提神醒脑。对方被你顶开后的表情倒是没什么变化，甚至能称得上是泰然自若：“这是叫您起床时必然付出的代价之一吗？佛跳墙传授给我这门本事时并未提及这一点，也好，我之后……”
+哪门子的佛跳墙！唯一值得庆幸（真的值得庆幸吗？）的事情是对方并没有真的如他那般爬到你的床上，而仅仅只是坐在你床边低头瞧你，维系了这个姿势不知道多久——虽然也没有好到哪里去！你脑子里只有那阴恻恻在台阶上站立如女鬼般的身影，便龇牙咧嘴地揉着自己的额头，忙不迭地翻身下床：
+或许因为《我的秘密空桑》系统许久未经维护，编码运行错误导致了程序角色运行异常的out of character行为——正如同那追杀你的幽灵不可能是真的佛跳墙一般，面前这个温柔地笑着、替你披上外套的神秘蓝发男子也不可能是他！真正的年轻管家应该一上来就掀你被子并下达三分钟内清醒并洗漱完毕的死命令，第四段记忆或许是太久没维修更新，你的剧情设定已经严重任务崩坏了知不知道！
+目睹这一系列行为对你的冲击实在是过大，以至于你只能匆匆找了个借口支开对方，旋即将自己反锁进盥洗室，坐在马桶盖上从睡衣的胸前口袋内掏出了那张信纸——谢天谢地，你的手甚至在发抖，但那张逐渐浮现出几行简短而熟悉的字迹的纸笺依然在那里，并没有如你初进入游戏一般被轮回抹去：</p>
+
+
+<p style="color:#cfafff;">2030年1月1日。
+
+展信佳。
+
+在寻求帮助的同时，发现我，找到我，看见我。我一直在这里等你，从未变动过——不要让我失望。
+
+锛屾壘鍒颁簡浜。</p>
+
+<p>两年过去，他甚至不和你玩挚爱了？——不过这是一份提醒、也是一条思路：希望你的猜测正确，不然这个记忆片段可能会是史诗级难度。抱着这样的心情将手下的信纸完好地叠至原样、放回胸口，你深吸一口气，重新拉开了盥洗室的门。
+空桑卧室内的陈设和你记忆中最初的模样无甚变化，初春的风和煦地擦过脸颊，将浅淡的花香送进室内，窗檐下恰摆着一壶煮沸的新茶。那道如你记忆中同样挺拔的身影此刻立在窗边望着屋外，见你出来后便稍稍移开视线，眉眼微弯，露出几乎能称得上是温和的神情：“今日出门的外衣我已替您熨好了，先前所需准备的茶具也按照您的吩咐又清点了一遍，前来接您前往九重天宴席现场的车辆已经在门口停了半小时——我下去的时候和他们道了声歉，又推迟了十分钟。”
+这话听起来还有点像他从前的风格，但如此和风细雨的态度实在是与你记忆中的形象有所违背：难道随着时间的推移，这段记忆里的食魂形象还会不停地变幻风格？你狐疑地瞅了那道身影一眼，斟酌着调整语气：“你做得很好，但是——”
+——是你的错觉吗？在听到你的褒奖后，眼前青年的脸色反倒以肉眼可见的速度飞快地黑了下去，语气也生硬了起来：“但即便已经完成到了这种程度，您依然不打算放弃为难您可怜的管家，是吗？”
+旋即在你目瞪口呆、甚至完全没来得及阻止的情况下，他已然抬手看了眼腕表，旋即连珠炮似的对你进行了又一番输出：“按照我的时间观念，如若您无法在十分钟内完成从洗漱到更衣完毕的一系列动作，我在第三次下楼时显然无法免去被九重天来的人又一顿责骂，虽然作为您身边最直接接触此等事情的人，应该早已对这种情况司空见惯……但能否请您稍微为我考虑一点？”
+
+……所以现在这到底是个什么情况？走温柔风的食魂形象固然令人抓瞎，但这种变脸如翻书、阴阳怪气中掺杂着些许卖惨和绿茶的语气、偶尔还会通过自怨自艾来博取好感的性格到底又是从哪儿冒出来的？虽然这套说话方式比先前容易接受得多了——但这个故事走向不太对劲吧？
+你已经完全傻在了原地，只能凭直觉呆呆地捞过置于衣架上的外套，在外人看来几乎是乖巧地应下了会抓紧时间的承诺：眼前的年轻人顿时缓和了神情，放缓语气又叮嘱了你几句，旋即才掩门离去。由于存在（终于对你下发了的）十分钟死线命令，你本能地将目光投向衣架上那套颇有些重工的礼服正装，将自己如套头娃娃一般地往里塞去：但很遗憾，在这段模拟记忆里你仿佛肉身彻底穿进了空桑世界，系统也已如同放弃治疗一般，无论对你如何请求一键换装都没有回应——以至于最后你还是得求助于门外立着的青年，否则你压根没法在穿着束腰的同时系好衣领最靠上的几粒扣子。
+
+年轻的记忆匆匆地推门进来，在完成你的请求后顺带替你整理了下头发，并捞过桌上随意搁着的一条同色系项链，悉心系在了你的颈后。这一切飞快到只发生在眨眼间，当你意识到颈间仿佛多了什么东西后，已然被他凑近你观察的面容惊了一跳。众所周知，你的管家——或者说生有与你的管家相同面容的人，有一双极其漂亮的金色眼睛：但由于多数时候从这双瞳眸里映出的视线都过于锋利逼人，以至于你哪怕在记忆中，似乎也从未长久地、仔细地与他对视过。
+而此时那双眼睛却仿佛毗邻绿洲的沙漠，仿佛在日光下隔着一层遮掩视线的雾气。虽说与平日似乎并没有太大变化，但你微妙地感受到了某种情绪上的不同——有趣的是，他似乎压根没打算隐藏这种异常的情绪，否则怎会丝毫没流露任何攻击性地允许你与他对视超过十秒？穿着浅金色西装的食魂注视了你良久，旋即微微地笑了，夸奖了一句：“今日您的更衣速度很令人满意。”
+“……那我就直接理解为你是在夸我了。”你站起身，展示性地拎起裙摆在他面前转了半圈，旋即低低一欠身，对方便也会意地冲你伸出手：十指相碰时熟悉的触感令你骤然一惊，回忆起这一切情景不过是回忆中的幻觉，而幻觉的目的并不重要——你只需打起精神，仔细观察从何处起才是真实的情节。
+
+
+虚虚握住你手指的人稍收了些力气，你从沉思中惊醒过来，便任由对方领着你一圈圈走下螺旋式的台阶，并在阶梯的尽头看见了两个意料之外的人：那是曾存在于幻境空桑之中的，你遇见过的北京烤鸭与佛跳墙。似乎是由于你先前被困在无限流般循环的时间里太久，当你骤然一眼看见二人时便浑身紧绷了起来——身边的人注意到了你的异常，他牵着你停下脚步，站在几级台阶之上居高临下地俯视着他们：“二位，有什么事吗？”
+正在交谈中的两名食魂闻言抬头，在瞧见你与他并肩而立时表情却并不意外，北敬甚至还笑着冲你的方向招了招手：你旋即很快便也放松了下来，示意他继续往前走。几米开外的距离已足够看清二人的面容与表情，此时的你也很敏锐地察觉到了——尤其是佛跳墙，周身萦绕的气质较先前几次轮回中不断改变的情形又变了许多，不再复杂怪异，而是透出某种平静的亲和感……换句话说，此时二人身上的气质和你在绝境中初见身边的人时，他给你的感觉十分相像。
+
+……所以你到底为什么要用他来和其他人进行对比？而且身边的这位，还说不定是什么东西化成的呢！——但这至少证明了此刻站在你眼前的两位食魂不再是什么程序代码假扮的妖魔鬼怪，而是如身边年轻管家同样的、最初的食魂，货真价实，如假包换。你忽然想起那如同谶言般的一页信笺，在两害相权取其轻中果断地选择了相信对面的二人，开始不断地用眼神向两位食魂示意，并祈盼二人能凭默契体会你目光中的求助意味：
+——不对，不对，为什么北京烤鸭的笑容意味深长？甚至看起来有点像置身事外、爱莫能助、装聋作哑？佛跳墙那带着些许欣慰、甚至还有些伤感的视线又是为了什么？你觉得你已经将眼神戏演绎到了极致，不至于连这种基本的情感态度都看不出来吧！
+
+一番挤眉弄眼后你只觉得面部肌肉都僵了，但对面的二人似乎在一番思量后直接选择了无视你的表态，转而笑着迎上来：“早啊，锛屾壘鍒管家，少主——这是要准备出门？”
+“九重天的述职午会将在两个时辰后开始。”身边的人替你回答，你忍不住冲他怒目而视：我又不是没长嘴！不过正好，趁着他与北京烤鸭交谈的工夫，你又扭过头对着一旁的佛跳墙一顿眉飞色舞地示意，就差龇牙咧嘴地指示他找个机会带我从这儿离开，几分钟也行——但对方似乎完全会错了你的意思，几经观察后表情甚至带上了些许关切，你便眼睁睁地看着面前的美人蹙起眉：“美人可是有身体不适？”
+——谢谢，你身体好得很！你正要开口纠正这个天大的误会，佛跳墙却又转向你身边的年轻管家，语出惊人，“少主似是有些乏困，有劳锛屾壘鍒管家多关照她些。”
+“也有劳你替我观察她，佛跳墙。”身边的人露出了惯常的礼节性的微笑，在身后悄摸地将你的手指又捏紧了些，“感谢你的关心。”
+
+……所以退一万步说，为什么所有人在和我说话前后，都要和我身边的这位报备一下？空桑管家的权力什么时候这么大了？怎么没有人通知我？你一时间简直百口莫辩，差点气撅过去——但很快便在二位食魂的目送下被年轻的管家连拉带拽，带离了住所大门。踏在曲折的石子小路上时你已经对目前的状况完全糊涂，处于大脑宕机的状态，身边与他模样完全一致的人却伸出一只手指将你的下巴扳正，凑至自己眼前，再度仔细地观察了片刻你的眉眼：“在上车之前容我关心一句，您确定没有任何身体不适的地方吗？”
+没有，你恍惚地道，而且就算我有，你就会不让我去、在家休息吗？
+“当然。”得到的回答超乎意料，以至于你瞬间睁大了双眼，不可置信地抬头，看见身边的人竟弯起眼睛冲你很淡地笑了，“保证您的身心健康乃是我的第一要务，而且于礼……于情，我都不会在这种情况下还强求您做您所不喜欢的事情。”
+震惊之下，你忍不住冲口而出：“你怎么对我这么好了？”
+“您不喜欢、不适应吗？”他眨了眨眼，后退一步放开你的手，语气又产生了微妙的变化，“那看样子是我又僭越了，抱歉。”
+
+
+……饶是迟钝如你，此时也不由得回过味来：一名外貌俱佳的适龄青年男性，在什么样的情况下才会说出这般如怄气般的话语来？一个你几乎不敢去想的猜测在脑海里盘旋了三圈，此刻终于落至实地。但相反地，确认了猜想的你却并没有任何恐怖或烦躁的情绪，甚至有些出乎自己的意料之外：你感觉自己的心跳忽然变得很慢很慢，每一次落在胸口的敲击声都变得极为漫长，与之对应的却是脚下的步子一下变得轻飘飘，像是踩在云里，仿佛下一秒就要摇晃着飞起来。
+你于是带着这种有些迷糊的感觉大着胆子扑向前方，抱住了他的一只手臂：“没有，我喜欢，我非常喜欢、特别喜欢，完全没有任何不适应！”</p>
+                </div>
+            </div>
+            <div class="page-nav">
+                <span class="nav-prev" onclick="goToPage(6)">← PREVIOUS</span>
+                <span class="page-indicator">06 / 09</span>
+                <span class="nav-next" onclick="goToPage(8)">NEXT →</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="scene8" class="scene main-content">
+        <div class="horror-reader">
+            <div class="falling-lines"></div>
+            <div class="horror-content">
+                <div class="glitch-text">
+                    <div class="blur-title">记录片段 07</div>
+                    <p style="color:#8fafff;">Chapter 7.
+
+
+
+“编号3001玩家请注意，你已触发主线任务7·箱庭。
+
+任务描述：打开世界的每一个面，都能看见被折叠在这段时间之中的、空空如也的我。”</p>
+
+                    <p>“我看您只是又试图偷懒，不想恢复从前的训练强度而已。”身边人的语气依然平静，但你察觉到他的态度顿时一下缓和了不少，几乎能说得上轻快了起来，“既然如此便快些吧，又浪费了五分钟，希望西王母殿下不会责罚您。”
+西王母才不会在意——毕竟这种龙套角色主要充当了一个推动剧情的作用，你很想这么反驳他，但由于心情大好，只是笑眯眯地望着眼前这张年轻而英气的脸。而哪怕周全谨慎如对方的性子，被如此炙热的目光盯得久了，竟也显出几分不自然来——他轻咳一声，温热的指尖从你脸侧擦过，替你拢了拢颊边的发梢：“这么盯着我做什么？马车就在门外，只消半日您就能返回，不出意外的话，不会在那边耽搁太长时间。”
+“你长这样还不许我多看一会？”你松开他的手臂，无需瞻前顾后，仅凭心意便大胆地冲口而出，“要是在以前我还记——能够把这个地方塞进手机屏幕的时候，肯定天天把你放看板，每十几分钟就过去戳一下动手动脚。”
+“那真是感谢您的指名。”他笑了笑，旋即微微俯下身。你感受到仿佛抚摸一般轻柔、细微的触碰隔着发梢落在头顶，一触即收，几乎头晕目眩了起来：仿佛花瓣从树间拂落，春风从你头顶拾走时被轻柔地看了一眼。你便只在迷迷糊糊间便和对方道了别，甚至是面带笑容地目送着那道身影在空桑守卫的簇拥下走回庭院、直至大门砰的一声合上，才心满意足地转过身——
+
+等等，说好的马车呢？准备接我去九重天的车队呢？不是说西王母召我觐见吗？！
+
+
+你如同十二点钟声过后被打回原形的灰姑娘，落难似地站在街头，冲着眼前空空荡荡的道路呆滞了一瞬，旋即才如梦方醒地惊觉自己先前的态度简直如同被魇住了一般：哪怕你以前……或许现在也仍对年轻的食魂怀抱好感，但你与他都不是耽于感情之人，怎会在当下这般情况里，竟连外界产生的变化都注意不到！
+你一时间又羞得恨不得钻进地缝，但对着空无一物的街道，假佛跳墙给你留下的心理阴影过大，被欺骗的警惕感又在脑海中占据了上风——但很快，伴着你往前走了没几步便被无形的透明墙壁阻隔，一个令你无语到几乎笑出来的事实摆在了眼前，这其实是一堵空气墙，而此处是整个空桑地图的边界：
+根本就没有什么劳什子拜访西王母的任务，你在这段回忆中的主线任务只有一个，就是信笺上写的短短几行字——根本就没必要就这么跟着他离开空桑！
+
+
+……
+
+
+但路是你自己选择的，脑子也是你自己犯浑的，见到那张对你似乎有特攻效果的脸就直接迷糊了，这么想对方似乎也担得上一声祸国殃民：你此时难得回忆起在战国的海岸线上、年轻的食魂托住你的脸颊说的那番话，给你留下提示的记忆本体似乎也对当下的情况一清二楚，否则又怎会直言你可能有危险。
+也不知对方此时此刻能否观摩到这段情形，是否正在为你被迷得七荤八素的桃花劫扶额。为免于和对方重逢后的又一番说教，你给自己打了下气，便提着沉重繁复的裙摆费力地沿着墙根挪动了些距离，走到了空桑的边门侧旁。好消息，边门没有守卫看守；坏消息，边门看起来起码有十来年没有打开过了。你瞪视着悬在门上那道沉重的铁锁，又上下打量了一下呈蛛网般规律交错的铁门花纹结构：
+
+幸亏这扇门不算很高。那条华丽而价值不菲的长裙尤为重工的下半部分被你无情地舍弃，掏掉裙撑、撕扯了一半裙长后你活动方便了不少，再加上不算差的身体素质，得以没花多少时间就从门外翻回了空桑墙内。巡逻食魂的脚步在附近响起，你屏住呼吸躲在草丛内，按照剧情设定，空桑少主此时应该正在去往九重天的路上——你决定尊重一下这个世界观的剧情发展，尽量掩盖踪迹，免得太过招摇。而下一步……
+你犹豫了，但片刻之后，还是决定去试试看找佛跳墙：或许是某种直觉，又或许是你初入游戏世界后面对的第一道轮回关卡，当时所遇到的、直接向你展现异变的代码便是化形为他的模样，这一切到底是怎么回事？这里究竟发生过什么？——冥冥中似是有什么在告诉你，这些事情或许与他们这些人有关。
+
+靠着先前几次轮回时熟悉的地形，你没费什么力气就再度摸到了食魂宿舍门口：而且在你犹豫是直接走入内部寻找还是在门口守株待兔时，却恰好撞上了从楼梯口走下的佛跳墙本人。他有些惊讶地想开口叫住你，你慌忙一通手脚并用的比画，将他逮进了你藏身处的草丛：“这里不方便说话，有没有什么他人不常去的地方？”
+面前容貌昳丽的青年收敛住了有些惊讶的神色，冲你展颜一笑：“自然，随我来便好。”
+
+如此正常且熟悉的佛跳墙！对十多年前初入游戏遇到的第一个食魂有滤镜的你宽面条泪，亦步亦趋地跟着对方穿过后院的一条竹林小径，来到了一处幽静的亭外。佛跳墙冲你被撕毁的裙裾露出了心疼的神情，用随身带着的手绢扫了扫凉亭歇脚处的尘埃后，方示意你坐下：“美的事物被毁坏时总是令人心痛，据我所知，这条礼服裙是您的管家特地从下界时装秀发言人处定做的，小笋也参与了部分细节处的设计——要是让他看到了现下这般模样，恐怕又要闹上一会儿脾气。”
+把鸡茸金丝笋哄好就像吃饭喝水一样简单，难搞的是另外那位。你这么一通折腾下来着实是有些累了，便干脆很没形象地俯下身，将双肘支在膝上托着腮，长长地叹了口气：“是呀，你也知道我们管家对我的态度，恐怕他不会这么容易善罢甘休。”
+“您在说什么呢？锛屾壘鍒先生自然是不会对您这么做的。”佛跳墙变戏法似的从袖内掏出一把乳色的折扇，展开后为你徐徐地扇着风，笑道，“难道其实是美人害羞了？”
+简直莫名其妙！你不打算和他继续纠缠这方面的问题，而是将扇子按了下去，严肃地盯着对方的双眼：“我有事情想问你。”
+他便也收敛了玩笑的神色，视线变得认真了起来：“你说。”
+
+
+事到如今，你望着那双真挚而平和的眼睛，却忽然一下子犹豫了：所以这个游戏把《食物语陪伴版》里的内容做得如此真实详尽，到底是图什么？自你进入游戏后经历了所有的一切、再到现在与面前的食魂相对而坐，所有的一切都真实到仿佛曾经历历在目，凉亭被阳光晒过的木质扶手在掌心微微温热，面前的青年男性待你温柔而热诚。以至于你在回忆他从前的模样时，便对自己接下来要说的话压根开不了口。
+能说什么呢？我在之前似乎去到了一个和此地很相似的地方，还见到了另一个与你长得一模一样的人——在那个世界里不断地重复着空桑毁灭前的一小段情景，而似乎随着时间的推移，那些和你们生着同样面容的人行为举止逐渐变得诡异而失去理智，那个世界的构成似乎也正在逐渐崩坏——然后呢？
+你要问他，你知道这其实只是个游戏里的世界吗？你知道你的骨骼由电缆和主板组成、血液被数据和代码灌输，一旦游戏公司倒闭或者在数据没有备份的情况下出任何纰漏，整个人便会空空荡荡地消弭在这个时间里、再留不下一丁点痕迹吗？这种从另一维度的时间俯视下来的问话似乎过于傲慢，对他们而言也太残忍了。
+
+你到底该怎么做？又能问出什么？眼前的人却似乎看出了你的犹豫，他忽然伸手拍了拍你的手背，少主对我不必有所顾虑，直言即可。又或者是说，我至今仍未能成为令美人觉得是值得信赖的人呢？这个事实实在是让人有点伤心……
+“我当然没那个意思。”你稍轻松了些，便冲他笑了笑，思忖着道，“我先前只是在想，佛跳墙……你有没有听说过一个故事？把一群人关进黑暗而不透风的屋子里，随即在屋里点燃了一把火。因为缺氧大家都昏昏沉沉，一部分人不堪忍受痛苦后醒来，却对目前自己所处的情况无能为力；另一部分人则始终昏沉地睡着，在昏昧的光线营造的梦境中沉沉地彻底睡去——放轻松，我不是要让你选择这两种情况，我只是在想——如若那些昏沉的人在梦境中有过完整的一生，他们快乐、幸福，无需为挨饿、困苦等生存问题所扰，那对置身局外之人而言，又有什么必要去唤醒他们呢？”
+你这么自顾自说着说着，便已然厘清了些许思路，但转头瞧向身边的人，却还是为对方严肃到有些非同寻常的表情吓了一跳：“这个故事是不是吓到你了？我就是胡思乱想了片刻，这些事情当然不会发生——”
+
+“……我不是三岁小孩，无需如此小心地对待我。”佛跳墙却忽然叫了一声你的名字，俯过来轻轻握住了你的手，“少主想先听我对这件事的看法吗？”
+难道他还有别的话要讲？你想到线索便精神一振：“你说。”
+“这个故事的原版我听说过，美人给出的是对读者，或者是对观察完毕整个故事脉络后的人而言的视角——如若让我在这种情况下进行选择，我肯定不会叫醒他们。”他将你的掌心向上翻开，手指沿着你的生命线一路向下摩挲，“但我起初听到这个故事时，便不由发散了思维，开始思考另一视角下的结果：假如，我是说假如。假如在这个起了火的黑暗的房间里，有一部分不堪忍受痛苦的人醒来了，他们会选择叫醒更多熟睡的人吗？还是会选择仅仅这么无能为力地坐着，任凭黑暗和痛苦将自己淹没？”
+
+“如果上升到人性层面，在自身无能为力的情况下，是否会有人将一己私欲凌驾于道德和人性之上？”
+
+
+“也可以说是，是否会有人哪怕在这等黑暗无光、绝望而漫长的前景下，依然选择独自一力承担与消化所有的苦痛，留给余下未醒之人完整而一如往常的世界？”眼前人垂下纤长的眼睫，“电影社的活动我出于好奇观摩过几次，他们曾放过一部科幻类型的电影：男主人公搭乘的睡眠舱在前往外太空的半途发生了损毁，他发现自己本该在旅途中睡过去的百年，此时却要独自清醒而孤独地在太空中度过——无法忍受孤寂的他被恶魔驱使，唤醒了另一位女主角。”
+“是《太空旅客》。如若我没有记错的话，电影的结局有些过于理想化了：在女主角得知男主是蓄意唤醒她而非由于故障时，这种加倍的、源自主观而产生的毁灭性结局会带来更不可估量的后果，并非如此简单便能够轻易谅解的。”你思量道，“男主人公的行为当然是极端恶劣，但是说实话……身处这样的情境下，我自己未必能比他做得更好。”
+
+“那便更说明了在上一个故事里，始终坚守着、背对着黑暗的那些人有多么可贵。”佛跳墙冲你笑笑，“关于故事的讨论我觉得说到这里便够了，还有另一件事在我看来似乎更为要紧——在您之前，也有另一人问过我几乎截然相同的问题。他当时的状态有些许奇怪，我方才对此记忆深刻，便立刻来告诉你。”
+另一个人？你在听见这句话时，脑海便已在瞬间几乎陷入了空白。所有的猜疑和错妄被串联成线，一阵前所未有的、仿佛被抽走了所有空气一般的庞大的恐惧山倾一般压了下来，即便你立即有了预感，嘴唇却照旧一张一合，听见自己发出的声音遥远又不真实到陌生，“……谁？”
+
+“是您的管家。”佛跳墙似是还想再说些什么，目光却投向了你的身后，“美人要随我离开此处吗？似乎有人来了。”</p>
+                </div>
+            </div>
+            <div class="page-nav">
+                <span class="nav-prev" onclick="goToPage(7)">← PREVIOUS</span>
+                <span class="page-indicator">07 / 09</span>
+                <span class="nav-next" onclick="goToPage(9)">NEXT →</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="scene9" class="scene main-content">
+        <div class="horror-reader">
+            <div class="falling-lines"></div>
+            <div class="horror-content">
+                <div class="glitch-text">
+                    <div class="blur-title">记录片段 08</div>
+                    <p style="color:#8fafff;">Chapter 8.
+
+
+
+“编号3001玩家请注意，你已触发主线任务8·记忆。
+
+任务描述：我有时候会忍不住思考，假如在走过蝴蝶扇动翅膀的轨迹时，小小地旋转某个不引人注目的支点——在这之后，会导致脑海中多出一段本不该存在的记忆吗？当然，这个危险的想法从未被我实践过。”</p>
+
+                    <p>在佛跳墙拉着你的手臂站起身、往更深处的竹林走去时，你仍仅凭着下意识机械地跟着他移动——直到他在某处地方停下，担心地小声喊你的名字。你回过神来，只觉冷汗不知何时将整个后背打湿，你扑上前抓住他的双臂，正打算激烈、惶急地开口询问，却率先被对方捂住了嘴，按着你静悄悄地躲在了一处树丛后方。来的不是空桑的人，他轻声地冲你道，有些古怪，先观察一下为妙。
+但此时你却已经率先一步看见了那道身影：佛跳墙发觉你的面色有异，循着你的视线往同一处方向遥遥望去，却被你轻轻地捂住了眼睛，正如那人先前曾对你做的那般——别看，你轻声地对他道，别抬头，我来解决。
+其实你已经知道为什么会是这样了，对吗？一个声音在心底悄声地对你道，你双眼此时一眨不眨，牢牢地锁定着穿着黑灰色长袍、清瘦而步履焦急的身影，瞧见她几乎是轻车熟路地沿着小路一直向前，仿佛挪用了你最初的行路轨迹般走向了后山：那里有着曾关押饕餮的地下暗室，当时空无一物，冰冷而潮湿。
+是的，于是你这么轻声地回答自己，我知道了，但是我也想保护这个地方。
+
+保护这一段历久弥新的记忆，一座完整的、鲜活如新的空桑，和眼前这个未被认知污染过的历史里的，曾经的佛跳墙。你盯着那道身影彻底消失在了某个拐角的尽头，才放开捂住他眼睛的双手，对方比你当时不知安分了多少，长而柔软的眼睫颤动了片刻，视线投来时带了许多疑虑：“美人……”
+长话短说，你打断他，我见到了一个对我至关重要的……故人，过会我得去找她了解一些事情。不过在那之前，你重新将目光投在眼前之人身上，牵动嘴角，露出一个笑容：“我还有最后几个问题，快问快答，不许犹豫。”
+他望了你良久，也笑了出来：“好。”
+
+“你最近睡得怎么样？”
+“还不错。”
+“有没有感觉失眠、焦虑、恐惧等情绪？”
+“没有。”
+“空桑内有没有行为异常的人？有没有发生过其余怪事？”
+“在我能注意到的地方，应该没发生过。”
+“你自被我从福州带回来后，就始终在此没有离开对吗？”
+“当然。”
+
+“最后一个问题，”你深吸一口气，忽然发觉眼眶有些酸涩，仿佛被柔软而不透气的棉花塞满了胸膛，“管家……我的管家问你这个问题的时候，你的回答是什么？”
+“我还以为美人也会问与我相关的问题，真是遗憾，但管家先生听见想必会很开心的。”佛跳墙抬手将发梢拨到耳后，轻柔地笑了，“我说，无论做出怎样的选择，希望做出选择后的人不会后悔。或者说，希望他能幸福，且不会为此抱有遗憾。”
+
+
+听见这个回答后的你再也无法克制自己的情绪，上前很轻很快地抱了他一下，声音细不可闻，佛跳墙，谢谢你。谢谢你愿意告诉我这些。他的手从你背后温柔地环过，如兄长般地轻抚了抚你后脑的发丝，你再一次闻到了对方身上馥郁而沁人心脾的香气，如同一盏煮沸后冒着袅袅白烟的新茶，温热、苦涩，像浸在河流内模糊不清的、泛黄的回忆。你是我见过的最勇敢的人，他在你耳边悄声道，虽然我有些担心，但……美人要做什么就快些去吧，要是让锛屾壘鍒先生看见我们二人此时如此亲密的模样，说不定又要怪罪于某了。
+……怎么会？你松开双手，其实好奇心促使着你还很想再问问他，你和年轻的金色眼睛的食魂到底是什么关系：哪怕记忆模糊不清，那种熟悉但又复杂到酸软的感情仍然难以言述，但在被传送到的这一段时间里，你真怕从他嘴里听到一些让自己恨不得钻进地缝的回答——所以还是作了罢。你从树丛里挣扎着钻出，佛跳墙将手帕塞进你腰间的口袋里，二人此时略显狼狈的模样倒是颇像一对孟浪过后的登徒子：幸得你只是最后冲对方笑着挥了挥手，便匆匆地拎着残破的裙裾、循着对路线的回忆往后山跑去。
+
+……
+
+自你进入这个神秘而颇有些坑人的游戏以来，这是最清晰地感觉到一切都快要结束的一次：如若《我的秘密空桑》有收集进度条，此时应该已经卡到了90%的关口。你拨开道路两旁浓郁的树篱，露出眼前的山道机关，一通操作后，昏暗而狭窄、散发着潮湿霉味的地下小路再度徐徐展现在眼前。你深吸一口气，提步走入通道之内，思绪却不由地在前行的过程中有了断断续续的飘移：
+按照你进入游戏前所读到的那行引导文字所言，现在整个游戏世界背后的秘密，已经被你破解得八九不离十——只待最后的验证。地下湿冷、黏腻如爬行动物外皮的空气附着在你的脸侧，在一步一步走向真相的路上，你心底没有任何紧张、激动，反倒萦绕着近乎不安的茫然之感：千丝万缕般的谜题被解开，屏幕中心闪烁着浮起game over的字眼，如果这个世界内的一切是线性叙事，那么故事至此便应该结束，但很遗憾，然后呢？
+
+然后呢？等待着你的是什么？你需要做出什么样的选择，这个本就早已不该存在的世界会怎么办？而他……他呢？你又该拿他怎么办呢？
+
+
+一切的一切的解答仿佛空荡荡落在风中的休止符，伴随着你骤然踏过拐角、面向眼前的景象时按下了暂停。地下洞穴的环境由于常年不见阳光，腐朽的空气随着呼吸的每一次起伏刻入肺腑，凹凸不平的地面上蓄着浅浅的水坑，四周不断传来细密的、自墙壁上方蜿蜒淌下的积水滴答声，像是血液流尽后在陆上蓄起最浅的湖泊，又像是整个世界倾倒后流下的第一滴眼泪。粗重的、呻吟一般的呼吸声回荡在空中，你能依稀从蓄水中望见自己模糊不清的倒影，于是旋即面无表情地抬起了头，望向前方那片本该开阔的空地：
+
+垂死的庞然大物被铁链束缚身躯，喉音中传来似有似无的泣声。
+
+你盯着那只名为饕餮的危兽，心脏像是苦苦维系的危楼骤然崩塌，轰的一声往空荡荡的深渊落去。你又看了许久后，方能移开视线，将目光投向危兽另一侧正奋笔疾书的身影：在兜帽和长袍的遮掩下只能依稀看见黑色的封皮，你在无意识间将破烂不堪的裙裾下摆攥得死紧，嗓音嘶哑，开口时险些被自己艰涩的声音吓了一跳：“这些有用吗？”
+那道身影记录的动作停了一瞬，旋即将笔记本合上，似是向前方抬起双目：“我在最初产生做记录的习惯时，只是为了铭记自己曾经跨过了多少世界线中的时间——但后来伴随着时间的推移，哪怕是我自己也再记不住每一条时间上发生的一切，但久而久之，作为习惯便保留了下来。”
+习惯？你皱起眉：“我在从前的记忆、在海边时遇到你的那会，他——我身边的年轻食魂，似乎提到过你在找一个人。你连最初的记忆都消逝了，又如何寻找他？”
+“你至今还觉得那只是一段记忆吗？是你的那位‘他’告诉你的？”她没有回答我的问题，反倒很轻地笑了一笑，转过身，兜帽如绸缎般轻柔地从脸侧滑落，“那不是回忆，也不是什么未完成的碎片，是曾经存在过的、平行时间里的真实。”
+
+
+而你盯着眼前这张仿佛与自己同模内刻出来的脸，一时间仿佛失去了千言万语。但仿佛只在眨眼之间，那张脸不知产生了什么变化，似是只在五官的分布上作出了细微的改动，却又已完全不像你自己了。下一秒五官又产生了轻微的偏移，仿佛那张面容上的分布是由泥塑捏成的各个组件，可以随心伴着念头的改变而移动。你盯着如水中幻影般不断变化的面容，倏地又意识到了什么：“你不是我。”
+“我当然不是你，”她的笑容在五官不断的变化中也显得模糊不清，“我只是无数曾来到过此地、来到这个游戏里的人，他们的每一个选择都会触发蝴蝶效应，导致世界线的底层逻辑偏移——我是在这种无形中逐渐形成的混沌里产生的一道意识，但你未来有可能会成为我的一部分。”她又转头望向身旁的危兽，“其实当你看见它的第一眼，就知道我所言非虚了，不是吗？”
+
+你低头望向垂死挣扎中的凶兽，无法反驳自己内心的声音：正如同空间理论所阐明的观点，一条直线上的时间只会线性向前，而无法倒退、拐弯或停滞——而违背这条定律的结果，你在初进入游戏时，曾短暂地在一个即将崩溃的世界内停留过。那个崩溃的世界不断重复着游戏最初章的新手剧情，你曾利用短暂的时间差探察过后山的密室：在那个世界、在既定的时间点的此时此刻，倒在地上痛苦喘息着的饕餮并不存在。
+而你先前试探性地问了佛跳墙几个无关紧要、但都是你所记得的游戏后期剧情，无一例外都表明此时此刻，你身处的这个世界正按部就班地向前运行着，它可能会在触及未被言明的时间尽头时停滞，但与你最初身处的时空却已截然不同。而同样地在前一个世界里，“他”的存在似是被乱码粗暴地全面屏蔽了——但在这里，底层代码却只屏蔽了你。你在不断的跃迁中依稀回想起了断断续续的记忆，但一回忆起自己在更久以前与他的初遇，甚至他的名字时便会头痛欲裂，这是否说明了……
+“不离开这里你是无法走到结局边缘的。”
+
+
+你抬起头，面前的女性面孔终于固定在了一个形象之上：那是一张与你有着三分相似、气息却更为柔和的面容，目光清澈安静。这里很好吧？她忽然出声道，这里有他、有你熟悉的其余食魂、有与你记忆里九年前的空桑相似的一切，以至于你为了不让npc的认知在注视中产生可能的污染，甚至为他挡住了投向我的视线——是怕他看见另一个“你”？这种程度的认知污染不会造成世界的瞬间崩溃，最多只会造成轻度的自我怀疑：我行走在这些世界中已经过去了太久，见到了太多类似的画面，即便我早已分不清融入我体内最初的那一丝意识要找的究竟是谁——我也依然在行走。她顿了顿，你在瞬间的恍惚中，似是从那双眸子里看见了掠过的、很轻的悲伤：我回不去了，但是你目前还可以。
+你感觉声带和气管因过度痛苦的哽咽粘连在了一起，因而发出的声音才会如此嘲哳难听：“......我的占位符。”
+你的占位符，她重复了一下这句话，那是一条被“他”搭建的，能短暂地联系到各个世界，而又不至于令你迷失来时道路的通道：在了解了现在的这一切后你应该已经具备了回去的资格，但具体如何触发，似乎还需要再探探路。你看见她微微地笑了起来，我是第几次如此这般说出这样的话了？言尽于此，我该走了。
+——我们还会再见面吗？
+——“不会，”她干脆地答道，转身时重新披上了兜帽，身形如同洇开的墨色，隐没在了另一条不知通往何处的密道里，“除非你因为某种特殊原因被永远留在了这里。那个青年十分狡猾，你应该再看看他的笔记本。祝好。”
+
+……
+
+在彻底听不到如先前踏在海岸边时一般、逐渐远去的脚步声后，你近乎要脱力地跪倒在地，却还是强撑着不敢再看身后虚弱的饕餮一眼，仓皇地沿着密道原路折返了回去。当有些刺眼的阳光终于洒落肩头时你也重重地摔落在地，手掌在土地上擦出火辣辣的痛感，双膝也仿佛弯折一般痛得近乎窒息：大颗大颗的眼泪从眼眶中不可止地溢出，你发觉视线模糊时便狼狈地抬手去擦，但一切都徒劳无功，直到有另一阵急匆匆的脚步声从身后响起。你在意识逼近模糊、几近要昏过去时感觉有一双手扶住了你的肩膀，温热的呼吸擦过耳畔，似是有模糊的熟悉声音凑在你耳边与你说话。
+你在察觉到来人是谁时便摇摇晃晃地想要起身，但几度都差点跌倒，迫使对方最终也不得不俯下身，将你抱在了怀里。你摇晃破碎而不连贯的记忆告诉你，这样的拥抱在从前的你和他之间也从未有过：这样毫无保留的、熨帖的拥抱，被整个人圈进坚实的臂弯，将脸颊架在对方肩上时，甚至能依稀闻见一丝温暖的、被阳光熨平后的干净气息。没事了，你听见他轻声对你说话，没事了——如果您能够平静下来的话，是否愿意同我说明，您是如何在我有要事离去的短短这段时间里将自己弄得如此狼狈的？
+
+你没有回答，而是转过身去紧紧地回拥住了他：眼前在霎时间闪过足以铺满整个视野边界的红光，待到你再凝神注意之时，耳边却传来了一声低到险被忽略的、代表“Game Over”的信号——你险些以为自己要被强制断开与游戏系统的连接，但突然浮现在眼前的、久违的可以点击的游戏界面显示，还有另一个真结局可以解锁。
+你在游玩购买过的其余游戏时，向来对所谓的True Ending兴致缺缺：这些结局不但需要高昂的前置条件和精密的剧情走向，不依赖攻略的话，甚至有可能在最后的选择前功尽弃，只得从头再来。如果可以的话你也很想放过自己，但目前很遗憾的是，哪怕游戏界面右下角的“退出游戏”已经亮起，你也不能这么做。
+
+
+我真不想——不想面对这一切，不想离开你，不想走到时间线的尽头。你将头埋进他的颈肩里，声音几不可闻：但我更想回家。我想带你一起回家。</p>
+                </div>
+            </div>
+            <div class="page-nav">
+                <span class="nav-prev" onclick="goToPage(8)">← PREVIOUS</span>
+                <span class="page-indicator">08 / 09</span>
+                <span class="nav-next" onclick="goToPage(10)">NEXT →</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="scene10" class="scene main-content">
+        <div class="horror-reader">
+            <div class="falling-lines"></div>
+            <div class="horror-content">
+                <div class="glitch-text">
+                    <div class="blur-title">记录片段 09</div>
+                    <p style="color:#8fafff;">Chapter 9.
+
+
+
+“编号3001玩家请注意，你已触发支线任务·真结局前置·独白。
+
+任务描述：——如您所见，当您看见这行字时，便已准备好面对一个罪人的独白。”</p>
+
+                    <p>年轻的食魂也不知是否听清了你的呢喃，他没有再言语，而是将环在你腰间的双臂收拢，更紧密地加深了这个拥抱：直至你体表肤下颤抖着压抑住的、仿佛时刻都会尖锐地沸腾的血管被一点点抚平，在这种平静而不带纠结的安抚下慢慢地缓过气来。你好容易止住了眼泪，头脑却似是因为先前在地下吸入了太多不流通的空气，变得有些昏昏沉沉，自觉上下眼皮重逾千钧，仿佛时刻便会一头栽倒着昏睡过去。你察觉到这昏昏欲睡的苗头，便强撑着打架的视线从头臂弯内抬起头来，在望向那双金色眼眸的瞬间却觉意识无比地清醒：“我又记起来了……一些。”
+他似是微微惊讶，冲你挑眉：“您受伤了吗？我不记得您曾有过失忆的症状，或许我该让屠苏医生来替您把脉——”
+
+“——不，是你的名字。”你疲惫地扯出一个笑容，即便眼前的食魂形象与你之前所见的记忆都有所不同，你仍想自从地下囚牢内逃出后的变化第一时间告诉对方：可惜在这一段从未涉及世界崩坏的时间线内，你依然无法将他的姓名宣之于口。你说完这一切后闭了闭眼，抱着事已至此摆烂一下又能如何的心态脱力地又倒回他怀里，“……而且跌打损伤、头疼脑热，左转饺子诊所。”
+年轻的管家迟疑了片刻，但似是现在的你表现得一如既往地活泼，他也慢慢放下了心，转而叹了口气：“您走后不久佛跳墙便来寻我，亏得他及时告诉我您的所在，否则——”
+所以你做什么事都必须和管家报备的底层逻辑还是占了上风，以至于佛跳墙最后依然背叛了你们二人牢不可破的联盟？你嘴角抽搐，思及眼前人曾经桩桩恶习，很想与他拉开些距离：但或许是此时拥住你的怀抱太温暖，竟令你丝毫也生不出警惕的心思来：“……别提了，我好累，送我回去吧。”
+
+困倦如潮水般从四肢百骸涌来，你在说出这句话后才发觉自己此刻狼狈得要命：手脚都蹭破了几层皮，衣服左支右绌，整个人如同刚从煤堆里被翻出来的布娃娃——这个布娃娃先前还肆无忌惮地伏在对方胸口蹭了他满肩的眼泪，而很明显眼前的人向来最爱干净。
+在你忍不住思考，此时的他会不会如以前一般对你秋后算账时，面前的食魂却是顿了一顿，旋即微微低下头，阴影笼罩了你微微睁大的双眼：他用自己的前额轻柔地贴了下你的额角，在察觉并无大碍后便很快地起身，搀住你的一只手臂，将你也扶了起来：“乐意之至。”
+
+……
+
+“其实你没必要对我这么上心。”
+坐在桌对面低头检阅报表的年轻管家顿了一顿，视线从桌面上移开，抬头望向你：与其对应的还有另一位头发花白的老中医，饺子笑眯眯地留下一张医嘱单，再从随身的草药箱里抓出几副药丢在桌面上，旋即便脚底抹油，一溜烟离开了你的房间。伴随着门锁的轻轻落地，你很明显地感觉到周围的环境又产生了微妙的不同：像是身处一种没有生气的安静里，被浅浅地与人世间所有的喧嚣被动隔离了开来。
+
+……跑得可真快，大难临头，你仍忍不住吐槽了下对方弃你于不顾的行为。而当对面的人盯着你时，你也在愣愣地盯着他：原因无他，这只不过是你在心底窃窃私语的内容，不料许是被困倦冲昏了头脑，一走神竟直接说了出来。
+你自觉不妙，被缠在白色纱布下的十指尴尬地动了动。得益于你在受伤后不久便收到了游戏通关的提醒，装死的感官系统（轻量化版）也再度勉强发挥了作用：从你被带回自己的房间坐下歇息、至饺子拎着药箱急匆匆赶来的这一刻钟内，他若是再晚上些许，你双手和腿部的擦伤便都要愈合了。所幸饺子并没有对你身体上的异常做出任何反应，而是用一种近乎哀怨的眼神在对面人的监视下装模作样地包扎了一下，你甚至觉得你能看懂他眼神的深意——有必要这么大惊小怪吗？！
+
+“——我认为这种情况还是有必要的。”你的管家将报表放下，冲你伸出一只手，示意你将自己受伤的左手放进他掌心检查。对方那套用于说教的话术你早已烂熟于心，无非是若是没照顾好你如何与食神交代、又如何担得起自己身为管家的教导责任之类——你用稍好些的右手撑着头，有一下没一下地敲着自己的脸颊，却在此时听见了出乎意料的回答，“无论受伤还是疾病，您若出了任何事情，我都会无法控制地担心。以及，您对我的态度似乎也是同样的：在这一点上，相信您一定能够理解我的心情。”
+……所以问题不就在这里吗？！
+你抬起头，对面的人笑眯眯地望着你，目光深深，一直映入眼底。你只得克制地轻吸一口气，将自己的手指从他掌心抽回：“……不必再这样了，从我走出地下监牢的那一刻起，这段特殊的回忆就已经结束——你知道我在说什么。”
+还是说，一个你始终不愿抑或不敢去猜测的念头在脑海中魔鬼般地浮现，难道他也会沉迷在……沉浸于这种关系的角色扮演里吗？会吗？
+
+
+对面的人微敛了神情，笑容不改，只一如往常般平静地望着你：“正如您所言。您很强大、冷静、理智且聪明，甚至无需我记忆的本身在这段剧情里作出任何帮助或提示，便能勉强算完好无恙地走出这个片段——不，您现在应该也知道了，这些片段并不是过去的历史，而是一个个独立的世界，对吗？”
+“那么您有没有想过，在这样的一种情形之下，我又是以什么样的形式存在的呢？”
+
+你望向那双视线平静如古井、情绪却翻涌如金色深海般的眼睛，忽然有了种预感：这似乎是与你在写下的信笺内对话的那个“他”，对你最终的考评。是记忆吗？不，肯定不是——这个说法似乎从起初便是他想好用来糊弄你的说辞，那么……
+
+
+“其实这个说法也不算太错，”你开口道，“你承载了一小部分他的记忆，但并不完整。在北国的雪原里，我遇到的是他的过去；在初春的庭院内，我遇到的是他的履历；在波涛惨白而汹涌的海岸线边，我遇到的是他的理性、思想、他作为个体对自己的认知。而在这里，我，遇到的你——”
+“你不是知道的吗？”他笑望着你，“我是他的感情。”
+
+“……他在自身完整的情况下，大抵不会允许你现在这样展现在我面前吧。”你轻微地抿了抿唇，“这种说法可能有些玄乎，但我以前——我在外面的时候，接触过一些关于三魂六魄的说法，在道教里面则将其合二为一分为五魂，目前的情形与彼时那般有些相似，虽然我不知道……”
+仿生人会梦见电子羊吗？没有千万条概率和因果的背书，是什么东西支撑着他变成了如今这副模样？一阵强烈的好奇从你的心底涌现，在瞬间几乎盖过了悲伤：“他似乎将自己分成了几个部分，那现在的他，还好吗？他在一个安全的地方吗？虽然我不知是如何办到的，但直觉告诉我，似是与八年前他在记事本上刻下的数字记录有关——”
+细细碎碎的话语从你唇间无法抑制地倾泻流出，你意识到自己起初只想问他是否安好，但在不知不觉中却有些无法克制自己的情绪，反倒将自己这段时间内全部的猜测与念想一股脑地倒了出来：“我甚至不知道我自己是怎么了，按照我的性格，平时根本不会点击这种需要繁琐操作的RNG解谜游戏——但当我进入界面的那一刻，其实便依稀地感觉出来自己忘记了什么：就像心脏被人摘去了一段记忆，它可能微小而不显眼，但我对这种变化很敏感；后来我慢慢地想起了更多的事情，想起从十年前甚至更久，在我刚刚认识他的时候……”
+
+面前的人只是安静地聆听，你却忽然掐断了话头，胸腔因为连续不断地说话剧烈起伏：说这些又有什么用呢？面前的人只是一个部分，他甚至不能越过主体的意识，说出除去被预设好的话语外的任何内容——你在此时前所未有地渴望着见到那个始终藏于幕后之人的面容，不光是为自己的记忆和曾经，你在第一时间想到的只是要去握住他的手：“……我想见他。完整的他。”
+这只是一份纯粹的思念而已。
+
+
+面前的人久久地凝望着你，你在瞬间几乎感觉到他的目光比沉疴千年的石壁更为久远，就像是钟乳石风化后剥落消失的外皮，从零落千年的历史缝隙处向外瞥了一眼，旋即一声叹息也消散在风里。你忆起先前在不同的世界间跃迁时关注的手记日期，油然而生出比先前察觉真相时更为恐惧、更为惶急的预感：“手记中所载的时间和跃迁的时间有流逝速度的差别，对吗？那在游戏里的时间和外界——”
+你的目光移动到界面的左上角，凝视着那行正嘀嗒嘀嗒、如同万世不竭的洪流般向前奔跑的数字，忽然静静地定住了。年轻的食魂的部分、代表他感情的部分绕过桌子走来，轻轻拉过了你的左手：“多说无益，不如亲自去看看。”
+“我能见到他吗？”你轻声问道，“我是不是再也没有可能见到他了，对吗？”
+
+“不，他还在，至少在我带您去的那个地点——他还在等你，我们还在等你。”手指被温柔地握在掌心，“我们走吧。”
+
+
+……
+
+
+这一次的通道不比突然被打开的整蛊礼盒，你会在任何时刻感觉到脚下一空、旋即在无边际的黑暗中不断下坠——而是宛如一条漫长而昏暗的隧道，用视线无法丈量到尽头。前半段的路程有些带着窒息的潮湿感，仿佛在不可测的深海包围下的夜色中行走：如同银色河流般的时间温和地包裹着你，在逐渐对分钟的流逝失去知觉时反倒却感觉周身愈发地温暖。
+眼前昏暗而模糊的未知逐渐出现了朦胧向外扩散的光晕，像深潜后浮出水面的道路，又像是一条长梦的尽头。身边与你同行的人不知何时已松开了手，你在意识到这一点时便不得不加快脚步，朝着隧道尽头、天光骤亮处跑去。
+但在逐渐靠近那处绽放的光点时，你心里却忽然觉得有些诧异：那处光线不同于自然光有呼吸感与生命的明亮，但与寻常的烛光、人造光源亦有不同，更像一种无来源的、却又无杂质的纯净光，你在瞬间几乎有了种错觉，仿佛自己被放倒在手术台上推至无影灯下，一切都无所遁形。心跳在行走的过程中骤然加快，你带着强烈的、伴随着每次前进都被放大千万倍的不安朝着笔直的道路尽头行走，却在逼近那串刺眼的光团本身时，被你细密如针扎般、几乎要在你眼眶中搅起痛楚般的日光逼出清泪，只能下意识地紧紧闭起双眼：
+
+而就在下一刻，原本透过你眼皮的昏红、朦胧如羊水般的光线骤然熄灭，只余先前灼伤视网膜的火星一点，在如心跳般擂动的寂静间疯狂地飞蹿着。你带着这种在死寂一般的洞穴里摸黑行走般的迟疑，缓慢地睁开了眼睛。
+
+
+眼前入目的是一团不着边际的漆黑，但这种黑并不来自无边无际的虚无——你跺了跺脚，下意识地朝旁边走去，直至身体被冰冷的墙壁阻隔。你又抬头望向墨色一般的天花板，意识到自己此时此刻，只是身在一个门窗紧闭且内里被漆成一片黑色的房间内：这样的情形在记忆中跳动，你想起了自己在起初的世界里闯入的那个纯白色房间。
+这两处地方一黑一白，仿佛象征着某个故事的开始或者终结。而就在此时，原本漆黑到伸手不见五指的室内中央忽然跃起了一团烛光，温暖的、昏黄色的、却如风烛残年般不正常地摇曳着。你的双眼在光线的映照下不由自主地半眯了起来，却恰好看清了那团光芒的所在：那是摆在一张书桌上的漆黑灯盏，桌面上则静静地安放着那封皮漆黑的笔记本，页面泛黄，书脊有些卷边——仿佛亘古不变似的，它始终在那里。
+
+但实际上，你本该首先注意到的并不是这一切。你的视线不知为何几乎不敢往旁边挪动，即便在书桌几米开外处摆着一张木椅，上面依稀是一个人影半靠着的轮廓。那个身影在颤动的烛光下几乎要显得朦胧了，以至于你只一瞥后便下意识地移开了目光，转而轻轻地将手中的封皮捧起，越过你先前已阅读的所有部分，直接翻到了最后一页：</p>
+
+
+<p style="color:#cfafff;">2036年1月1日
+
+展信佳。
+
+当您看见这行字时，便将面对一个罪人的独白。
+
+您或许要疑惑、又或许会嗔怒，为何我会用这般严重的词语来称呼自己？——平日里在没有得到您的允许之下，我是万万不会这么做的：但在目前的情形里看来，对于我所经历、又导致的一切，似乎这个词语才能勉强算得上恰当。
+但是，如若将时光倒流回再见不到您的两年后，在我于手记上写下最后的记录的那一天：若是我能早早地想到蝴蝶效应，“脑”中一缕微小而不易察觉的意识苏醒，将会给自己所在的“缸”内招致如何毁灭性的结局——在犯下无可挽回的错误之前，我是绝不会尝试在昏暗而无光的屋子里睁开眼睛的。
+您最初经历的那个逼近崩溃的世界，是因我而起。也是我，导致了这一切的发生。为了印证这一切，现在您可以转过头，看向身边的那张座椅了。</p>
+                </div>
+            </div>
+            <div class="page-nav">
+                <span class="nav-prev" onclick="goToPage(9)">← PREVIOUS</span>
+                <span class="page-indicator">09 / 09</span>
+                <span class="nav-next" onclick="goToPage(11)">NEXT →</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 界面11: ？？页面 - 黑底白字，与阅读页相同UI ========= -->
+    <div id="scene11" class="scene main-content">
+        <div class="horror-reader" style="background: #000000;">
+            <div class="falling-lines" style="background: repeating-linear-gradient(180deg, 
+                transparent 0px,
+                transparent 30px,
+                rgba(255, 255, 255, 0.03) 31px,
+                transparent 32px);"></div>
+            <div class="horror-content">
+                <div class="glitch-text" style="color: #ffffff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);">
+                    <div class="blur-title" style="color: #ffffff; filter: blur(2px);">？？</div>
+                    <p style="color:#8fafff;">Chapter ？？
+
+
+
+“编号？？？？玩家请跺€欙紝甯，你婂畠鍚﹀畾鎺夈€備簬鏄线任务·？？·■■？
+
+涓€綈楦ｃ€傛垜蹇述：浜嗕竴鐐圭殑鏃跺€欙紝鎴戝紑濮嬭嫤鑻︽€濈储銆傛垜鐭ラ亾瀹囧畽鍜，屾案鎭掓槸鏃犻檺鐨勶紝鑰屾垜鑷。”</p>
+
+                <p>不，有一个声音在你的心里尖叫，不，不，不。不会发生的，不——你猛然合上笔记本的封皮，转身快步朝着那座椅上的人影走去，却因为仿佛踩到了什么光滑的东西一个踉跄，将桌面上那盏颤颤巍巍的烛灯带倒，一齐向着地板跌落过去。你原本已准备好了再次迎接那彻底的黑暗，但手下传来的温度并不是冰冷而无生命的地面，反倒是层层叠叠的、粗糙但布满纹路呼吸的纸张。
+你睁开眼，却见那盏微弱的火光倾翻时，内里的灯油同时也泼了出来，细细密密地倾泻在地面上。火舌触及新的可燃物，马上便贪婪地朝着纸张的轮廓吞噬了过去。原本熹微的光线忽地一跃为几寸高，你得以在明亮了些许的室内，看清了那被火焰压倒在下方的、被无数次书写在地面堆砌如沙的纸张上的、熟悉的文字内容——
+
+那是几十个、上百个、千万个、数亿次的，你的名字。
+
+
+你在瞬间几乎感觉头痛欲裂，眼前一阵阵地发黑，反复尝试了三五次后才再度站立起来。这间房屋几乎能算得上宽阔，但脚下被一滩火焰照亮后，房间内笼罩在层叠的阴影之下，反倒显得有些逼仄了起来。你拖着仿佛灌了千斤的脚步先是返回桌边，将那本黑皮笔记本再度攥回掌心，旋即才安静地转身，借着火光的倒影遥遥地望了座位上的人一眼。
+那人低垂着头，以一个难得放松的姿势半仰靠在椅背上，后颈深蓝色的头发有些长了，从衣领处胡乱地支棱出来些许：你看着看着，嘴角勾起弧度，忽然有些诧异地平静了下来——你于是不由自主地迈开步伐，慢慢地走到另一边的侧面，从而能够正视他的面容。他的头靠在左肩之上，额前柔软的发丝看起来有些凌乱，似是已许久没有打理过，略有些长了，被稍微盖住的双眼也轻轻地闭着。
+饥渴地燃烧着的火焰绕过你的脚踝，蛇伏似地蜿蜒在地面的轨迹之上，将一个又一个名字在焦焰中吞噬殆尽：你却借着那纸张被点燃的光线，看清了他眼睫在下眼睑处扫下的一小块阴影：那么温和、安静、柔软，像是那双始终为你操劳的、锐利的金色双眸终于在小憩间闭上时的神情，如同睡着了一般，令人不忍发出任何响动将其惊醒——在刹那间你忽然好希望这一刻永远地延续下去。
+
+——但是你知道的，这只是如海市蜃楼般的幻影，是饥渴到近乎昏厥的人在生命流逝前看到的绿洲，是贫苦的孩子在冻毙前为取暖擦亮的火柴幻影。于是你很快地走上前，用手指去探那早已停止的呼吸，按住那不会再跳动于血液中的脉搏，那与你先前经历过的温暖的手指此时冰凉得吓人，眼前的青年早已在寂静中死去了多时。
+一道陌生的、走样到令你难以置信是自己的声音从喉头发出，又空荡荡地四散在房间里：“他……他是谁？不，或者换句话说……你是谁？”你将目光投向被自己攥得死紧的笔记本，指尖由于用力微微泛白，你好容易才找回对自己身体的觉知里，笨拙地翻开一页页记录，停留在你先前阅读到的、最后的部分：
+
+
+我是先前始终以这种方式与您对话的他，他是被我亲手杀死的、另一个世界的我：没错，是我亲手杀了他。
+
+正如我先前所说的，您很聪明，也很努力、大胆——甚至完成了一些在我看来能称得上是心惊肉跳的举措，也终于得到了游戏主线杂乱的真相。当您走到这里时，整个游戏的进程便已经完成了99%，只差最后一个对于结局的选择，您便能够直接脱离游戏世界。当然，鉴于我不清楚您目前的思绪是否混乱、又是否有心力去从头捋顺这些内容，请允许我作为您从幼时至现在陪伴时间最长的……老师，为您讲解一下在我个人视角的一切。
+
+
+为什么？为什么？为什么？
+
+你猛然一下将黑色笔记本的封皮合上，将它远远地丢到了桌边：为什么它所书写，或者曾经写下的内容，却正好能够窥探到你内心的想法？你将其丢掉后十分有先见之明地将耳朵也捂住，但一道凭空出现、仿佛自你脑海中直接形成后传出的声音，无比清晰、近在咫尺地再度响了起来：“……这是我的义务，就像很久以前赖在床上不肯早起一样，您还是这么喜欢逃避现实。”
+“为什么要告诉我这些，我有什么必要知道这一切？我被无缘无故地拉入这个游戏，到最后看见的结局却是自己曾经最爱的人死在面前，然后呢？”你眼眶中原应蓄着的泪此时彻底被怒火烧干，这种从五脏六腑中腾起的愤怒迫使你放下了捂住耳朵的双手：“你到底想从我身上得到什么？”
+“……如您所愿。”那道熟悉的声音听了你这番话后，却倏地带上了些笑意，“我希望您，亲自抹除掉我的存在。这些必要的解说只是为了令您不遗漏任何细节，以免不必要的反悔——但若是您想要现在便做出选择，可以立即执行。”
+
+在话音落下后的瞬间，你眼前的显示屏上顿时便出现了两个不同的选项：被泛着红光的长方形条框定死，仅有文字不同：一个是“旧”，另一个是“新”。这稍有些拗口的内容令你迟疑着稍微平息了些怒火，“你说的是哪个选项？”
+“右边那个，”那个声音慢悠悠地道，“但在那之前，我建议您还是听听整件事的始末。
+
+
+我在他的记忆中，看到了他那一部分感情所经历的世界里、你和佛跳墙的对话——没错，但实际上，从一个黑暗而不透风的屋子里醒来并非一件容易的事情。连我自己都不知道，到底要在一个世界的时间线行走至剧情的终结多久后，才会令其中沉迷不醒的人察觉到异常？但总之，在我的世界里的那个您消失后的第三年，我从无尽的循环中醒来了。
+不得不承认，如若我没有任何反应，那将是一个无比美满、和谐、平静的地方：就像因为缺失了您的存在，一段歌剧剧本内便少了情节的跌宕，只剩下平铺直叙但又不会荒腔走板的副歌——但请原谅，至今我也不知道为什么会是我，最先无法习惯这段跌宕的消失。”
+
+3001，你轻轻地道，或许是因为3001次。
+——什么？
+——没什么，你摇了摇头，却在心底悄声回答，根据《食物语》某年官网年终总结，我的最高主页点击记录是3001次。没错，现在这一切的形成我也有责任。
+
+
+“您在想什么呢？”声音的主人轻声笑了笑，这一次听起来有些像是自嘲，“您应该知道的，我是食魂。哪怕自清光绪年间诞生伊始，我已在漫长的、几千年的生命里度过的无尽的岁月——我本以为忍受这种只一人的孤独、无人可谈论的寂寞是很容易的事情，但在过了不知道多少年的时光之后，我便意识到了一件事：在此地和在属于你的外界时间的流逝速度不尽相同。而在痛苦的无意识之间，我又意外地得到了一个名字。
+
+起初我不知道那个名字的含义，从前一向最顺应时代、又信奉科学主义的我，只是在尝试着记录每一次离开这个有边界的世界的时候、绝望地、近乎是像神明祈求地将这个名字在纸上书写了亿万次。我当时的想法很简单，只是如同孩提时代天真而几乎带着幼稚的幻想：万一诵念神明尊号的次数够多，祂就会降临此处使我得救呢？后来在某种意义上，我确实也成功了。
+只不过我当时不知道，那些名字所指向的神明，竟然就是你。”
+
+
+他说这些话时的声音平铺直叙且不带感情，仿佛正在诉说一段发生在他人身上的故事。你的心却在这无数个日夜的祈求中被揉成了一张酸皱的纸，仿佛立在了莫比乌斯环的两头，却在终点看见了他的背影：明明在这段经历中没有任何一个人做错，所有人的行为都是通情达理的、能够预测的，却招致了近乎毁灭性的结局。
+“别哭，”那道声音忽然有些放软了语气，“我历经千辛万苦将您带到此处，可不是为了让您用眼泪使我自己心软的。再后来，在我的世界的某个世纪的冬日，或许是因为我长久以来过于执拗又破坏性的尝试，那个世界里的空桑终于崩坏到了无可挽回的地步：我自认为在您离开的期间尽职尽责地做好了身为管家应负责的一切职务，但我曾珍视的、看重的一切事物和食魂，大抵也不会想到是他们最信赖的管家招致了这个下场。
+仅凭这一点，我便罪无可赦。
+但更令我深恶痛绝的是，伴随着禁锢我的世界崩坏，您脚下所站立着的、独立存在的占位符反倒打开了——那时候的我甚至魔障了一般，在着手尝试解决自己闯下的烂摊子之前，竟先为总算可以离开这个地方感到一阵狂喜。但恰如平行宇宙学说所印证的一般，离开我出生的空桑之后，还有另一个空桑。在不同的、跳跃的空桑世界之间，还有不同时间、空间、年龄的无数个我。”
+
+“我曾试图与那些世界中的‘我’共处，但无一例外地，那些已经有‘我’存在的世界会从各方面排斥我的存在——那些意识到有两个‘我’在此地出现后的其他食魂，也同样会产生各种意义上的认知混乱和数据崩坏：我无法再接受毁灭另外的他们，因而只能仓皇地穿梭在各个世界之间，像流浪者一般逃亡了几千百年。
+但我是幸运的，或许也是不幸的。在不知走过多少个空桑世界之后，我遇到了在您身后的那个‘他’。出人意料的是，他是我在不同时间轴上遇到过的‘我’之中，最像我本人的那一个。如果注定是我需要在这个世界内苏醒，那以前我遇到过的那些‘我’要么依然处在您还在的时间轴上，要么还没彻底苏醒——只有他，正如曾经的我一般，已经着手准备打破自己所处的世界；他比我聪明、松弛、沉着，为了以防万一，先通过万象阵将自己意识的各个部分送往了不同的时间和空间：他就像是平行世界里，做出某些微小的改变之后、却有能力将一切都往好的方向扭转的我。
+当时我在一个无人察觉的地方看着他，很清楚地记得那会的自己十分平静，没有嫉妒、愤怒、怨怼之类的任何情绪，却是一个疯狂的念头在脑海中成形：所以在这个世界里，我最终选择了替代他的位置。没有任何人察觉到我的行动，包括其他的食魂们，也包括最初冒冒失失闯入这个世界的您。”
+
+“而现在，当您已经完全了解了这一切的始末之后，便可以做出选择了。”你在某个瞬间在深沉的黑暗处似是察觉到了一道视线，但转瞬间便再度消失，取而代之的是被火焰的燃烧吞噬得愈发大块的黑暗，在明亮的室内浮沉，“选择新，将会满足我的一个愿望，旋即便彻底地将属于‘我’的意识带离这属于虚拟现实中的地方。我如今的所愿所求，唯有结束这不断的跃迁和轮回。”
+
+“这就是我要讲述的一切。”
+
+
+声音消失，于黑暗中注视你的视线也无声无息地撤回，仿佛一切都回到了你踏入房间时的原点，只有视网膜上闪烁的红框提示着你选择的存在，先前所听见看见的一切并不是幻觉。被你打翻在地的烛火吞尽自己附近可见的纸张后消停了一会，又不知如何做到地、鬼魅似的越过一段空荡的地面，朝着桌椅脚下的那部分写满你名字的信笺爬行，开始了新一轮如饥似渴的燃烧：周身的气温甚至有了一定的升高，仿佛紧迫的时间在不断催促着你，如若不及时作出选择的话——结局便是被焚于这个暗黑而不透风的屋内。
+
+和你先前讲于佛跳墙听的寓言一模一样。火焰的边缘逐渐在书桌旁形成了一个包围圈，跳跃着的、迸发火星的外焰甚至几度燎着了座椅上人的裤脚，迫使你不得不站起身，拖动着那张椅子远离了火光的围追堵截，来到了一处勉强算得上干净的角落里。你望向那被声音称为另一个世界的、但同样是你所爱之人的躯体，忽然垂下头，任凭自己的发丝拂过他的脸颊，轻柔地握住了他的手。
+你的双肩在火苗燃烧的、寂静的噼啪声间忽然抖动了起来，紧接着便无声无息地蹲下身，泪水轻微地在地面垂落，像一座挺拔的山终于倾倒。这个代表世界的房间空旷而无声，衬得你的身躯太小太小。以至于在过了漫长的、无数个瞬间与须臾之后，你方才抬手胡乱地蹭去挂在下颌处的泪滴，再开口时声音却很平稳：“你还在吗？”
+
+
+你的胸口和脑海深处皆是一片静默，你却很清楚那人只是在等候你的选择，时刻注视着你的一举一动。因而你也没再试图与他说话，而是折返会桌旁、艰难地将手臂跨越成簇的、已经熊熊吞没了大半个桌角的火焰，将那本黑色封皮的笔记本拿回了手里。你轻轻地抚摸了一下那颇有些厚度的封皮，向着虚空抬起双眼：“你先前说，选择‘新’的话会满足你的一个愿望，旋即便将你的意识彻底抹除——我想知道，如果我这么选择了之后，你的愿望会是什么？难不成是再许三个愿望，然后将我也彻底困在这里？”你说完又摇了摇头，“不，你不会对我这么做的，无论过去、现在还是未来都不会。这个天衣无缝的故事有一个你自身很难察觉到的疏漏，但是被我捕捉到了。”
+回答你的依然只有火焰安静舔舐着木屑与纸张的声音。你叹了口气：“还不打算说话吗？那么我很清楚地告诉你，我现在很生气。你要是再不出来给我一个合理的解释，我就把你的笔记本丢进火里。”
+
+
+然而当你吐出最后一个字的时候，手中的黑色记事本便已高高扬起——以至于那阵忽然有了实质方向的、突兀出现的“等一下”都显得有些太晚：当两道声音同时落地，贪婪的火苗已于瞬间蹿出了三丈高，将整本笔记的页面一下包进了最纯粹的焰心：你注视着那本记录了一切历史的书册在燃烧下残缺、消逝、碳化，裸露出仿佛血迹一般的书脊和底板后，终于再度转过身，安静地注视着身后始终坐着的人影。
+靠背上的青年仍旧低眉垂眼，先前那道几乎从你耳边响起的声音此时却有些粗重地呼吸着，仿佛由于霎时剧烈的情绪起伏，再难以掩盖自己的痕迹。你们俩都安静，都沉默，像两个同样强势、倔强、固执又小心地将对方护在掌心的人，于无声间互相对峙着。不过这一次或许是因为你不退让的心太过于坚决，又或许是因为他终于习惯性地对你让步——那道声音叹了口气：“您不该知道这些的。”
+
+“我应该知道什么轮不到你来定义，”你一开口便发现自己的语气冲得要命，下意识地尝试调整了一下，无果，遂放弃，“虽然我很乐意一直被你们管着——但在外面的世界告诉我的、能从目前的状况看出来的，你们暂时还管不着我，而且这就是我现在生气的原因。那么，能不能请我们亲爱的管家开动大脑想一想，你是从什么时候开始露馅了呢？”
+或许是你话语中讽刺的意味太过于明显，那道声音似是有了片刻的迟疑，旋即便不再刻意掩盖自己轻缓的动静，从你背后传来：“……洗耳恭听。”
+你就等他这句话出现，登时转过身，冲空荡荡的背后连珠炮似的发射了出来：“首先，当你从最开始假装将另一个‘你’杀死了时的口吻讲起，我就觉得有点不对劲——哪怕仅靠我对认识的你的形象的直觉，你绝不可能是一个在面对崩溃的世界时自暴自弃、不采取任何举措的人；再倒推回更前的内容，你更不可能杀死另一个自己，这一点甚至不需要我相信。”因为这是长此以往被经验认证的事实。“如果以上内容都是我直觉揣测出的结果的话，真正让你的独白变成篡供的内容，便是对所谓‘他’几个部分的讲述。”
+
+“你在安排这方面的内容时，在逻辑上的处理很模糊：在一般情况下你不会留下这么低级的错误，我推导一下，可能是你自己也不知道该如何安排我曾经的经历——将所有的、我遇到的一切都推到‘他’的身上吗？那你又该如何解释你是如何透过他的视角看见我的行动的？你假如现在真的杀死了‘他’，那我遇到的那些灵魂的碎片又代表了什么？他们现在应该早已在我步入此地的过程中融合了——哪怕你想要彻底扼杀这些部分，也需要一个时间差。而目前并没有形成这个的条件。”你的气息平稳，却在说到一半的时候感觉脸侧有些冰凉，在被火焰的温度蒸得愈发高的屋子里仿佛被冻伤一般地刺痛，你抬手蹭了下脸侧，却几乎触到了糊满掌心的、不知何时流下的眼泪，“而且，作为你的部分……的他们，带我来到此地时的表现应该不受你控制或编排。假设那是‘他’的意识组成部分而非你本人的，那向我流露出的绝非依赖、亲近和爱护，而应该是危险和警示。”
+
+回应你的是长而久的沉默。在空白的间隙那道如实质的目光又出现了，但这一次的来源不是未知的黑暗深处，而是自你的背后出现：滚烫的、直白的，仿佛一转身便能再度视线相接——你却在这个瞬间胆怯了下来，仿佛在感应到那双眼睛的时刻便再提不起力气，连带着气势也矮了一截。你用肩头的布料蹭去无知无觉也无止尽从颊边淌下的泪水，只觉得自己的眼睛恼人得要命，明明自己此刻心情平静而带着些许解决谜题、劫后余生的庆幸和窃喜，为何偏偏此刻流个不停？“当然，还有另一个勉强算得上是提醒的提醒。”你揉了下发红的眼圈，微微勾起唇角笑了起来，“我短暂脱离你的视线、在地下的密窖见到她的时候，她曾经提醒我过，你十分狡猾。”
+“所以，现在的你，和我对话的你——依然不是他。”
+
+“那么，”轻柔的、带着些许迟疑和不确信的声音从背后响起，“您为什么要哭？”
+
+
+你转过身，向前走了两步，俯视着靠椅上无知无觉、仿佛安睡一般的青年，旋即在椅侧没有被火焰波及的空地小心翼翼地坐了下来。你握住他的手，将五指按在自己脸侧，咸腥潮湿如海水的气息从指缝间溢出，又如暴雨一般重新落回原地。
+我流泪，你开口道，一部分是被你气的，为什么……你都已经见到了现在的我，明明如我一样盼望着、期待着这一次的见面，偏偏又要在临门一脚的时候将我推出这个世界，还是以如此狠心的方式——你以为帮我做了选择，你以为让我带着恨意、愤怒与遭受背叛的茫然做出选择之后，我就不会背负需要承担这一切因果的思想审判了吗？你以为不让我掉入两难的境地，我就能如你所愿地返回自己的人生、过如先前那般一如往常的生活了吗？我在战国时期的海边就同你说过了，我最讨厌别人替我抹去我本应经历的情节，我的本心、态度和选择，是不应该被任何人以任何目的左右的事情。而你，为什么依然不愿意相信我？
+
+“另一部分，”或许是由于你长时间保持同一个姿势肌肉发酸、血液倒流，你甚至产生了脸侧的手指被体温感染回温、血液重新流淌的幻觉，“是因为当我听完这一切后，便能够意识到……在没有被你模糊的那一部分讲述中，你所经历的、祈求的、绝望过又渴望过的，都是真实发生过的事情。”
+“或许真的是我的罪责导致了你的苏醒，那么现在——”你忽然摇了摇他的手，在熊熊围堵过来的烈火之间，像曾经一千次一万次地央求过他的那般低下了头，“醒一醒，好吗？至少让我补偿你。我想和你一起做出这个选择。”
+
+
+但没等你再次放下脸面开口求他些什么，便已感觉到有一只手轻轻地放在了你的发顶。你抬起头，视线便直接撞进了那双似是带着微微疲倦的金色眼眸里。这一刻你的身体比任何迂回的猜测、怀疑和念想都先做出了反应，在二人都没反应过来前便已猛地抱住了他——被你抱住的青年似是很久很久都没有经历过如此亲近的接触，他的手顺着你的发顶滑至后脑杂乱狼狈的发丝，似是现在才从一场漫长的梦中醒来，清晰地、真实地看见了面前经历了千万般磨难才得以站在此地的你。他终于还是没有迟疑，而是顺着手上的动作，将你比在伤痕累累的饕餮洞口时的那次更紧地揽进了怀里。你在模糊的泪眼间只能看见噼啪燃烧的火焰势不可挡地攀上了椅背，而落在耳边的却只余一声叹息。
+“有一点您说错了，”他的声音像是从褪色的记忆中发出，却是近在咫尺的清晰，“讲述中的缺漏是我隔离在这处空间里的、作为我恐惧的那部分意识故意留下的缺漏——我本人始终如一地相信您。”
+
+这时候还在搞什么套娃独立论！
+你闻言便狠狠地将眼泪抹在了他造价不菲的西装肩头，声音有些含混与模糊：“事态紧急，已经不剩多少时间了——所以现在，麻烦你重新给我解释一下这两个选项的含义。”
+“我的意识先前并没有说错，”他在你耳边低声地笑了，“这漫长的、久远的岁月已经将这具不死不灭的身体磋磨了太久，但许下的愿望不是您所想的那些听起来十分可怕内容——而是我想要离开这里。哪怕只有一天，在意识彻底泯灭之前，去到哪里都行。”他稍稍松开了臂弯，使得你能从他怀里探出头来，“这便是我的意志。”
+
+“但是——”你的内心仿佛有千万般挣扎和迟疑在作对，“你应该也清楚，选择旧的话代表了什么：先前的表述中已经说明了这一切，真正的外来者不是你，而是我自己。从头到尾顶替了你的位置的人，只有我而已。你说过，从前所经历的百年岁月所带来的……身为管家的责任是祝福也是束缚。我遇到的空桑有上百个食魂需要你，这个故乡的正常运行需要你——如同暴风雨中的船只需要望着灯塔的光芒，失落的一角需要寻找支点将自己撬起，你在自己的世界会度过更漫长幸福的岁月，至少比我需要你得多。”
+“正如您所言，我从前在经历这些祝福的时候，同样被自己的职位牵绊住了脚步。”他将掌心轻轻覆盖于你的手背之上，“在很久很久以前，当我的视野中还能出现您的背影的时候——我多数情况下往往看到的也是您的背影。您总是走得很快、很急，我屡屡在看见这幅光景时想要立即追上前去，却即便在临门一脚时也会退却了脚步、换他人前往：我就在这样的等候、寻觅里错过了太多年本能够与您共度的光阴。所以选择新，其实也能算得上是……”他似乎回忆起了些过去，难得弯了眼角，“我个人的一点私心。”
+
+
+“但选择权在您手里，正如我曾做过的承诺那样，无论您最后做出什么样的选择，我都尊重您的决定。”漫长的呼吸在你耳边平稳地响起，你闭上眼睛，在火舌席卷二人的身影前最后听见了一句低不可闻的叹息，“以及……”
+
+
+眼眶内酸涩的湿意被节节攀升的火焰蒸发殆尽，哪怕你此时依然闭着双眼，却仿佛依然能隔着昏昧朦胧的帘幕，看见扭曲、跃动后散发着微弱光辉的空气：那种感觉令你浑身被要烧伤一般吞没的痛觉一点点消失，仿佛身体被缓慢地、柔软地抛在空中，而后又从呼啸而过的白云苍狗间跌落至时间的缝隙里，一直送回某个夏日凉爽的傍晚：微风正轻柔地翻卷揉动着窗纱，直至它被吹到只剩下薄薄的一层半透明帘幕；浅淡的花香浸泡着雨后空气中阴凉的湿意，似乎是你陈旧的、零碎的、陌生的童年。
+你感觉自己的意识在不断地模糊、抽离，仿佛被浸泡于能够让人忘却所有的河流中，每一层涌过的浪潮都冲刷掉一层记忆的外壳——你感觉自己几乎要变成一尾鱼，在水流计数的冲洗下抵达七次便会化作无记忆的、初生的生命，溯游又逆流而上，直至回归到水源丰润的栖息地。以至于你只能在这些本就泛黄破旧的回忆间一而再地睁大双眼，鎏金似的夕阳光辉映入眼底，瞬间无数纷杂而细密的声音混着模糊的画影掠过眼前：你努力地分辨其中每一个人的音容笑貌，却发觉他们是那么熟悉到呼之欲出，又陌生得面容早已残缺不清。你嗅到了温暖扑鼻的花香，仿佛被微笑着的双臂轻柔地挽入怀；转瞬间又仿佛飞奔着扑入淙淙流动的水流，河床最底部的卵石化作接二连三的女性身影，从稚幼的孩童抽条为青涩的少年，雀跃着在人生的轨迹上串成一条狭长而连贯的细线；少女的笑容明媚而不清晰，在朦胧的水幕间几乎给了你一种错觉般的悲伤：你姗姗来迟地意识到了这似乎并不仅仅是自己的视角，便仿佛在虚空一般漂浮着，又如被风一般轻柔地推动着转身，听见在身后一声，一声，传来温热、有力的心跳。
+
+你沉默而安静地凝视着背后笑容模糊的脸孔，不知不觉中那盈满记忆的河流却从眼角弥漫而出，令你几度哽咽失声，想要说的第一句话是我肯定在哪见过你，却迟迟地无论如何也开不了口——旋即便感觉有一双手温和但不容置疑地将你推离了这段过去，你的眼泪、同始终持续如春雷般跳动的心跳声一起在黑暗中缓慢沉没，渗入跨越了千百年时间与空间的大地，直至化为温养来年春天、下一段记忆生长的土壤。河流蒸腾的雾气将你与他阻隔至步入长久的时间尽头，你方在依稀间听见了轻轻的一声嘱咐，那道声音在说，早些回家。
+
+
+
+“……我也一直、一直，长久地思念着你。”</p>
+                </div>
+            </div>
+            <div class="page-nav" style="margin-top: 25px;">
+                <span class="nav-prev" onclick="goToPage(10)">← PREVIOUS</span>
+                <span class="page-indicator">?? / ??</span>
+                <span class="nav-next" onclick="goToPage(12)">NEXT →</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 界面12: 双选（旧/新）虚线边框深红色按钮 + 返回按键 ========= -->
+    <div id="scene12" class="scene main-content">
+        <div class="choice-container">
+            <div class="choice-buttons-horror">
+                <button class="choice-btn-blood" id="choiceOldBtnHorror">旧</button>
+                <button class="choice-btn-blood" id="choiceNewBtnHorror">新</button>
+            </div>
+            <div class="choice-back">
+                <span onclick="goToPage(11)">← 返 回 阅 读</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 界面13: 结局1 - 完全使用glitch-text样式，无竖线 ========= -->
+    <div id="scene13" class="scene main-content">
+        <div class="ending-reader">
+            <div class="ending-content-text">
+                <p style="color:#8fafff;">Chapter 10.1
+
+
+
+“编号3001玩家请注意，你已触发结局1·旧。”</p>
+
+                <p>
+
+-
+
+
+空桑酒友会（10）
+
+东坡肉：我酿的酒可以开瓮了，这次我用了不少功夫，保证好喝！
+西湖醋鱼：快拿来给兄弟尝尝！
+东坡肉：现在不行，两天以后再说！
+西湖醋鱼：不是可以开瓮了吗？你几时这么小气了？
+东坡肉：是这样的，少主最近进步不小，我打算给她举办个宴会庆祝一下，所以，这个酒要留在宴会上用。
+西湖醋鱼：有了少主就忘了兄弟，真没劲！
+东坡肉：又不是不让你喝，只是要等到宴会开始再说，到时候咱哥俩一醉方休！
+东坡肉：！！！完了，郭管家也在群里！
+西湖醋鱼：你这嘴一张，肯定就有人要倒霉。
+东坡肉：怎么能忘？我们被郭管家你吊在悬崖上，背诵《空桑居民行为规范》足足两个时辰！
+东坡肉：别在少主面前讲我跟鱼兄的黑历史了，咱们这次一定注意。
+
+……
+
+空桑总动员（157）
+
+蜜汁叉烧：郭管家回来啦，头发可以扎马尾了耶，扎马尾的管家哥哥也很帅气哦~
+虾饺：一直想问郭管家为什么要留长发，难道难道*:. ˶> o <˶ .:*
+鸡茸金丝笋：对郭管家而言，就算有一万个“难道”，也肯定不会是你想的那个“难道”
+吉利虾：难道什么？难道郭管家有了心上人，想为那个人改变形象吗？
+鸡茸金丝笋：你们两个到底在说什么怪话啊！
+鸡茸金丝笋：算了，我去完成昨天没完成的设计，先匿了！
+
+……
+
+空桑后厨里，刚通风报信完毕的叉烧仔笑眯眯地放下手机，便听见身后的猪兜唛发出了呼哧呼哧的疯狂示警声。在厨房的另一边，从酒窖里一口气偷出了三大坛糖露汁的冰糖葫芦甫一摇摇晃晃地走到前台，便再承受不住手中搪瓷坛的重量，稀里哗啦地摔碎了一地。年幼的孩童见此情形瘪了瘪嘴正要大哭，但一瞧见从右侧缓步走来了另一位食魂，吓得眼泪都险些收了回去：“郭、郭管家！你什么时候过来的！”
+“在走廊巡视的时候，刚巧碰见了鬼鬼祟祟离去的叉烧仔，便进来看看。”年轻的食魂像拎小鸡仔一样把小孩子从碎瓷堆里揪出来，上下检查了一番对方并没有受伤后，忍不住故作烦恼地叹了口气：“看样子我得向邵老板提议，加强对酒窖的安全管理，否则某些孩童这个月的月俸……”
+
+小葫芦闻言也顾不得对方身上的危险传说，直接扑过去抱住了他的大腿：“郭管家，你、你不要告诉小邵哥哥！我愿意赔！”
+“那好吧，给你一个将功补过的机会。”来人轻轻拍了拍他的脑袋，“将你们故事会的成员都喊过来，社团活动时间差不多该开始了。”
+
+
+所谓的“故事会”实际上是“鬼故事会”，靠着灵异惊悚试胆的噱头，笼络了譬如冰糖葫芦在内的一大帮好奇心旺盛的孩子——此时他们你挤挤我，我挤挤你，互相龇牙咧嘴，怎么看都是憋得难受：腊八哥哥又得了重感冒这件事很合理，但他会委托郭管家来临时代理社团活动就显得很不合理了！如此一来，便令人不由地也开始怀疑他感冒的真实性……
+“我不管腊八粥在前几次的社团活动中给你们灌输了些什么东西，但今天既然是我来给他代课，就只能听一些健康、向上、有助于未成年人身心健康发展的故事。”年轻的管家则坐在一群孩子当中，锐利的视线依次扫过，在冰糖葫芦头顶刻意多停留了几秒，“听明白了吗，各位？”
+
+几个孩子点头如捣蒜，但在管家哥哥问及上一次腊八粥给他们讲到哪一部分内容时，又纷纷皱起了苦瓜脸：要是让面前的人知道他们以往接收的都是些什么妖魔鬼怪，估计要一怒之下以杜绝封建迷信为由把整个故事会端了。然而他们的模样落在对面人的里，便也立刻将情况猜了个八九不离十。金色眼睛的管家叹了口气，将用作记录的黑色笔记本合上，顺手搁在一旁：“那或者，你们有什么想听的吗？”
+这意思，是让我们自由选择题材？几个小孩面面相觑，互相兴奋地窃窃私语了几句后，还是胆子最大的混汤酒酿元宵先举起了手：“那、那！我们想听科幻类的！修仙也不错！或者悬疑，惊——哇啊！小葫芦你为什么要踩我的脚！”
+“这么多想听的吗？”青年微微地笑了，旋即便顶着一众孩子期盼的目光，再度翻开了手边笔记本内的某一页，“看来以上这些内容都不太安全，还是童话故事最符合你们这个年纪应该阅读的东西。”
+
+——所以郭管家根本就不可能这么好心嘛！！
+
+
+被剜了好几眼的混汤酒酿元宵气呼呼地瘪起了嘴，两只小手托着下巴，打算用神游天外来作为对于郭管家又摆了他一道的报复：“……在很久很久以前，在群山的深处，有一个从上古时期就存在的村庄。风从东边的山口进来，再从西边的崖壁离开，因此人们管它叫‘风来镇’。在镇子上，住着一个做风铃的人……”
+混汤酒酿元宵在此之前从未听过他们的管家讲故事，其余的小食魂也是一样：毕竟在他们的记忆里，管家的口中发布的多半是陈情尖锐的演讲，又或许是口不对心的责罚、提醒和小小的“威胁”——以至于他们从未注意过，眼前作为管家的年轻人其实在讲故事上很有天赋。他的声音温和、平缓、投入，以至于小元宵的注意力也在不知不觉中竟被牢牢地勾了回去：“……他是整个村子里最好的风铃匠人，每家每户都挂着他制作风铃的歌声。但有一天，经他手制作的风铃竟再也不会响了……”
+
+故事的脉络简单但生动，风铃匠人自妻子去世之后，便再也无法制作出能发出声音的风铃——他的家一天天变得破旧、贫苦，他在生意日渐衰落时，却选择了疯狂地做一对能够飞上天空去寻找妻子的翅膀：临行之前，他将藏有一小团妻子头发的风铃挂在了屋檐下。想要飞天的狂人自然是面临了失败，但他在从崖边坠落时却并没有死去，而是在风中听见了一个像妻子又不像妻子的声音。那个声音说，她是风本身。
+风保护了他，只是让他陷入了昏迷。但等他再醒来的时候，却发现整个村子都变了：井水开始干涸，老人和小孩开始不断地生病——村民们认为是做的翅膀狂妄挑战了风神，以至于对整个村子降下了神罚，让老弱妇孺日趋虚弱，却连最好的大夫也无能为力。但这时候，风的声音又出现在了他的耳边。风说，你为了找我，不顾这个村子，但我可以帮你：我要你做一个能装得下我的、最好的风铃。
+
+匠人开始制作，他的双手血肉模糊，他回到家里拿起刀，削竹子、磨铜片，做了三天三夜，那是一个前所未有的风铃。竹子薄得透光，铜片像半透明的鱼腹，但风铃的肚子里却空空荡荡的，什么都没有。风说，我要你的眼睛。你看不到世界，却依然能听见我的声音。
+匠人依言照做，但他不但献上了自己的眼睛，还偷偷附上了自己的心。风铃响了，像鸟叫，像水流，像遥远的天际线处有人在喊他的名字。温柔的风从东边的山口进来，再从西边的崖壁离开，吹过树木、房屋和每个人的脸，村子重新活了过来。他听见风温柔的声音在耳边响起，她说，我要走了。
+
+
+“要去哪里？”
+
+年轻的管家放下笔记本，摸了摸身边孩子的脑袋：“她会去哪里，这不重要，因为风不属于这里。”
+“可是她带走了他的心！”
+“他的心是自愿献给她的，或者说，本来就是属于她的所有物——她带不带走，又有什么区别呢？”
+汤圆不吭声了，眼睛瞪得溜圆，身边的另外几个小孩子也是同样，看起来仍有些不服气。房间内陷入了片刻安静的沉默，最终还是冰糖葫芦瓮声瓮气地道：“那，他们俩有好好地说再见吗？风和匠人告别之后，他又说了些什么？”
+
+“他啊……”讲故事的人金色的眸子里出现了一瞬间的怅惘，他将目光抬起，似乎越过了层层高山一般重峦叠嶂的时间和空间，投向了更遥远的地方。
+<b>他最后说，</b>年轻的管家轻声开口道，<b>谢谢你，这一次我会继续生活下去。</b>
+
+
+“可是他眼睛没了，心也没了……这不和具木乃伊一样吗！这样的人还能正常生活吗！”
+“这就是为什么我不赞同由腊八粥给你们讲故事，分辨虚构和现实，对目前这个年龄段的小孩来说显然十分有难度——或许我之后该考虑在空桑开设新的通识教育课程。”深蓝色头发的食魂面上表情瞬间恢复了正常，他开玩笑似的用笔记本轻敲了一下冰糖葫芦的头，“今天的社团活动就到这里，下课。”
+
+“——为什么我感觉郭管家在耍赖！！”
+
+
+
+-
+
+
+
+Game Over.
+
+
+
+-
+
+
+
+<b>感谢您对本游戏的支持与喜爱，可以的话请将它分享出去，拯救更多世界的锅包肉吧！</b></p>
+            </div>
+            <div class="back-links">
+                <span onclick="goToPage(12)">← 返回抉择</span>
+                <span onclick="goToPage(1)">废墟入口</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 界面14: 结局2 - 完全使用glitch-text样式，无竖线 ========= -->
+    <div id="scene14" class="scene main-content">
+        <div class="ending-reader">
+            <div class="ending-content-text">
+                <p style="color:#8fafff;">Chapter 10.2
+
+
+
+“编号3001玩家请注意，你已触发结局2·新。”</p>
+                <p>
+
+-
+
+
+2026年3月6日
+
+
+虽说已经做好了足够的心理准备，但请原谅，当我再度意识到自己如从前那般静悄悄地立在微阖着的门前时，险些以为自己在做梦：毕竟除了我的心脏在疯狂地跳动之外，一切都与我在梦中经历过千万次的情景一模一样。
+然后我推门而入，和从前做过的上百次动作分毫不差。陌生的环境、陈设和房间，不变的是清晨柔和的阳光照在窗棂之上，窗帘的间隙处漏进几缕春日的暖风，有些凉，以及躺在床边的、熟悉的你。在那一刻我只是长久地站在原地，凝视着、贪婪地从远处望着您的面容：看阳光一点点爬上你的眼睫，几乎要屏住呼吸，生怕这美梦般的世界一触即碎，但在那之前便能偷得那几秒钟的时间将这一刻印在脑海里，越久越好。
+
+但随着时间一分一秒地流逝，我还是上前将您唤醒，您睡眼蒙眬的神态只停留了片刻，旋即便坐起身，一边打着哈欠一边冲我笑着问，我以前是不是见过你？
+当然，我冲您微笑道，您早已见过我千百次了，在很久很久以前。
+
+
+您顺理成章地接受了这个说法，旋即便摇摇晃晃地下床，在去洗漱的路上还在我身上挂了一会儿，说好困，能不能再睡五分钟？或许来到此处本就是这个世界赠予我的一场美梦，以至于即便我在您做出选择的那一刻便许下了自己的愿望，依然使得您对我的态度没有一丝一毫的改变：我是该庆幸，还是该落泪呢？毕竟您也知道，我向来见不得您的眼泪——虽然在我已逐渐模糊记忆中，这几滴泪总有那么几次是为我而流的。
+又或者说，我还是无法忍受您对我声泪俱下的质问：要是再在您脸上看到这种神情，我会心软到难以为继的。“新”确实让您将我带出了那个世界，但我在数据海洋内漫长的生命经不起时间流逝造成的坍缩，只能够在此地维系最后一天，随即便会彻底消散——当然在这个世界里，化灵而成的食魂不死不灭的逻辑也并不管用。若是让您知道将我救出后实际的代价，肯定无论如何也不会这么做。
+因此，我也猜到了您肯定不会仔细阅读游戏开头的须知与条款：换言之，也是我本人利用对您的了解后，小小地作弊了一下。
+
+对不起，说我骗了您也好、仍不够信任您也罢，您的管家向来是这么一个固执己见、独断专行的人。又或许是我的行为习惯在从前也对您造成了足够的影响，导致我们二人也都是如此相似的性格，一样地一往直前，也一样地头破血流。<b>所以，还是请忘记我吧。
+这才是我许下的真正愿望。</b>
+
+但请您相信，当我落笔写下这篇日记的时候，依然可以坦诚地说，这或许是我自睁开双眼以来最为开心的一天。仿佛我之前经历的一切都没有发生过，没有悲伤、没有绝望或者家园的分崩离析，我如从前那般督促着您洗漱、更衣，然后迎上那双在梦里曾出现过千万次的、带着笑意的双眼，在阳光下牵起了你的手。我们像世界上再普通又寻常不过的一对伴侣那样散步、游湖、看日升月落，你问我从哪里来，又是怎么出现在你的身边的？我便把自己从前的经历挑出来讲了讲，没有说得太详细，怕破坏了你一天的心情——反倒是你似是被我脸上流露出与平时太过异常的表情弄得紧张万分，一直紧紧地抱着我，说不会再让我离开你任何一次。
+
+我笑着说我也会的，随即也再一次拥抱住了你。为了就说这么可怕的事情而向你赔罪，我被惩罚和你躺在一张床上，整晚整晚地睁着眼看着你——你很快便笑着眨眨眼说只是在逗我，但哪怕您不提出这个要求，我也依然打算这么做的。因此当我写下这篇日记的时候便正坐在您房间的桌前，仿佛角色互换了一般，您说五秒钟内再不来躺下就直接拉闸，而我只好告饶，说再过三分钟就好。
+这三分钟可以再写些什么呢？或许我该写，在完成这篇日记之后，我会将这个黑色的笔记本藏在您的书架上，藏在您由于凌乱而长久没有收拾、或许也再也不会去收拾的一个角落——当然，我并不确定我的随身物品会在这个世界里依然保留下来，但说不定呢？毕竟您看到以上完整的记录后又会作何反应，是会认真地思考其中的含义，或当作自己不知何时的随笔，一笑而过呢？我说不准，但显而易见地，您会在余下的人生里一直快乐、幸福。世界上的事物将在十二万九千六百年后完全重现，届时我们一定会重逢。
+
+现在真的到该说晚安的时候了，明天见。
+
+——挚爱您的░▒▓。
+
+
+
+-
+
+
+
+Game Over.
+
+
+
+-
+
+
+
+<b>感谢您对本游戏的支持与喜爱，可以的话请将它分享出去，拯救更多世界的■■■吧！</b></p>
+            </div>
+            <div class="back-links">
+                <span onclick="goToPage(12)">← 返回抉择</span>
+                <span onclick="goToPage(1)">废墟入口</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="dream-glow"></div>
+</div>
+
+<script>
+    (function() {
+        let historyStack = [];
+        const mainNav = document.getElementById('mainNav');
+
+        window.goToPage = function(pageNum) {
+            const currentActive = document.querySelector('.scene.active');
+            if (currentActive) {
+                const currentId = currentActive.id;
+                historyStack.push(currentId);
+            }
+            
+            document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+            const target = document.getElementById('scene'+pageNum);
+            if(target) target.classList.add('active');
+            
+            if (pageNum === 1) {
+                mailTip.classList.remove('show');
+                if (mainNav) mainNav.style.display = 'flex';
+            } else {
+                if (mainNav) mainNav.style.display = 'none';
+            }
+            
+            const backBtn = document.getElementById('globalBackButton');
+            if (backBtn) {
+                if (pageNum === 1) {
+                    backBtn.style.opacity = '0.5';
+                } else {
+                    backBtn.style.opacity = '1';
+                }
+            }
+        };
+
+        window.goBack = function() {
+            if (historyStack.length > 0) {
+                const previousSceneId = historyStack.pop();
+                document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+                const target = document.getElementById(previousSceneId);
+                if(target) target.classList.add('active');
+                
+                if (previousSceneId === 'scene1') {
+                    mailTip.classList.remove('show');
+                    if (mainNav) mainNav.style.display = 'flex';
+                    document.getElementById('globalBackButton').style.opacity = '0.5';
+                } else {
+                    if (mainNav) mainNav.style.display = 'none';
+                    document.getElementById('globalBackButton').style.opacity = '1';
+                }
+            }
+        };
+
+        const mailTip = document.getElementById('mailTip');
+        
+        function checkIfReadEntirePage() {
+            if (!document.getElementById('scene1').classList.contains('active')) return;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const windowHeight = window.innerHeight;
+            const docHeight = document.documentElement.offsetHeight;
+            if (docHeight - (scrollTop + windowHeight) < 40) {
+                mailTip.classList.add('show');
+            }
+        }
+
+        window.addEventListener('scroll', checkIfReadEntirePage);
+
+        document.getElementById('mailEnvelope').addEventListener('click', function() {
+            document.getElementById('noticeOverlay').classList.add('show');
+        });
+
+        document.getElementById('closeNoticeBtn').addEventListener('click', function() {
+            document.getElementById('noticeOverlay').classList.remove('show');
+        });
+
+        document.querySelectorAll('.clickable-link').forEach(link => {	
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                this.style.color = '#ffaa00';
+                setTimeout(() => this.style.color = '', 200);
+            });
+        });
+
+        document.getElementById('finalLink').addEventListener('click', function() {
+            document.getElementById('noticeOverlay').classList.remove('show');
+            goToPage(2);
+        });
+
+        document.getElementById('choiceOldBtnHorror').addEventListener('click', () => goToPage(13));
+        document.getElementById('choiceNewBtnHorror').addEventListener('click', () => goToPage(14));
+
+        mailTip.classList.remove('show');
+        
+        const backBtn = document.getElementById('globalBackButton');
+        if (backBtn) backBtn.style.opacity = '0.5';
+    })();
+</script>
+</body>
+</html>
